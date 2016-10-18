@@ -111,19 +111,19 @@ void  TaskStart (void *pdata)
 	
 	OSTaskCreate(TimerTask, (void *)0, &TaskTimerStk[TRANSMIT_TASK_STK_SIZE - 1], 11);
 
-	OSTaskCreate(LedTask, (void *) 0, &TaskLedStk[TASK_STK_SIZE - 1], 10);
+	//OSTaskCreate(LedTask, (void *) 0, &TaskLedStk[TASK_STK_SIZE - 1], 10);
 	
 	OSTaskCreate(SerialTransmitTask, (void *) 0, &SerialTransmitTaskStk[TRANSMIT_TASK_STK_SIZE-1], 20);
 	
 	
 	
-	OSTaskCreate(AngleMeasurementTask, (void *) 0, &AngleMeasurementTaskStk[TRANSMIT_TASK_STK_SIZE-1], 20);
+	OSTaskCreate(AngleMeasurementTask, (void *) 0, &AngleMeasurementTaskStk[TRANSMIT_TASK_STK_SIZE-1], 18);
 	
-	OSTaskCreate(ScreenDetectorTask, (void *) 0, &ScreenDetectorTaskStk[TRANSMIT_TASK_STK_SIZE-1], 20);
+	OSTaskCreate(ScreenDetectorTask, (void *) 0, &ScreenDetectorTaskStk[TRANSMIT_TASK_STK_SIZE-1], 19);
 	
-	OSTaskCreate(ButtonDetectorTask, (void *) 0, &ButtonDetectorTaskStk[TRANSMIT_TASK_STK_SIZE-1], 20);	
+	OSTaskCreate(ButtonDetectorTask, (void *) 0, &ButtonDetectorTaskStk[TRANSMIT_TASK_STK_SIZE-1], 21);	
 	
-	OSTaskCreate(GyroDetectorTask, (void *) 0, &GyroDetectorTaskStk[TRANSMIT_TASK_STK_SIZE-1], 20);
+	OSTaskCreate(GyroDetectorTask, (void *) 0, &GyroDetectorTaskStk[TRANSMIT_TASK_STK_SIZE-1], 17);
 	
 	OSMboxPost(SerialTxMBox, (void *)sys_on_str);	//tell the user debugging that we're on!
 
@@ -248,8 +248,37 @@ void  AngleMeasurementTask (void *pdata){
 
 
 void  ButtonDetectorTask (void *pdata){
+	INT8U buttonState = 0;
+	char msg[100];
+	INT8U tmp = 10;
+	
+	//DDRD &= ~(1<<PD2);    //Configure PORTD pin 2 as an input
+	//PORTD |= (1<<PD2);    //Activate pull-ups in PORTD pin 2
+	
+	
+	
 	for(;;){
-		OSTimeDly(1*OS_TICKS_PER_SEC);
+		OSTimeDly(0.01*OS_TICKS_PER_SEC);
+		
+		buttonState = (PIND & (1<<PIND2));
+		
+		//itoa(buttonState, msg, tmp);
+		//OSMboxPost(SerialTxMBox, (void *)buttonState);
+		tmp = 100;
+		
+		if(buttonState == 0)
+		{        
+			//If the button was pressed
+			PINB |= _BV(PORTB5); // toggle led
+			OSTimeDly(1*OS_TICKS_PER_SEC);
+		}
+		
+		/*if button is pressed, toggle LED
+		if (buttonState != 0)
+		{
+			PINB |= _BV(PORTB5); // toggle led
+		}*/
+		
 	}
 }
 

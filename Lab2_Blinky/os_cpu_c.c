@@ -65,7 +65,16 @@ void InitPeripherals(void)
 	PORTB &= ~_BV(PORTB5); // set pin 5 (Arduino DIO pin 13) low to turn led off
 	PORTB &= ~_BV(PORTB4); // set pin 4 low to turn led off
 	DDRB |= _BV(DDB5); // set pin 5 of PORTB for output
-	DDRB |= _BV(DDB4); // set pin 4 of PORTB for output
+	DDRB &= ~_BV(DDB4); // set pin 4 of PORTB for INPUT
+	
+	/*EXAMPLE FROM ONLINE*/
+	//DDRB = 0xFF;  //set port b to output
+	
+	DDRD &= ~(1<<PIND2);    //Configure PORTD pin 2 as an input
+	PORTD |= (1<<PIND2);    //Activate pull-ups in PORTD pin 2
+	
+	
+	//DDRD &= ~(1 << PD2);
 
 	// setup Timer0 for UC/OS-II timer tick
 	//

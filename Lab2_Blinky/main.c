@@ -15,7 +15,7 @@
 
 #define TASK_STK_SIZE					64		/* Size of each task's stacks (# of WORDs)            */
 #define TRANSMIT_TASK_STK_SIZE			128		/* Size of the Transmit Task's stack                  */
-#define TRANSMIT_BUFFER_SIZE			24	    /* Size of buffers used to store character strings    */					
+#define TRANSMIT_BUFFER_SIZE			24	    /* Size of buffers used to store character strings    */	
 
 /*
  *********************************************************************************************************
@@ -27,10 +27,21 @@ OS_STK        TaskLedStk[TASK_STK_SIZE];
 OS_STK        TaskTimerStk[TRANSMIT_TASK_STK_SIZE];
 OS_STK        SerialTransmitTaskStk[TRANSMIT_TASK_STK_SIZE];
 
+OS_STK		  AngleMeasurementTaskStk[TRANSMIT_TASK_STK_SIZE];
+OS_STK        ButtonDetectorTaskStk[TRANSMIT_TASK_STK_SIZE];
+OS_STK		  ScreenDetectorTaskStk[TRANSMIT_TASK_STK_SIZE];
+OS_STK		  GyroDetectorTaskStk[TRANSMIT_TASK_STK_SIZE];
+
 OS_EVENT     *LedSem;
 OS_EVENT     *LedMBox;
 OS_EVENT	 *SerialTxSem;
 OS_EVENT     *SerialTxMBox;
+
+OS_EVENT	 *ButtonPressMBox;
+OS_EVENT     *AngleMBox;
+OS_EVENT     *GyroMBox;
+
+INT16U AngleMeasurement = 120;
 
 /*
  *********************************************************************************************************
@@ -48,6 +59,11 @@ void  USART_TX_Poll(unsigned char pdata);	   /* Function prototypes of LedTask *
 void  SerialTransmitTask(void *data);          /* Function prototypes of tasks */
 void PostTxCompleteSem (void);                 /* Function prototypes of tasks */
 
+void AngleMeasurementTask(void *pdata);
+void ButtonDetectorTask(void *pdata);
+void ScreenDetectorTask(void *pdata);
+void GyroDetectorTask(void *pdata);
+
 
 /*
  *********************************************************************************************************
@@ -59,10 +75,13 @@ int main (void)
 	InitPeripherals();
 	
     OSInit();                                              /* Initialize uC/OS-II                      */
+	
+	USART_Init();
 
 /* Create OS_EVENT resources here  */
 
 	LedMBox = OSMboxCreate((void *)0);
+	SerialTxMBox = OSMboxCreate((void *)0);
 	
 /* END Create OS_EVENT resources   */
 
@@ -84,6 +103,8 @@ int main (void)
  */
 void  TaskStart (void *pdata)
 {
+	
+	char *sys_on_str = "uCOS ON\r\n---\r\n";			//helps see when the system turns on
     pdata = pdata;                                         /* Prevent compiler warning                 */
 	
 	OSStatInit();                                          /* Initialize uC/OS-II's statistics         */
@@ -93,6 +114,18 @@ void  TaskStart (void *pdata)
 	OSTaskCreate(LedTask, (void *) 0, &TaskLedStk[TASK_STK_SIZE - 1], 10);
 	
 	OSTaskCreate(SerialTransmitTask, (void *) 0, &SerialTransmitTaskStk[TRANSMIT_TASK_STK_SIZE-1], 20);
+	
+	
+	
+	OSTaskCreate(AngleMeasurementTask, (void *) 0, &AngleMeasurementTaskStk[TRANSMIT_TASK_STK_SIZE-1], 20);
+	
+	OSTaskCreate(ScreenDetectorTask, (void *) 0, &ScreenDetectorTaskStk[TRANSMIT_TASK_STK_SIZE-1], 20);
+	
+	OSTaskCreate(ButtonDetectorTask, (void *) 0, &ButtonDetectorTaskStk[TRANSMIT_TASK_STK_SIZE-1], 20);	
+	
+	OSTaskCreate(GyroDetectorTask, (void *) 0, &GyroDetectorTaskStk[TRANSMIT_TASK_STK_SIZE-1], 20);
+	
+	OSMboxPost(SerialTxMBox, (void *)sys_on_str);	//tell the user debugging that we're on!
 
     for (;;) {	
         OSCtxSwCtr = 0;                         /* Clear context switch counter             */
@@ -117,14 +150,21 @@ void  TimerTask (void *pdata)
 		OSTimeDly (10*OS_TICKS_PER_SEC);
 		tmp = HIGH_PRIORITY_ERROR;
 		OSMboxPost(LedMBox, (void *)&tmp);
+		strcpy(TextMessage, "HIGH ERR STATE\n\r");
+		OSMboxPost(SerialTxMBox, (void *)TextMessage);
 
 		OSTimeDly (10*OS_TICKS_PER_SEC);
 		tmp = MEDIUM_PRIORITY_ERROR;
 		OSMboxPost(LedMBox, (void *)&tmp);	
+		strcpy(TextMessage, "MED ERR STATE\n\r");
+		OSMboxPost(SerialTxMBox, (void *)TextMessage);
 	
 		OSTimeDly (10*OS_TICKS_PER_SEC);
 		tmp = NO_SYSTEM_ERROR;
-		OSMboxPost(LedMBox, (void *)&tmp);				
+		OSMboxPost(LedMBox, (void *)&tmp);
+		strcpy(TextMessage, "NO ERR STATE\n\r");
+		OSMboxPost(SerialTxMBox, (void *)TextMessage);
+
     }	
 }
 
@@ -148,9 +188,9 @@ void  LedTask (void *pdata)
 
     for (;;) {
 		/*HANDLE LED BLINKING*/
-		PORTB |= _BV(PORTB5); // turn off led
-		OSTimeDly ((1.0 / blink_freq) * duty_cycle * OS_TICKS_PER_SEC); //keep it off for the 1 - duty cycle %
-		PORTB &= ~_BV(PORTB5); // turn on led
+		PORTB |= _BV(PORTB5); // turn on led
+		OSTimeDly ((1.0 / blink_freq) * duty_cycle * OS_TICKS_PER_SEC); //keep it on for the duty cycle %
+		PORTB &= ~_BV(PORTB5); // turn off led
 		OSTimeDly ((1.0 / blink_freq) * (1 - duty_cycle) * OS_TICKS_PER_SEC); //keep it off for the 1 - duty cycle %
 
 		/*SEE IF LED STATE HAS CHANGED*/
@@ -182,22 +222,56 @@ void  SerialTransmitTask (void *pdata)
 {
 	INT8U  err;
 	void *msg;
-	INT8U CharCounter=0;
+	INT8U str_index;
 	INT16U StringLength;
-	char LocalMessage[TRANSMIT_BUFFER_SIZE];
+	char TextMessage[TRANSMIT_BUFFER_SIZE];
 	
 	for (;;) {
 		OSTimeDly (1*OS_TICKS_PER_SEC);
+		msg = OSMboxAccept(SerialTxMBox);
+		
+		if(msg != NULL){
+			strcpy(TextMessage, msg);	//copy the contents of the passed pointer to the new local string
+			
+			for(str_index=0;TextMessage[str_index]!='\0';str_index++){ //print the string
+				USART_Transmit(TextMessage[str_index]);
+				}
+		}
 	}
 }
 
+void  AngleMeasurementTask (void *pdata){
+	for(;;){
+		OSTimeDly(1*OS_TICKS_PER_SEC);
+	}
+}
+
+
+void  ButtonDetectorTask (void *pdata){
+	for(;;){
+		OSTimeDly(1*OS_TICKS_PER_SEC);
+	}
+}
+
+
+void ScreenDetectorTask(void *pdata){
+	for(;;){
+		OSTimeDly(1*OS_TICKS_PER_SEC);
+	}
+}
+	
+
+void GyroDetectorTask(void *pdata){
+		for(;;){
+		OSTimeDly(1*OS_TICKS_PER_SEC);
+	}
+}
 /*
  *********************************************************************************************************
  *                                           USART Transmit TASK
  *********************************************************************************************************
  */
-void  USART_TX_Poll (unsigned char data)
-{
+void  USART_TX_Poll (unsigned char data){
 
 }
 

@@ -856,13 +856,13 @@ END GROUP
  .debug_frame   0x000000e4       0xa4 os_cpu_c.o
  .debug_frame   0x00000188      0x2e4 ucos_ii.o
 
-.debug_str      0x00000000      0x8ae
+.debug_str      0x00000000      0x863
  *(.debug_str)
- .debug_str     0x00000000      0x42b main.o
-                                0x471 (size before relaxing)
- .debug_str     0x0000042b      0x158 os_cpu_c.o
+ .debug_str     0x00000000      0x42e main.o
+                                0x474 (size before relaxing)
+ .debug_str     0x0000042e      0x10a os_cpu_c.o
                                 0x2f5 (size before relaxing)
- .debug_str     0x00000583      0x32b ucos_ii.o
+ .debug_str     0x00000538      0x32b ucos_ii.o
                                 0x617 (size before relaxing)
 
 .debug_loc      0x00000000     0x14c1
@@ -897,5 +897,5 @@ END GROUP
 
 .debug_macro
  *(.debug_macro)
-OUTPUT(Lab2_Blinky.elf elf32-avr)
+OUTPUT(Lab2_Serial.elf elf32-avr)
 LOAD linker stubs

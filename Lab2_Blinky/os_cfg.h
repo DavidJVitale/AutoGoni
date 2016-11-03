@@ -24,7 +24,7 @@
 #ifndef OS_CFG_H
 #define OS_CFG_H
 
-#define CPU_CLOCK_HZ       8000000
+#define CPU_CLOCK_HZ       4000000
 
 #define OS_TASK_DEF_STK_SIZE    64    /* Default stack size                                           */
 

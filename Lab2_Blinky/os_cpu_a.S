@@ -407,6 +407,6 @@ WatchDogReset:
 .global USART_TX_vect							   ; Transmit Complete Interrupt
 USART_TX_vect:
 SerTxISR:      
-
+.extern PostTxCompleteSem
 			   ret
 

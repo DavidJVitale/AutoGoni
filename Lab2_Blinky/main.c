@@ -27,21 +27,10 @@ OS_STK        TaskLedStk[TASK_STK_SIZE];
 OS_STK        TaskTimerStk[TRANSMIT_TASK_STK_SIZE];
 OS_STK        SerialTransmitTaskStk[TRANSMIT_TASK_STK_SIZE];
 
-OS_STK		  AngleMeasurementTaskStk[TRANSMIT_TASK_STK_SIZE];
-OS_STK        ButtonDetectorTaskStk[TRANSMIT_TASK_STK_SIZE];
-OS_STK		  ScreenDetectorTaskStk[TRANSMIT_TASK_STK_SIZE];
-OS_STK		  GyroDetectorTaskStk[TRANSMIT_TASK_STK_SIZE];
-
 OS_EVENT     *LedSem;
 OS_EVENT     *LedMBox;
 OS_EVENT	 *SerialTxSem;
 OS_EVENT     *SerialTxMBox;
-
-OS_EVENT	 *ButtonPressMBox;
-OS_EVENT     *AngleMBox;
-OS_EVENT     *GyroMBox;
-
-INT16U AngleMeasurement = 120;
 
 /*
  *********************************************************************************************************
@@ -58,12 +47,7 @@ void  TimerTask(void *data);                  /* Function prototypes of tasks */
 void  USART_TX_Poll(unsigned char pdata);	   /* Function prototypes of LedTask */
 void  SerialTransmitTask(void *data);          /* Function prototypes of tasks */
 void PostTxCompleteSem (void);                 /* Function prototypes of tasks */
-
-void AngleMeasurementTask(void *pdata);
-void ButtonDetectorTask(void *pdata);
-void ScreenDetectorTask(void *pdata);
-void GyroDetectorTask(void *pdata);
-
+void USART_Transmit(unsigned char data);
 
 /*
  *********************************************************************************************************
@@ -82,6 +66,7 @@ int main (void)
 
 	LedMBox = OSMboxCreate((void *)0);
 	SerialTxMBox = OSMboxCreate((void *)0);
+	SerialTxSem = OSSemCreate(1);
 	
 /* END Create OS_EVENT resources   */
 
@@ -103,9 +88,10 @@ int main (void)
  */
 void  TaskStart (void *pdata)
 {
-	
-	char *sys_on_str = "uCOS ON\r\n---\r\n";			//helps see when the system turns on
-    pdata = pdata;                                         /* Prevent compiler warning                 */
+	char *threeDollarSign = "$$$";
+	char *baudString = "U,38400,N";
+	char *sys_on_str = "\r\nuCOS ON\r\n---\r\n";			//helps see when the system turns on
+	pdata = pdata;                                         /* Prevent compiler warning                 */
 	
 	OSStatInit();                                          /* Initialize uC/OS-II's statistics         */
 	
@@ -115,16 +101,10 @@ void  TaskStart (void *pdata)
 	
 	OSTaskCreate(SerialTransmitTask, (void *) 0, &SerialTransmitTaskStk[TRANSMIT_TASK_STK_SIZE-1], 20);
 	
-	
-	
-	OSTaskCreate(AngleMeasurementTask, (void *) 0, &AngleMeasurementTaskStk[TRANSMIT_TASK_STK_SIZE-1], 20);
-	
-	OSTaskCreate(ScreenDetectorTask, (void *) 0, &ScreenDetectorTaskStk[TRANSMIT_TASK_STK_SIZE-1], 20);
-	
-	OSTaskCreate(ButtonDetectorTask, (void *) 0, &ButtonDetectorTaskStk[TRANSMIT_TASK_STK_SIZE-1], 20);	
-	
-	OSTaskCreate(GyroDetectorTask, (void *) 0, &GyroDetectorTaskStk[TRANSMIT_TASK_STK_SIZE-1], 20);
-	
+	OSMboxPost(SerialTxMBox, (void *)threeDollarSign); //enter command mode
+	OSTimeDly(2*OS_TICKS_PER_SEC);
+	OSMboxPost(SerialTxMBox, (void *)baudString); //set baud to 38400
+	OSTimeDly(2*OS_TICKS_PER_SEC);
 	OSMboxPost(SerialTxMBox, (void *)sys_on_str);	//tell the user debugging that we're on!
 
     for (;;) {	
@@ -188,9 +168,9 @@ void  LedTask (void *pdata)
 
     for (;;) {
 		/*HANDLE LED BLINKING*/
-		PORTB |= _BV(PORTB5); // turn on led
-		OSTimeDly ((1.0 / blink_freq) * duty_cycle * OS_TICKS_PER_SEC); //keep it on for the duty cycle %
-		PORTB &= ~_BV(PORTB5); // turn off led
+		PORTB |= _BV(PORTB5); // turn off led
+		OSTimeDly ((1.0 / blink_freq) * duty_cycle * OS_TICKS_PER_SEC); //keep it off for the 1 - duty cycle %
+		PORTB &= ~_BV(PORTB5); // turn on led
 		OSTimeDly ((1.0 / blink_freq) * (1 - duty_cycle) * OS_TICKS_PER_SEC); //keep it off for the 1 - duty cycle %
 
 		/*SEE IF LED STATE HAS CHANGED*/
@@ -232,40 +212,25 @@ void  SerialTransmitTask (void *pdata)
 		
 		if(msg != NULL){
 			strcpy(TextMessage, msg);	//copy the contents of the passed pointer to the new local string
-			
+
+			UCSR0B |= TXCIE0;	//ENABLE TX COMPLETE INTERRUPT
 			for(str_index=0;TextMessage[str_index]!='\0';str_index++){ //print the string
-				USART_Transmit(TextMessage[str_index]);
+	//				USART_Transmit(TextMessage[str_index]);
+					
+					/* Wait for empty transmit buffer */
+					OSSemPend(SerialTxSem, 1, &err);
+					
+					PORTB |= _BV(PORTB4); // turn on debug port
+					/* Put data into buffer, sends the data */
+					UDR0 = TextMessage[str_index];
+					PORTB &= ~_BV(PORTB4); // turn off debug port
 				}
+
 		}
+		UCSR0B &= ~TXCIE0;	//DISABLE TX COMPLETE INTERRUPT
 	}
 }
 
-void  AngleMeasurementTask (void *pdata){
-	for(;;){
-		OSTimeDly(1*OS_TICKS_PER_SEC);
-	}
-}
-
-
-void  ButtonDetectorTask (void *pdata){
-	for(;;){
-		OSTimeDly(1*OS_TICKS_PER_SEC);
-	}
-}
-
-
-void ScreenDetectorTask(void *pdata){
-	for(;;){
-		OSTimeDly(1*OS_TICKS_PER_SEC);
-	}
-}
-	
-
-void GyroDetectorTask(void *pdata){
-		for(;;){
-		OSTimeDly(1*OS_TICKS_PER_SEC);
-	}
-}
 /*
  *********************************************************************************************************
  *                                           USART Transmit TASK
@@ -276,6 +241,12 @@ void  USART_TX_Poll (unsigned char data){
 }
 
 
+void USART_Transmit(unsigned char data){
+	INT8U err;
+
+
+}
+
 /*
  *********************************************************************************************************
  *                    Routine to Post the Transmit buffer empty semaphone
@@ -283,5 +254,11 @@ void  USART_TX_Poll (unsigned char data){
  */
 void PostTxCompleteSem (void)
 {
-
+	PushRS();
+	OSIntEnter();
+	
+	OSSemPost(SerialTxSem);
+	
+	OSIntExit();
+	PopRS();
 }

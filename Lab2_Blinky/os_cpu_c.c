@@ -100,20 +100,6 @@ void USART_Init(){
 	UCSR0C = (1<<USBS0)|(3<<UCSZ00);
 }
 
-void USART_Transmit(unsigned char data);
-
-void USART_Transmit(unsigned char data){
-	PORTB |= _BV(PORTB4); // turn off led
-	
-	/* Wait for empty transmit buffer */
-	while ( !( UCSR0A & (1<<UDRE0)) )
-	;
-	PORTB &= ~_BV(PORTB4); // turn on led
-	/* Put data into buffer, sends the data */
-	UDR0 = data;
-
-}
-
 unsigned char USART_Receive(void);
 
 unsigned char USART_Receive(void){

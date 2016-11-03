@@ -51,12 +51,6 @@ OSRunning           0x1               ucos_ii.o
 OSIdleCtr           0x4               ucos_ii.o
 OSPrioHighRdy       0x1               ucos_ii.o
 LedMBox             0x2               main.o
-AngleMeasurementTaskStk
-                    0x80              main.o
-AngleMBox           0x2               main.o
-ButtonDetectorTaskStk
-                    0x80              main.o
-ButtonPressMBox     0x2               main.o
 OSPrioCur           0x1               ucos_ii.o
 OSTCBList           0x2               ucos_ii.o
 LedSem              0x2               main.o
@@ -73,16 +67,11 @@ SerialTransmitTaskStk
 OSTCBHighRdy        0x2               ucos_ii.o
 OSRdyGrp            0x1               ucos_ii.o
 OSRdyTbl            0x8               ucos_ii.o
-ScreenDetectorTaskStk
-                    0x80              main.o
 OSEventFreeList     0x2               ucos_ii.o
 TaskLedStk          0x40              main.o
 OSIntNesting        0x1               ucos_ii.o
 TaskStartStk        0x40              main.o
 OSTCBCur            0x2               ucos_ii.o
-GyroMBox            0x2               main.o
-GyroDetectorTaskStk
-                    0x80              main.o
 OSTime              0x4               ucos_ii.o
 OSEventTbl          0x8c              ucos_ii.o
 OSStatRdy           0x1               ucos_ii.o
@@ -98,10 +87,10 @@ Discarded input sections
  .bss           0x00000000        0x0 main.o
  .text.USART_TX_Poll
                 0x00000000        0x2 main.o
+ .text.USART_Transmit
+                0x00000000        0x2 main.o
  .text.PostTxCompleteSem
-                0x00000000        0x2 main.o
- .data.AngleMeasurement
-                0x00000000        0x2 main.o
+                0x00000000       0xa2 main.o
  .data          0x00000000        0x0 os_cpu_a.o
  .bss           0x00000000        0x0 os_cpu_a.o
  .text          0x00000000        0x0 os_cpu_c.o
@@ -114,10 +103,6 @@ Discarded input sections
  .text          0x00000000        0x0 ucos_ii.o
  .data          0x00000000        0x0 ucos_ii.o
  .bss           0x00000000        0x0 ucos_ii.o
- .text.OSEventTaskWait
-                0x00000000       0x5e ucos_ii.o
- .text.OSEventTO
-                0x00000000       0x3e ucos_ii.o
  .text.OSIntEnter
                 0x00000000       0x10 ucos_ii.o
  .text.OSSchedLock
@@ -132,10 +117,6 @@ Discarded input sections
                 0x00000000       0x42 ucos_ii.o
  .text.OSSemAccept
                 0x00000000       0x30 ucos_ii.o
- .text.OSSemCreate
-                0x00000000       0x3a ucos_ii.o
- .text.OSSemPend
-                0x00000000       0x96 ucos_ii.o
  .text.OSSemPost
                 0x00000000       0x50 ucos_ii.o
  .text.OSSemQuery
@@ -405,7 +386,7 @@ END GROUP
 .rela.plt
  *(.rela.plt)
 
-.text           0x00000000     0x1290
+.text           0x00000000     0x140e
  *(.vectors)
  .vectors       0x00000000       0x68 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1061/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr5/crtm328p.o
                 0x00000000                __vector_default
@@ -498,160 +479,157 @@ END GROUP
                 0x000002e6                . = ALIGN (0x2)
  *(.text.*)
  .text.TaskStart
-                0x000002e6       0xac main.o
+                0x000002e6       0x94 main.o
                 0x000002e6                TaskStart
- .text.AngleMeasurementTask
-                0x00000392        0xa main.o
-                0x00000392                AngleMeasurementTask
- .text.ButtonDetectorTask
-                0x0000039c        0xa main.o
-                0x0000039c                ButtonDetectorTask
- .text.ScreenDetectorTask
-                0x000003a6        0xa main.o
-                0x000003a6                ScreenDetectorTask
- .text.GyroDetectorTask
-                0x000003b0        0xa main.o
-                0x000003b0                GyroDetectorTask
  .text.TimerTask
-                0x000003ba       0xec main.o
-                0x000003ba                TimerTask
- .text.LedTask  0x000004a6      0x132 main.o
-                0x000004a6                LedTask
+                0x0000037a       0xec main.o
+                0x0000037a                TimerTask
+ .text.LedTask  0x00000466      0x132 main.o
+                0x00000466                LedTask
  .text.SerialTransmitTask
-                0x000005d8       0x5c main.o
-                0x000005d8                SerialTransmitTask
- .text.main     0x00000634       0x44 main.o
-                0x00000634                main
+                0x00000598       0xb2 main.o
+                0x00000598                SerialTransmitTask
+ .text.main     0x0000064a       0x54 main.o
+                0x0000064a                main
  .text.InitPeripherals
-                0x00000678       0x44 os_cpu_c.o
-                0x00000678                InitPeripherals
+                0x0000069e       0x44 os_cpu_c.o
+                0x0000069e                InitPeripherals
  .text.USART_Init
-                0x000006bc       0x18 os_cpu_c.o
-                0x000006bc                USART_Init
- .text.USART_Transmit
-                0x000006d4       0x14 os_cpu_c.o
-                0x000006d4                USART_Transmit
+                0x000006e2       0x18 os_cpu_c.o
+                0x000006e2                USART_Init
  .text.OSTaskStkInit
-                0x000006e8       0x94 os_cpu_c.o
-                0x000006e8                OSTaskStkInit
+                0x000006fa       0x94 os_cpu_c.o
+                0x000006fa                OSTaskStkInit
  .text.OSTaskCreateHook
-                0x0000077c        0x2 os_cpu_c.o
-                0x0000077c                OSTaskCreateHook
+                0x0000078e        0x2 os_cpu_c.o
+                0x0000078e                OSTaskCreateHook
  .text.OSTaskStatHook
-                0x0000077e        0x2 os_cpu_c.o
-                0x0000077e                OSTaskStatHook
+                0x00000790        0x2 os_cpu_c.o
+                0x00000790                OSTaskStatHook
  .text.OSTimeTickHook
-                0x00000780        0x2 os_cpu_c.o
-                0x00000780                OSTimeTickHook
+                0x00000792        0x2 os_cpu_c.o
+                0x00000792                OSTimeTickHook
  .text.OSTaskIdle
-                0x00000782        0x6 ucos_ii.o
-                0x00000782                OSTaskIdle
+                0x00000794        0x6 ucos_ii.o
+                0x00000794                OSTaskIdle
  .text.OSEventTaskRdy
-                0x00000788       0xa6 ucos_ii.o
-                0x00000788                OSEventTaskRdy
+                0x0000079a       0xa6 ucos_ii.o
+                0x0000079a                OSEventTaskRdy
+ .text.OSEventTaskWait
+                0x00000840       0x5e ucos_ii.o
+                0x00000840                OSEventTaskWait
+ .text.OSEventTO
+                0x0000089e       0x3e ucos_ii.o
+                0x0000089e                OSEventTO
  .text.OSEventWaitListInit
-                0x0000082e       0x12 ucos_ii.o
-                0x0000082e                OSEventWaitListInit
+                0x000008dc       0x12 ucos_ii.o
+                0x000008dc                OSEventWaitListInit
  .text.OSIntExit
-                0x00000840       0x90 ucos_ii.o
-                0x00000840                OSIntExit
- .text.OSSched  0x000008d0       0x86 ucos_ii.o
-                0x000008d0                OSSched
- .text.OSStart  0x00000956       0x5a ucos_ii.o
-                0x00000956                OSStart
+                0x000008ee       0x90 ucos_ii.o
+                0x000008ee                OSIntExit
+ .text.OSSched  0x0000097e       0x86 ucos_ii.o
+                0x0000097e                OSSched
+ .text.OSStart  0x00000a04       0x5a ucos_ii.o
+                0x00000a04                OSStart
  .text.OSTCBInit
-                0x000009b0       0xbc ucos_ii.o
-                0x000009b0                OSTCBInit
+                0x00000a5e       0xbc ucos_ii.o
+                0x00000a5e                OSTCBInit
  .text.OSTimeTick
-                0x00000a6c       0x8c ucos_ii.o
-                0x00000a6c                OSTimeTick
+                0x00000b1a       0x8c ucos_ii.o
+                0x00000b1a                OSTimeTick
  .text.OSMboxAccept
-                0x00000af8       0x28 ucos_ii.o
-                0x00000af8                OSMboxAccept
+                0x00000ba6       0x28 ucos_ii.o
+                0x00000ba6                OSMboxAccept
  .text.OSMboxCreate
-                0x00000b20       0x3a ucos_ii.o
-                0x00000b20                OSMboxCreate
+                0x00000bce       0x3a ucos_ii.o
+                0x00000bce                OSMboxCreate
  .text.OSMboxPost
-                0x00000b5a       0x44 ucos_ii.o
-                0x00000b5a                OSMboxPost
+                0x00000c08       0x44 ucos_ii.o
+                0x00000c08                OSMboxPost
+ .text.OSSemCreate
+                0x00000c4c       0x3a ucos_ii.o
+                0x00000c4c                OSSemCreate
+ .text.OSSemPend
+                0x00000c86       0x96 ucos_ii.o
+                0x00000c86                OSSemPend
  .text.OSTaskCreate
-                0x00000b9e       0xd4 ucos_ii.o
-                0x00000b9e                OSTaskCreate
- .text.OSInit   0x00000c72      0x104 ucos_ii.o
-                0x00000c72                OSInit
+                0x00000d1c       0xd4 ucos_ii.o
+                0x00000d1c                OSTaskCreate
+ .text.OSInit   0x00000df0      0x104 ucos_ii.o
+                0x00000df0                OSInit
  .text.OSTimeDly
-                0x00000d76       0x3e ucos_ii.o
-                0x00000d76                OSTimeDly
+                0x00000ef4       0x3e ucos_ii.o
+                0x00000ef4                OSTimeDly
  .text.OSStatInit
-                0x00000db4       0x50 ucos_ii.o
-                0x00000db4                OSStatInit
+                0x00000f32       0x50 ucos_ii.o
+                0x00000f32                OSStatInit
  .text.OSTaskStat
-                0x00000e04       0xa8 ucos_ii.o
-                0x00000e04                OSTaskStat
+                0x00000f82       0xa8 ucos_ii.o
+                0x00000f82                OSTaskStat
  .text.avr-libc.fplib
-                0x00000eac        0xa c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1061/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr5\libm.a(addsf3.o)
-                0x00000eac                __subsf3
-                0x00000eae                __addsf3
+                0x0000102a        0xa c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1061/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr5\libm.a(addsf3.o)
+                0x0000102a                __subsf3
+                0x0000102c                __addsf3
  .text.avr-libc.fplib
-                0x00000eb6       0xc0 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1061/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr5\libm.a(addsf3x.o)
-                0x00000ed0                __addsf3x
+                0x00001034       0xc0 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1061/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr5\libm.a(addsf3x.o)
+                0x0000104e                __addsf3x
  .text.avr-libc.fplib
-                0x00000f76        0x4 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1061/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr5\libm.a(divsf3.o)
-                0x00000f76                __divsf3
+                0x000010f4        0x4 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1061/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr5\libm.a(divsf3.o)
+                0x000010f4                __divsf3
  .text.avr-libc.fplib
-                0x00000f7a       0xcc c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1061/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr5\libm.a(divsf3x.o)
-                0x00000f90                __divsf3x
-                0x00000f94                __divsf3_pse
+                0x000010f8       0xcc c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1061/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr5\libm.a(divsf3x.o)
+                0x0000110e                __divsf3x
+                0x00001112                __divsf3_pse
  .text.avr-libc.fplib
-                0x00001046       0x58 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1061/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr5\libm.a(fixunssfsi.o)
-                0x00001046                __fixunssfsi
+                0x000011c4       0x58 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1061/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr5\libm.a(fixunssfsi.o)
+                0x000011c4                __fixunssfsi
  .text.avr-libc.fplib
-                0x0000109e        0xc c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1061/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr5\libm.a(fp_inf.o)
-                0x0000109e                __fp_inf
+                0x0000121c        0xc c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1061/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr5\libm.a(fp_inf.o)
+                0x0000121c                __fp_inf
  .text.avr-libc.fplib
-                0x000010aa        0x6 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1061/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr5\libm.a(fp_nan.o)
-                0x000010aa                __fp_nan
+                0x00001228        0x6 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1061/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr5\libm.a(fp_nan.o)
+                0x00001228                __fp_nan
  .text.avr-libc.fplib
-                0x000010b0        0xe c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1061/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr5\libm.a(fp_pscA.o)
-                0x000010b0                __fp_pscA
+                0x0000122e        0xe c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1061/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr5\libm.a(fp_pscA.o)
+                0x0000122e                __fp_pscA
  .text.avr-libc.fplib
-                0x000010be        0xe c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1061/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr5\libm.a(fp_pscB.o)
-                0x000010be                __fp_pscB
+                0x0000123c        0xe c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1061/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr5\libm.a(fp_pscB.o)
+                0x0000123c                __fp_pscB
  .text.avr-libc.fplib
-                0x000010cc       0x22 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1061/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr5\libm.a(fp_round.o)
-                0x000010cc                __fp_round
+                0x0000124a       0x22 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1061/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr5\libm.a(fp_round.o)
+                0x0000124a                __fp_round
  .text.avr-libc.fplib
-                0x000010ee       0x44 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1061/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr5\libm.a(fp_split3.o)
-                0x000010ee                __fp_split3
-                0x000010fe                __fp_splitA
+                0x0000126c       0x44 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1061/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr5\libm.a(fp_split3.o)
+                0x0000126c                __fp_split3
+                0x0000127c                __fp_splitA
  .text.avr-libc.fplib
-                0x00001132        0xe c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1061/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr5\libm.a(fp_zero.o)
-                0x00001132                __fp_zero
-                0x00001134                __fp_szero
+                0x000012b0        0xe c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1061/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr5\libm.a(fp_zero.o)
+                0x000012b0                __fp_zero
+                0x000012b2                __fp_szero
  .text.avr-libc.fplib
-                0x00001140        0x4 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1061/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr5\libm.a(mulsf3.o)
-                0x00001140                __mulsf3
+                0x000012be        0x4 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1061/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr5\libm.a(mulsf3.o)
+                0x000012be                __mulsf3
  .text.avr-libc.fplib
-                0x00001144       0xc2 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1061/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr5\libm.a(mulsf3x.o)
-                0x00001158                __mulsf3x
-                0x0000115c                __mulsf3_pse
+                0x000012c2       0xc2 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1061/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr5\libm.a(mulsf3x.o)
+                0x000012d6                __mulsf3x
+                0x000012da                __mulsf3_pse
  .text.libgcc.div
-                0x00001206       0x44 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1061/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/avr5\libgcc.a(_udivmodsi4.o)
-                0x00001206                __udivmodsi4
+                0x00001384       0x44 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1061/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/avr5\libgcc.a(_udivmodsi4.o)
+                0x00001384                __udivmodsi4
  .text.libgcc.mul
-                0x0000124a       0x1e c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1061/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/avr5\libgcc.a(_umulhisi3.o)
-                0x0000124a                __umulhisi3
+                0x000013c8       0x1e c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1061/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/avr5\libgcc.a(_umulhisi3.o)
+                0x000013c8                __umulhisi3
  .text.libgcc.mul
-                0x00001268       0x16 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1061/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/avr5\libgcc.a(_muluhisi3.o)
-                0x00001268                __muluhisi3
+                0x000013e6       0x16 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1061/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/avr5\libgcc.a(_muluhisi3.o)
+                0x000013e6                __muluhisi3
  .text.avr-libc
-                0x0000127e        0xe c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1061/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr5\libc.a(strcpy.o)
-                0x0000127e                strcpy
-                0x0000128c                . = ALIGN (0x2)
+                0x000013fc        0xe c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1061/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr5\libc.a(strcpy.o)
+                0x000013fc                strcpy
+                0x0000140a                . = ALIGN (0x2)
  *(.fini9)
- .fini9         0x0000128c        0x0 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1061/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/avr5\libgcc.a(_exit.o)
-                0x0000128c                _exit
-                0x0000128c                exit
+ .fini9         0x0000140a        0x0 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1061/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/avr5\libgcc.a(_exit.o)
+                0x0000140a                _exit
+                0x0000140a                exit
  *(.fini9)
  *(.fini8)
  *(.fini8)
@@ -670,91 +648,84 @@ END GROUP
  *(.fini1)
  *(.fini1)
  *(.fini0)
- .fini0         0x0000128c        0x4 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1061/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/avr5\libgcc.a(_exit.o)
+ .fini0         0x0000140a        0x4 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1061/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/avr5\libgcc.a(_exit.o)
  *(.fini0)
-                0x00001290                _etext = .
+                0x0000140e                _etext = .
 
-.data           0x00800100      0x148 load address 0x00001290
+.data           0x00800100      0x158 load address 0x0000140e
                 0x00800100                PROVIDE (__data_start, .)
  *(.data)
  *(.data*)
  *(.rodata)
  *(.rodata*)
  .rodata.str1.1
-                0x00800100       0x3f main.o
+                0x00800100       0x4f main.o
  .rodata.OSUnMapTbl
-                0x0080013f      0x100 ucos_ii.o
-                0x0080013f                OSUnMapTbl
+                0x0080014f      0x100 ucos_ii.o
+                0x0080014f                OSUnMapTbl
  .rodata.OSMapTbl
-                0x0080023f        0x8 ucos_ii.o
-                0x0080023f                OSMapTbl
+                0x0080024f        0x8 ucos_ii.o
+                0x0080024f                OSMapTbl
  *(.gnu.linkonce.d*)
-                0x00800248                . = ALIGN (0x2)
- *fill*         0x00800247        0x1 
-                0x00800248                _edata = .
-                0x00800248                PROVIDE (__data_end, .)
+                0x00800258                . = ALIGN (0x2)
+ *fill*         0x00800257        0x1 
+                0x00800258                _edata = .
+                0x00800258                PROVIDE (__data_end, .)
 
-.bss            0x00800248      0x5fe
-                0x00800248                PROVIDE (__bss_start, .)
+.bss            0x00800258      0x3f8
+                0x00800258                PROVIDE (__bss_start, .)
  *(.bss)
  *(.bss*)
- .bss.OSTCBTbl  0x00800248       0xb4 ucos_ii.o
+ .bss.OSTCBTbl  0x00800258       0xb4 ucos_ii.o
  .bss.OSTaskStatStk
-                0x008002fc       0x40 ucos_ii.o
+                0x0080030c       0x40 ucos_ii.o
  .bss.OSTaskIdleStk
-                0x0080033c       0x40 ucos_ii.o
+                0x0080034c       0x40 ucos_ii.o
  .bss.OSIntExitY
-                0x0080037c        0x1 ucos_ii.o
+                0x0080038c        0x1 ucos_ii.o
  *(COMMON)
- COMMON         0x0080037d      0x38e main.o
-                0x0080037d                LedMBox
-                0x0080037f                AngleMeasurementTaskStk
-                0x008003ff                AngleMBox
-                0x00800401                ButtonDetectorTaskStk
-                0x00800481                ButtonPressMBox
-                0x00800483                LedSem
-                0x00800485                SerialTxMBox
-                0x00800487                TaskTimerStk
-                0x00800507                SerialTxSem
-                0x00800509                SerialTransmitTaskStk
-                0x00800589                ScreenDetectorTaskStk
-                0x00800609                TaskLedStk
-                0x00800649                TaskStartStk
-                0x00800689                GyroMBox
-                0x0080068b                GyroDetectorTaskStk
- COMMON         0x0080070b      0x13b ucos_ii.o
-                0x0080070b                OSLockNesting
-                0x0080070c                OSRunning
-                0x0080070d                OSIdleCtr
-                0x00800711                OSPrioHighRdy
-                0x00800712                OSPrioCur
-                0x00800713                OSTCBList
-                0x00800715                OSCtxSwCtr
-                0x00800719                OSIdleCtrMax
-                0x0080071d                OSTCBFreeList
-                0x0080071f                OSCPUUsage
-                0x00800720                OSTaskCtr
-                0x00800721                OSTCBHighRdy
-                0x00800723                OSRdyGrp
-                0x00800724                OSRdyTbl
-                0x0080072c                OSEventFreeList
-                0x0080072e                OSIntNesting
-                0x0080072f                OSTCBCur
-                0x00800731                OSTime
-                0x00800735                OSEventTbl
-                0x008007c1                OSStatRdy
-                0x008007c2                OSTCBPrioTbl
-                0x00800842                OSIdleCtrRun
-                0x00800846                PROVIDE (__bss_end, .)
-                0x00001290                __data_load_start = LOADADDR (.data)
-                0x000013d8                __data_load_end = (__data_load_start + SIZEOF (.data))
+ COMMON         0x0080038d      0x188 main.o
+                0x0080038d                LedMBox
+                0x0080038f                LedSem
+                0x00800391                SerialTxMBox
+                0x00800393                TaskTimerStk
+                0x00800413                SerialTxSem
+                0x00800415                SerialTransmitTaskStk
+                0x00800495                TaskLedStk
+                0x008004d5                TaskStartStk
+ COMMON         0x00800515      0x13b ucos_ii.o
+                0x00800515                OSLockNesting
+                0x00800516                OSRunning
+                0x00800517                OSIdleCtr
+                0x0080051b                OSPrioHighRdy
+                0x0080051c                OSPrioCur
+                0x0080051d                OSTCBList
+                0x0080051f                OSCtxSwCtr
+                0x00800523                OSIdleCtrMax
+                0x00800527                OSTCBFreeList
+                0x00800529                OSCPUUsage
+                0x0080052a                OSTaskCtr
+                0x0080052b                OSTCBHighRdy
+                0x0080052d                OSRdyGrp
+                0x0080052e                OSRdyTbl
+                0x00800536                OSEventFreeList
+                0x00800538                OSIntNesting
+                0x00800539                OSTCBCur
+                0x0080053b                OSTime
+                0x0080053f                OSEventTbl
+                0x008005cb                OSStatRdy
+                0x008005cc                OSTCBPrioTbl
+                0x0080064c                OSIdleCtrRun
+                0x00800650                PROVIDE (__bss_end, .)
+                0x0000140e                __data_load_start = LOADADDR (.data)
+                0x00001566                __data_load_end = (__data_load_start + SIZEOF (.data))
 
-.noinit         0x00800846        0x0
-                0x00800846                PROVIDE (__noinit_start, .)
+.noinit         0x00800650        0x0
+                0x00800650                PROVIDE (__noinit_start, .)
  *(.noinit*)
-                0x00800846                PROVIDE (__noinit_end, .)
-                0x00800846                _end = .
-                0x00800846                PROVIDE (__heap_start, .)
+                0x00800650                PROVIDE (__noinit_end, .)
+                0x00800650                _end = .
+                0x00800650                PROVIDE (__heap_start, .)
 
 .eeprom         0x00810000        0x0
  *(.eeprom*)
@@ -815,55 +786,55 @@ END GROUP
 .debug_sfnames
  *(.debug_sfnames)
 
-.debug_aranges  0x00000000      0x218
+.debug_aranges  0x00000000      0x1f8
  *(.debug_aranges)
  .debug_aranges
-                0x00000000       0x70 main.o
+                0x00000000       0x58 main.o
  .debug_aranges
-                0x00000070       0x20 os_cpu_a.o
+                0x00000058       0x20 os_cpu_a.o
  .debug_aranges
-                0x00000090       0x60 os_cpu_c.o
+                0x00000078       0x58 os_cpu_c.o
  .debug_aranges
-                0x000000f0      0x128 ucos_ii.o
+                0x000000d0      0x128 ucos_ii.o
 
 .debug_pubnames
  *(.debug_pubnames)
 
-.debug_info     0x00000000     0x1f54
+.debug_info     0x00000000     0x1dff
  *(.debug_info .gnu.linkonce.wi.*)
- .debug_info    0x00000000      0xa63 main.o
- .debug_info    0x00000a63       0x84 os_cpu_a.o
- .debug_info    0x00000ae7      0x38d os_cpu_c.o
- .debug_info    0x00000e74     0x10e0 ucos_ii.o
+ .debug_info    0x00000000      0x939 main.o
+ .debug_info    0x00000939       0x81 os_cpu_a.o
+ .debug_info    0x000009ba      0x365 os_cpu_c.o
+ .debug_info    0x00000d1f     0x10e0 ucos_ii.o
 
-.debug_abbrev   0x00000000      0x733
+.debug_abbrev   0x00000000      0x6e7
  *(.debug_abbrev)
- .debug_abbrev  0x00000000      0x28f main.o
- .debug_abbrev  0x0000028f       0x14 os_cpu_a.o
- .debug_abbrev  0x000002a3      0x18b os_cpu_c.o
- .debug_abbrev  0x0000042e      0x305 ucos_ii.o
+ .debug_abbrev  0x00000000      0x243 main.o
+ .debug_abbrev  0x00000243       0x14 os_cpu_a.o
+ .debug_abbrev  0x00000257      0x18b os_cpu_c.o
+ .debug_abbrev  0x000003e2      0x305 ucos_ii.o
 
-.debug_line     0x00000000      0x933
+.debug_line     0x00000000      0x8f3
  *(.debug_line .debug_line.* .debug_line_end)
- .debug_line    0x00000000      0x21e main.o
- .debug_line    0x0000021e       0x8f os_cpu_a.o
- .debug_line    0x000002ad      0x196 os_cpu_c.o
- .debug_line    0x00000443      0x4f0 ucos_ii.o
+ .debug_line    0x00000000      0x1f9 main.o
+ .debug_line    0x000001f9       0x8f os_cpu_a.o
+ .debug_line    0x00000288      0x17b os_cpu_c.o
+ .debug_line    0x00000403      0x4f0 ucos_ii.o
 
-.debug_frame    0x00000000      0x46c
+.debug_frame    0x00000000      0x42c
  *(.debug_frame)
- .debug_frame   0x00000000       0xe4 main.o
- .debug_frame   0x000000e4       0xa4 os_cpu_c.o
- .debug_frame   0x00000188      0x2e4 ucos_ii.o
+ .debug_frame   0x00000000       0xb4 main.o
+ .debug_frame   0x000000b4       0x94 os_cpu_c.o
+ .debug_frame   0x00000148      0x2e4 ucos_ii.o
 
-.debug_str      0x00000000      0x863
+.debug_str      0x00000000      0x7a3
  *(.debug_str)
- .debug_str     0x00000000      0x42e main.o
-                                0x474 (size before relaxing)
- .debug_str     0x0000042e      0x10a os_cpu_c.o
-                                0x2f5 (size before relaxing)
- .debug_str     0x00000538      0x32b ucos_ii.o
-                                0x617 (size before relaxing)
+ .debug_str     0x00000000      0x3a3 main.o
+                                0x3e9 (size before relaxing)
+ .debug_str     0x000003a3      0x10a os_cpu_c.o
+                                0x2de (size before relaxing)
+ .debug_str     0x000004ad      0x2f6 ucos_ii.o
+                                0x614 (size before relaxing)
 
 .debug_loc      0x00000000     0x14c1
  *(.debug_loc)
@@ -889,11 +860,11 @@ END GROUP
 .debug_pubtypes
  *(.debug_pubtypes)
 
-.debug_ranges   0x00000000      0x1c8
+.debug_ranges   0x00000000      0x1a8
  *(.debug_ranges)
- .debug_ranges  0x00000000       0x60 main.o
- .debug_ranges  0x00000060       0x50 os_cpu_c.o
- .debug_ranges  0x000000b0      0x118 ucos_ii.o
+ .debug_ranges  0x00000000       0x48 main.o
+ .debug_ranges  0x00000048       0x48 os_cpu_c.o
+ .debug_ranges  0x00000090      0x118 ucos_ii.o
 
 .debug_macro
  *(.debug_macro)

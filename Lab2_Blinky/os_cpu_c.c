@@ -66,6 +66,14 @@ void InitPeripherals(void)
 	PORTB &= ~_BV(PORTB4); // set pin 4 low to turn led off
 	DDRB |= _BV(DDB5); // set pin 5 of PORTB for output
 	DDRB |= _BV(DDB4); // set pin 4 of PORTB for output
+	
+	// TEAM ROTA-REE!!!!!!!!
+	
+	DDRC &= 0b11110000;	// Set Port 0-3 of PORTC to input (set lower four bits to 0 for input)
+	DDRD &= 0b00001111; // Set Port 4-7 of PORTD to input (set upper four bits to 0 for input)
+	
+	// END TEAM ROTARY
+	
 
 	// setup Timer0 for UC/OS-II timer tick
 	//

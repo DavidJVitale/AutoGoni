@@ -17,6 +17,8 @@
 #define TRANSMIT_TASK_STK_SIZE			128		/* Size of the Transmit Task's stack                  */
 #define TRANSMIT_BUFFER_SIZE			24	    /* Size of buffers used to store character strings    */	
 
+#define ASCII_CHAR_OFFSET				48
+
 /*
  *********************************************************************************************************
  *                                               VARIABLES
@@ -26,6 +28,8 @@ OS_STK        TaskStartStk[TASK_STK_SIZE];
 OS_STK        TaskLedStk[TASK_STK_SIZE];
 OS_STK        TaskTimerStk[TRANSMIT_TASK_STK_SIZE];
 OS_STK        SerialTransmitTaskStk[TRANSMIT_TASK_STK_SIZE];
+
+OS_STK        AngleOutputTaskStk[TRANSMIT_TASK_STK_SIZE];
 
 OS_EVENT     *LedSem;
 OS_EVENT     *LedMBox;
@@ -43,6 +47,8 @@ extern void InitPeripherals(void);
 void  TaskStart(void *data);                  /* Function prototypes of Startup task */
 void  LedTask(void *data);                    /* Function prototypes of tasks   */
 void  TimerTask(void *data);                  /* Function prototypes of tasks */
+
+void AngleOutputTask(void *data);
 
 void  USART_TX_Poll(unsigned char pdata);	   /* Function prototypes of LedTask */
 void  SerialTransmitTask(void *data);          /* Function prototypes of tasks */
@@ -96,8 +102,8 @@ void  TaskStart (void *pdata)
 	OSStatInit();                                          /* Initialize uC/OS-II's statistics         */
 	
 	OSTaskCreate(TimerTask, (void *)0, &TaskTimerStk[TRANSMIT_TASK_STK_SIZE - 1], 11);
-
 	OSTaskCreate(LedTask, (void *) 0, &TaskLedStk[TASK_STK_SIZE - 1], 10);
+	OSTaskCreate(AngleOutputTask, (void *) 0, &AngleOutputTaskStk[TASK_STK_SIZE - 1], 15);
 	
 	OSTaskCreate(SerialTransmitTask, (void *) 0, &SerialTransmitTaskStk[TRANSMIT_TASK_STK_SIZE-1], 20);
 	
@@ -111,6 +117,80 @@ void  TaskStart (void *pdata)
         OSCtxSwCtr = 0;                         /* Clear context switch counter             */
         OSTimeDly(OS_TICKS_PER_SEC);			/* Wait one second                          */
     }
+}
+
+/*
+ *********************************************************************************************************
+ *                                                  AngleOutputTask
+ *********************************************************************************************************
+ */
+
+void  AngleOutputTask (void *pdata)
+{
+    INT8U  err;
+	INT16U Message;
+	INT8U tmp;
+	char  TextMessage[TRANSMIT_BUFFER_SIZE];
+	char  CommRxBuff[TRANSMIT_BUFFER_SIZE];
+	
+	int digitCounter;
+	int tempInt;
+	int tempCounter;
+	
+	INT8U rotaryInput;
+	
+    for (;;) {
+		//strcpy(TextMessage, "TIMER TASK...\r\n");
+		//OSMboxPost(SerialTxMBox, (void *)&TextMessage);
+		
+		//if(PINC & 0b00000001)
+		//{
+			//strcpy(TextMessage, "pin 14 is high\r\n");
+			//OSMboxPost(SerialTxMBox, (void *)&TextMessage);
+		//}
+		//else
+		//{
+			//strcpy(TextMessage, "pin 14 is low\r\n");
+			//OSMboxPost(SerialTxMBox, (void *)&TextMessage);
+		//}
+		
+		rotaryInput = (INT8U)((PINC & 0b00001111) | (PIND & 0b11110000));
+		
+		tempInt = rotaryInput;
+		digitCounter = 0;
+		
+		while(tempInt != 0)
+		{
+			digitCounter++;
+			tempInt = tempInt / 10;
+		}
+
+		tempInt = rotaryInput;	// reset input
+
+		// Decimal 48 -> ASCII '0'
+		// Decimal 57 -> ASCII '9'
+		
+		CommRxBuff[digitCounter] = '\r';
+		CommRxBuff[digitCounter + 1] = '\n';
+		
+		while (digitCounter >= 0)
+		{
+			CommRxBuff[digitCounter - 1] = (tempInt % 10) + ASCII_CHAR_OFFSET;	// and add inputs, starting from the most significant digit
+			digitCounter--;
+			tempInt = tempInt / 10;
+		}
+		// END Turn number value into serial ^
+		
+		if(CommRxBuff)
+		{
+			OSMboxPost(SerialTxMBox, (void *)&CommRxBuff[0]);
+		}
+		
+//		rotaryInput = (PINC & 0b00001111) | (PIND & 0b11110000);
+
+					
+		OSTimeDly(OS_TICKS_PER_SEC);	// relinquish CPU
+    }	
 }
 
 /*
@@ -130,19 +210,22 @@ void  TimerTask (void *pdata)
 		OSTimeDly (10*OS_TICKS_PER_SEC);
 		tmp = HIGH_PRIORITY_ERROR;
 		OSMboxPost(LedMBox, (void *)&tmp);
-		strcpy(TextMessage, "HIGH ERR STATE\n\r");
+		//strcpy(TextMessage, "HIGH ERR STATE\n\r");
+		strcpy(TextMessage, "[Hi]\n\r");
 		OSMboxPost(SerialTxMBox, (void *)TextMessage);
 
 		OSTimeDly (10*OS_TICKS_PER_SEC);
 		tmp = MEDIUM_PRIORITY_ERROR;
 		OSMboxPost(LedMBox, (void *)&tmp);	
-		strcpy(TextMessage, "MED ERR STATE\n\r");
+		//strcpy(TextMessage, "MED ERR STATE\n\r");
+		strcpy(TextMessage, "[Med]\n\r");
 		OSMboxPost(SerialTxMBox, (void *)TextMessage);
 	
 		OSTimeDly (10*OS_TICKS_PER_SEC);
 		tmp = NO_SYSTEM_ERROR;
 		OSMboxPost(LedMBox, (void *)&tmp);
-		strcpy(TextMessage, "NO ERR STATE\n\r");
+		//strcpy(TextMessage, "NO ERR STATE\n\r");
+		strcpy(TextMessage, "[No]\n\r");
 		OSMboxPost(SerialTxMBox, (void *)TextMessage);
 
     }	

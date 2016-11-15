@@ -66,6 +66,8 @@ void InitPeripherals(void)
 	PORTB &= ~_BV(PORTB4); // set pin 4 low to turn led off
 	DDRB |= _BV(DDB5); // set pin 5 of PORTB for output
 	DDRB |= _BV(DDB4); // set pin 4 of PORTB for output
+	
+	DDRB &= ~_BV(DDB2); // set pin 2 of PORTB for io
 
 	// setup Timer0 for UC/OS-II timer tick
 	//

@@ -3,3482 +3,1614 @@ Lab2_Serial.elf:     file format elf32-avr
 
 Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
-  0 .data         00000158  00800100  0000140e  000014a2  2**0
+  0 .data         00000158  00800100  00000c66  00000cfa  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  1 .text         0000140e  00000000  00000000  00000094  2**1
+  1 .text         00000c66  00000000  00000000  00000094  2**1
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  2 .bss          000003f8  00800258  00800258  000015fa  2**0
+  2 .bss          00000478  00800258  00800258  00000e52  2**0
                   ALLOC
-  3 .comment      00000030  00000000  00000000  000015fa  2**0
+  3 .comment      00000030  00000000  00000000  00000e52  2**0
                   CONTENTS, READONLY
-  4 .debug_aranges 000001f8  00000000  00000000  00001630  2**3
+  4 .debug_aranges 00000200  00000000  00000000  00000e88  2**3
                   CONTENTS, READONLY, DEBUGGING
-  5 .debug_info   00001dff  00000000  00000000  00001828  2**0
+  5 .debug_info   00001dd6  00000000  00000000  00001088  2**0
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_abbrev 000006e7  00000000  00000000  00003627  2**0
+  6 .debug_abbrev 0000071d  00000000  00000000  00002e5e  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_line   000008f3  00000000  00000000  00003d0e  2**0
+  7 .debug_line   00000907  00000000  00000000  0000357b  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_frame  0000042c  00000000  00000000  00004604  2**2
+  8 .debug_frame  0000043c  00000000  00000000  00003e84  2**2
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_str    000007a3  00000000  00000000  00004a30  2**0
+  9 .debug_str    000007ee  00000000  00000000  000042c0  2**0
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_loc    000014c1  00000000  00000000  000051d3  2**0
+ 10 .debug_loc    000014e7  00000000  00000000  00004aae  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_ranges 000001a8  00000000  00000000  00006694  2**0
+ 11 .debug_ranges 000001b0  00000000  00000000  00005f95  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
 
 00000000 <__vectors>:
-       0:	0c 94 34 00 	jmp	0x68	; 0x68 <__ctors_end>
-       4:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
-       8:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
-       c:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
-      10:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
-      14:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
-      18:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
-      1c:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
-      20:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
-      24:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
-      28:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
-      2c:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
-      30:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
-      34:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
-      38:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
-      3c:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
-      40:	0c 94 13 01 	jmp	0x226	; 0x226 <OSTickISR>
-      44:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
-      48:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
-      4c:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
-      50:	0c 94 72 01 	jmp	0x2e4	; 0x2e4 <SerTxISR>
-      54:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
-      58:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
-      5c:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
-      60:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
-      64:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+   0:	0c 94 34 00 	jmp	0x68	; 0x68 <__ctors_end>
+   4:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+   8:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+   c:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  10:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  14:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  18:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  1c:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  20:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  24:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  28:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  2c:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  30:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  34:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  38:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  3c:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  40:	0c 94 13 01 	jmp	0x226	; 0x226 <OSTickISR>
+  44:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  48:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  4c:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  50:	0c 94 72 01 	jmp	0x2e4	; 0x2e4 <SerTxISR>
+  54:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  58:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  5c:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  60:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  64:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
 
 00000068 <__ctors_end>:
-      68:	11 24       	eor	r1, r1
-      6a:	1f be       	out	0x3f, r1	; 63
-      6c:	cf ef       	ldi	r28, 0xFF	; 255
-      6e:	d8 e0       	ldi	r29, 0x08	; 8
-      70:	de bf       	out	0x3e, r29	; 62
-      72:	cd bf       	out	0x3d, r28	; 61
+  68:	11 24       	eor	r1, r1
+  6a:	1f be       	out	0x3f, r1	; 63
+  6c:	cf ef       	ldi	r28, 0xFF	; 255
+  6e:	d8 e0       	ldi	r29, 0x08	; 8
+  70:	de bf       	out	0x3e, r29	; 62
+  72:	cd bf       	out	0x3d, r28	; 61
 
 00000074 <__do_copy_data>:
-      74:	12 e0       	ldi	r17, 0x02	; 2
-      76:	a0 e0       	ldi	r26, 0x00	; 0
-      78:	b1 e0       	ldi	r27, 0x01	; 1
-      7a:	ee e0       	ldi	r30, 0x0E	; 14
-      7c:	f4 e1       	ldi	r31, 0x14	; 20
-      7e:	02 c0       	rjmp	.+4      	; 0x84 <__do_copy_data+0x10>
-      80:	05 90       	lpm	r0, Z+
-      82:	0d 92       	st	X+, r0
-      84:	a8 35       	cpi	r26, 0x58	; 88
-      86:	b1 07       	cpc	r27, r17
-      88:	d9 f7       	brne	.-10     	; 0x80 <__do_copy_data+0xc>
+  74:	12 e0       	ldi	r17, 0x02	; 2
+  76:	a0 e0       	ldi	r26, 0x00	; 0
+  78:	b1 e0       	ldi	r27, 0x01	; 1
+  7a:	e6 e6       	ldi	r30, 0x66	; 102
+  7c:	fc e0       	ldi	r31, 0x0C	; 12
+  7e:	02 c0       	rjmp	.+4      	; 0x84 <__do_copy_data+0x10>
+  80:	05 90       	lpm	r0, Z+
+  82:	0d 92       	st	X+, r0
+  84:	a8 35       	cpi	r26, 0x58	; 88
+  86:	b1 07       	cpc	r27, r17
+  88:	d9 f7       	brne	.-10     	; 0x80 <__do_copy_data+0xc>
 
 0000008a <__do_clear_bss>:
-      8a:	26 e0       	ldi	r18, 0x06	; 6
-      8c:	a8 e5       	ldi	r26, 0x58	; 88
-      8e:	b2 e0       	ldi	r27, 0x02	; 2
-      90:	01 c0       	rjmp	.+2      	; 0x94 <.do_clear_bss_start>
+  8a:	26 e0       	ldi	r18, 0x06	; 6
+  8c:	a8 e5       	ldi	r26, 0x58	; 88
+  8e:	b2 e0       	ldi	r27, 0x02	; 2
+  90:	01 c0       	rjmp	.+2      	; 0x94 <.do_clear_bss_start>
 
 00000092 <.do_clear_bss_loop>:
-      92:	1d 92       	st	X+, r1
+  92:	1d 92       	st	X+, r1
 
 00000094 <.do_clear_bss_start>:
-      94:	a0 35       	cpi	r26, 0x50	; 80
-      96:	b2 07       	cpc	r27, r18
-      98:	e1 f7       	brne	.-8      	; 0x92 <.do_clear_bss_loop>
-      9a:	0e 94 25 03 	call	0x64a	; 0x64a <main>
-      9e:	0c 94 05 0a 	jmp	0x140a	; 0x140a <_exit>
+  94:	a0 3d       	cpi	r26, 0xD0	; 208
+  96:	b2 07       	cpc	r27, r18
+  98:	e1 f7       	brne	.-8      	; 0x92 <.do_clear_bss_loop>
+  9a:	0e 94 b1 01 	call	0x362	; 0x362 <main>
+  9e:	0c 94 31 06 	jmp	0xc62	; 0xc62 <_exit>
 
 000000a2 <__bad_interrupt>:
-      a2:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+  a2:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
 
 000000a6 <OSStartHighRdy>:
-
-OSStartHighRdy: 
-#if OS_TASK_SW_HOOK_EN > 0
-	        call    OSTaskSwHook                ; Invoke user defined context switch hook
-#endif
-                lds     R16,OSRunning               ; Indicate that we are multitasking
-      a6:	00 91 16 05 	lds	r16, 0x0516
-                inc     R16                         ;
-      aa:	03 95       	inc	r16
-                sts     OSRunning,R16               ;
-      ac:	00 93 16 05 	sts	0x0516, r16
-
-                lds     R30,OSTCBHighRdy            ; Let Z point to TCB of highest priority task
-      b0:	e0 91 2b 05 	lds	r30, 0x052B
-                lds     R31,OSTCBHighRdy+1          ; ready to run
-      b4:	f0 91 2c 05 	lds	r31, 0x052C
-
-                ld      R28,Z+                      ; Load stack L pointer
-      b8:	c1 91       	ld	r28, Z+
-                out     _SFR_IO_ADDR(SPL),R28
-      ba:	cd bf       	out	0x3d, r28	; 61
-                ld      R29,Z+                      ;
-      bc:	d1 91       	ld	r29, Z+
-                out     _SFR_IO_ADDR(SPH),R29
-      be:	de bf       	out	0x3e, r29	; 62
-
-                POPSREG                             ; Pop the status register
-      c0:	0f 91       	pop	r16
-      c2:	0f bf       	out	0x3f, r16	; 63
-                POPRS                               ; Pop all registers
-      c4:	ff 91       	pop	r31
-      c6:	ef 91       	pop	r30
-      c8:	df 91       	pop	r29
-      ca:	cf 91       	pop	r28
-      cc:	bf 91       	pop	r27
-      ce:	af 91       	pop	r26
-      d0:	9f 91       	pop	r25
-      d2:	8f 91       	pop	r24
-      d4:	7f 91       	pop	r23
-      d6:	6f 91       	pop	r22
-      d8:	5f 91       	pop	r21
-      da:	4f 91       	pop	r20
-      dc:	3f 91       	pop	r19
-      de:	2f 91       	pop	r18
-      e0:	1f 91       	pop	r17
-      e2:	0f 91       	pop	r16
-      e4:	ff 90       	pop	r15
-      e6:	ef 90       	pop	r14
-      e8:	df 90       	pop	r13
-      ea:	cf 90       	pop	r12
-      ec:	bf 90       	pop	r11
-      ee:	af 90       	pop	r10
-      f0:	9f 90       	pop	r9
-      f2:	8f 90       	pop	r8
-      f4:	7f 90       	pop	r7
-      f6:	6f 90       	pop	r6
-      f8:	5f 90       	pop	r5
-      fa:	4f 90       	pop	r4
-      fc:	3f 90       	pop	r3
-      fe:	2f 90       	pop	r2
-     100:	1f 90       	pop	r1
-     102:	0f 90       	pop	r0
-                ret                                 ; Start task
-     104:	08 95       	ret
+  a6:	00 91 96 05 	lds	r16, 0x0596
+  aa:	03 95       	inc	r16
+  ac:	00 93 96 05 	sts	0x0596, r16
+  b0:	e0 91 ab 05 	lds	r30, 0x05AB
+  b4:	f0 91 ac 05 	lds	r31, 0x05AC
+  b8:	c1 91       	ld	r28, Z+
+  ba:	cd bf       	out	0x3d, r28	; 61
+  bc:	d1 91       	ld	r29, Z+
+  be:	de bf       	out	0x3e, r29	; 62
+  c0:	0f 91       	pop	r16
+  c2:	0f bf       	out	0x3f, r16	; 63
+  c4:	ff 91       	pop	r31
+  c6:	ef 91       	pop	r30
+  c8:	df 91       	pop	r29
+  ca:	cf 91       	pop	r28
+  cc:	bf 91       	pop	r27
+  ce:	af 91       	pop	r26
+  d0:	9f 91       	pop	r25
+  d2:	8f 91       	pop	r24
+  d4:	7f 91       	pop	r23
+  d6:	6f 91       	pop	r22
+  d8:	5f 91       	pop	r21
+  da:	4f 91       	pop	r20
+  dc:	3f 91       	pop	r19
+  de:	2f 91       	pop	r18
+  e0:	1f 91       	pop	r17
+  e2:	0f 91       	pop	r16
+  e4:	ff 90       	pop	r15
+  e6:	ef 90       	pop	r14
+  e8:	df 90       	pop	r13
+  ea:	cf 90       	pop	r12
+  ec:	bf 90       	pop	r11
+  ee:	af 90       	pop	r10
+  f0:	9f 90       	pop	r9
+  f2:	8f 90       	pop	r8
+  f4:	7f 90       	pop	r7
+  f6:	6f 90       	pop	r6
+  f8:	5f 90       	pop	r5
+  fa:	4f 90       	pop	r4
+  fc:	3f 90       	pop	r3
+  fe:	2f 90       	pop	r2
+ 100:	1f 90       	pop	r1
+ 102:	0f 90       	pop	r0
+ 104:	08 95       	ret
 
 00000106 <OSCtxSw>:
-;                                                R0
-;                                                PCH
-;                                                PCL                                     (High memory)
-;********************************************************************************************************
-
-OSCtxSw:        PUSHRS                              ; Save current tasks context
-     106:	0f 92       	push	r0
-     108:	1f 92       	push	r1
-     10a:	2f 92       	push	r2
-     10c:	3f 92       	push	r3
-     10e:	4f 92       	push	r4
-     110:	5f 92       	push	r5
-     112:	6f 92       	push	r6
-     114:	7f 92       	push	r7
-     116:	8f 92       	push	r8
-     118:	9f 92       	push	r9
-     11a:	af 92       	push	r10
-     11c:	bf 92       	push	r11
-     11e:	cf 92       	push	r12
-     120:	df 92       	push	r13
-     122:	ef 92       	push	r14
-     124:	ff 92       	push	r15
-     126:	0f 93       	push	r16
-     128:	1f 93       	push	r17
-     12a:	2f 93       	push	r18
-     12c:	3f 93       	push	r19
-     12e:	4f 93       	push	r20
-     130:	5f 93       	push	r21
-     132:	6f 93       	push	r22
-     134:	7f 93       	push	r23
-     136:	8f 93       	push	r24
-     138:	9f 93       	push	r25
-     13a:	af 93       	push	r26
-     13c:	bf 93       	push	r27
-     13e:	cf 93       	push	r28
-     140:	df 93       	push	r29
-     142:	ef 93       	push	r30
-     144:	ff 93       	push	r31
-                PUSHSREG                            ; Save SREG
-     146:	0f b7       	in	r16, 0x3f	; 63
-     148:	0f 93       	push	r16
-
-                lds     R30,OSTCBCur                ; Z = OSTCBCur->OSTCBStkPtr
-     14a:	e0 91 39 05 	lds	r30, 0x0539
-                lds     R31,OSTCBCur+1              ;
-     14e:	f0 91 3a 05 	lds	r31, 0x053A
-
-                in      r28,_SFR_IO_ADDR(SPL)
-     152:	cd b7       	in	r28, 0x3d	; 61
-                st      Z+,R28                      ; Save Y (R29:R28) pointer
-     154:	c1 93       	st	Z+, r28
-                in      r29,_SFR_IO_ADDR(SPH)
-     156:	de b7       	in	r29, 0x3e	; 62
-                st      Z+,R29                      ;
-     158:	d1 93       	st	Z+, r29
-
-#if OS_TASK_SW_HOOK_EN > 0
-                call    OSTaskSwHook                ; Call user defined task switch hook
-#endif
-
-                lds     R16,OSPrioHighRdy           ; OSPrioCur = OSPrioHighRdy
-     15a:	00 91 1b 05 	lds	r16, 0x051B
-                sts     OSPrioCur,R16
-     15e:	00 93 1c 05 	sts	0x051C, r16
-
-                lds     R30,OSTCBHighRdy            ; Let Z point to TCB of highest priority task
-     162:	e0 91 2b 05 	lds	r30, 0x052B
-                lds     R31,OSTCBHighRdy+1          ; ready to run
-     166:	f0 91 2c 05 	lds	r31, 0x052C
-                sts     OSTCBCur,R30                ; OSTCBCur = OSTCBHighRdy
-     16a:	e0 93 39 05 	sts	0x0539, r30
-                sts     OSTCBCur+1,R31              ;
-     16e:	f0 93 3a 05 	sts	0x053A, r31
-
-                ld      R28,Z+                      ; Restore Y pointer
-     172:	c1 91       	ld	r28, Z+
-                out     _SFR_IO_ADDR(SPL),R28
-     174:	cd bf       	out	0x3d, r28	; 61
-                ld      R29,Z+                      ;
-     176:	d1 91       	ld	r29, Z+
-                out     _SFR_IO_ADDR(SPH),R29
-     178:	de bf       	out	0x3e, r29	; 62
-
-                POPSREG                             ; Restore the status register
-     17a:	0f 91       	pop	r16
-     17c:	0f bf       	out	0x3f, r16	; 63
-                POPRS                               ; Restore all registers
-     17e:	ff 91       	pop	r31
-     180:	ef 91       	pop	r30
-     182:	df 91       	pop	r29
-     184:	cf 91       	pop	r28
-     186:	bf 91       	pop	r27
-     188:	af 91       	pop	r26
-     18a:	9f 91       	pop	r25
-     18c:	8f 91       	pop	r24
-     18e:	7f 91       	pop	r23
-     190:	6f 91       	pop	r22
-     192:	5f 91       	pop	r21
-     194:	4f 91       	pop	r20
-     196:	3f 91       	pop	r19
-     198:	2f 91       	pop	r18
-     19a:	1f 91       	pop	r17
-     19c:	0f 91       	pop	r16
-     19e:	ff 90       	pop	r15
-     1a0:	ef 90       	pop	r14
-     1a2:	df 90       	pop	r13
-     1a4:	cf 90       	pop	r12
-     1a6:	bf 90       	pop	r11
-     1a8:	af 90       	pop	r10
-     1aa:	9f 90       	pop	r9
-     1ac:	8f 90       	pop	r8
-     1ae:	7f 90       	pop	r7
-     1b0:	6f 90       	pop	r6
-     1b2:	5f 90       	pop	r5
-     1b4:	4f 90       	pop	r4
-     1b6:	3f 90       	pop	r3
-     1b8:	2f 90       	pop	r2
-     1ba:	1f 90       	pop	r1
-     1bc:	0f 90       	pop	r0
-                ret
-     1be:	08 95       	ret
+ 106:	0f 92       	push	r0
+ 108:	1f 92       	push	r1
+ 10a:	2f 92       	push	r2
+ 10c:	3f 92       	push	r3
+ 10e:	4f 92       	push	r4
+ 110:	5f 92       	push	r5
+ 112:	6f 92       	push	r6
+ 114:	7f 92       	push	r7
+ 116:	8f 92       	push	r8
+ 118:	9f 92       	push	r9
+ 11a:	af 92       	push	r10
+ 11c:	bf 92       	push	r11
+ 11e:	cf 92       	push	r12
+ 120:	df 92       	push	r13
+ 122:	ef 92       	push	r14
+ 124:	ff 92       	push	r15
+ 126:	0f 93       	push	r16
+ 128:	1f 93       	push	r17
+ 12a:	2f 93       	push	r18
+ 12c:	3f 93       	push	r19
+ 12e:	4f 93       	push	r20
+ 130:	5f 93       	push	r21
+ 132:	6f 93       	push	r22
+ 134:	7f 93       	push	r23
+ 136:	8f 93       	push	r24
+ 138:	9f 93       	push	r25
+ 13a:	af 93       	push	r26
+ 13c:	bf 93       	push	r27
+ 13e:	cf 93       	push	r28
+ 140:	df 93       	push	r29
+ 142:	ef 93       	push	r30
+ 144:	ff 93       	push	r31
+ 146:	0f b7       	in	r16, 0x3f	; 63
+ 148:	0f 93       	push	r16
+ 14a:	e0 91 b9 05 	lds	r30, 0x05B9
+ 14e:	f0 91 ba 05 	lds	r31, 0x05BA
+ 152:	cd b7       	in	r28, 0x3d	; 61
+ 154:	c1 93       	st	Z+, r28
+ 156:	de b7       	in	r29, 0x3e	; 62
+ 158:	d1 93       	st	Z+, r29
+ 15a:	00 91 9b 05 	lds	r16, 0x059B
+ 15e:	00 93 9c 05 	sts	0x059C, r16
+ 162:	e0 91 ab 05 	lds	r30, 0x05AB
+ 166:	f0 91 ac 05 	lds	r31, 0x05AC
+ 16a:	e0 93 b9 05 	sts	0x05B9, r30
+ 16e:	f0 93 ba 05 	sts	0x05BA, r31
+ 172:	c1 91       	ld	r28, Z+
+ 174:	cd bf       	out	0x3d, r28	; 61
+ 176:	d1 91       	ld	r29, Z+
+ 178:	de bf       	out	0x3e, r29	; 62
+ 17a:	0f 91       	pop	r16
+ 17c:	0f bf       	out	0x3f, r16	; 63
+ 17e:	ff 91       	pop	r31
+ 180:	ef 91       	pop	r30
+ 182:	df 91       	pop	r29
+ 184:	cf 91       	pop	r28
+ 186:	bf 91       	pop	r27
+ 188:	af 91       	pop	r26
+ 18a:	9f 91       	pop	r25
+ 18c:	8f 91       	pop	r24
+ 18e:	7f 91       	pop	r23
+ 190:	6f 91       	pop	r22
+ 192:	5f 91       	pop	r21
+ 194:	4f 91       	pop	r20
+ 196:	3f 91       	pop	r19
+ 198:	2f 91       	pop	r18
+ 19a:	1f 91       	pop	r17
+ 19c:	0f 91       	pop	r16
+ 19e:	ff 90       	pop	r15
+ 1a0:	ef 90       	pop	r14
+ 1a2:	df 90       	pop	r13
+ 1a4:	cf 90       	pop	r12
+ 1a6:	bf 90       	pop	r11
+ 1a8:	af 90       	pop	r10
+ 1aa:	9f 90       	pop	r9
+ 1ac:	8f 90       	pop	r8
+ 1ae:	7f 90       	pop	r7
+ 1b0:	6f 90       	pop	r6
+ 1b2:	5f 90       	pop	r5
+ 1b4:	4f 90       	pop	r4
+ 1b6:	3f 90       	pop	r3
+ 1b8:	2f 90       	pop	r2
+ 1ba:	1f 90       	pop	r1
+ 1bc:	0f 90       	pop	r0
+ 1be:	08 95       	ret
 
 000001c0 <OSIntCtxSw>:
-;*********************************************************************************************************
-
-#if OS_TASK_SW_HOOK_EN > 0
-                call    OSTaskSwHook                ; Call user defined task switch hook
-#endif
-                lds     R16,OSPrioHighRdy           ; OSPrioCur = OSPrioHighRdy
-     1c0:	00 91 1b 05 	lds	r16, 0x051B
-                sts     OSPrioCur,R16               ;
-     1c4:	00 93 1c 05 	sts	0x051C, r16
-
-                lds     R30,OSTCBHighRdy            ; Z = OSTCBHighRdy->OSTCBStkPtr
-     1c8:	e0 91 2b 05 	lds	r30, 0x052B
-                lds     R31,OSTCBHighRdy+1          ;
-     1cc:	f0 91 2c 05 	lds	r31, 0x052C
-                sts     OSTCBCur,R30                ; OSTCBCur = OSTCBHighRdy
-     1d0:	e0 93 39 05 	sts	0x0539, r30
-                sts     OSTCBCur+1,R31              ;
-     1d4:	f0 93 3a 05 	sts	0x053A, r31
-
-                ld      R28,Z+                      ; Restore Y pointer
-     1d8:	c1 91       	ld	r28, Z+
-                out     _SFR_IO_ADDR(SPL),R28
-     1da:	cd bf       	out	0x3d, r28	; 61
-                ld      R29,Z+                      ;
-     1dc:	d1 91       	ld	r29, Z+
-                out     _SFR_IO_ADDR(SPH),R29
-     1de:	de bf       	out	0x3e, r29	; 62
-
-                POPSREG                             ; Restore the status register
-     1e0:	0f 91       	pop	r16
-     1e2:	0f bf       	out	0x3f, r16	; 63
-                POPRS                               ; Restore all registers
-     1e4:	ff 91       	pop	r31
-     1e6:	ef 91       	pop	r30
-     1e8:	df 91       	pop	r29
-     1ea:	cf 91       	pop	r28
-     1ec:	bf 91       	pop	r27
-     1ee:	af 91       	pop	r26
-     1f0:	9f 91       	pop	r25
-     1f2:	8f 91       	pop	r24
-     1f4:	7f 91       	pop	r23
-     1f6:	6f 91       	pop	r22
-     1f8:	5f 91       	pop	r21
-     1fa:	4f 91       	pop	r20
-     1fc:	3f 91       	pop	r19
-     1fe:	2f 91       	pop	r18
-     200:	1f 91       	pop	r17
-     202:	0f 91       	pop	r16
-     204:	ff 90       	pop	r15
-     206:	ef 90       	pop	r14
-     208:	df 90       	pop	r13
-     20a:	cf 90       	pop	r12
-     20c:	bf 90       	pop	r11
-     20e:	af 90       	pop	r10
-     210:	9f 90       	pop	r9
-     212:	8f 90       	pop	r8
-     214:	7f 90       	pop	r7
-     216:	6f 90       	pop	r6
-     218:	5f 90       	pop	r5
-     21a:	4f 90       	pop	r4
-     21c:	3f 90       	pop	r3
-     21e:	2f 90       	pop	r2
-     220:	1f 90       	pop	r1
-     222:	0f 90       	pop	r0
-                ret
-     224:	08 95       	ret
+ 1c0:	00 91 9b 05 	lds	r16, 0x059B
+ 1c4:	00 93 9c 05 	sts	0x059C, r16
+ 1c8:	e0 91 ab 05 	lds	r30, 0x05AB
+ 1cc:	f0 91 ac 05 	lds	r31, 0x05AC
+ 1d0:	e0 93 b9 05 	sts	0x05B9, r30
+ 1d4:	f0 93 ba 05 	sts	0x05BA, r31
+ 1d8:	c1 91       	ld	r28, Z+
+ 1da:	cd bf       	out	0x3d, r28	; 61
+ 1dc:	d1 91       	ld	r29, Z+
+ 1de:	de bf       	out	0x3e, r29	; 62
+ 1e0:	0f 91       	pop	r16
+ 1e2:	0f bf       	out	0x3f, r16	; 63
+ 1e4:	ff 91       	pop	r31
+ 1e6:	ef 91       	pop	r30
+ 1e8:	df 91       	pop	r29
+ 1ea:	cf 91       	pop	r28
+ 1ec:	bf 91       	pop	r27
+ 1ee:	af 91       	pop	r26
+ 1f0:	9f 91       	pop	r25
+ 1f2:	8f 91       	pop	r24
+ 1f4:	7f 91       	pop	r23
+ 1f6:	6f 91       	pop	r22
+ 1f8:	5f 91       	pop	r21
+ 1fa:	4f 91       	pop	r20
+ 1fc:	3f 91       	pop	r19
+ 1fe:	2f 91       	pop	r18
+ 200:	1f 91       	pop	r17
+ 202:	0f 91       	pop	r16
+ 204:	ff 90       	pop	r15
+ 206:	ef 90       	pop	r14
+ 208:	df 90       	pop	r13
+ 20a:	cf 90       	pop	r12
+ 20c:	bf 90       	pop	r11
+ 20e:	af 90       	pop	r10
+ 210:	9f 90       	pop	r9
+ 212:	8f 90       	pop	r8
+ 214:	7f 90       	pop	r7
+ 216:	6f 90       	pop	r6
+ 218:	5f 90       	pop	r5
+ 21a:	4f 90       	pop	r4
+ 21c:	3f 90       	pop	r3
+ 21e:	2f 90       	pop	r2
+ 220:	1f 90       	pop	r1
+ 222:	0f 90       	pop	r0
+ 224:	08 95       	ret
 
 00000226 <OSTickISR>:
-; won't get vectored.
-;
-;********************************************************************************************************
-.global TIMER0_OVF_vect
-TIMER0_OVF_vect:
-OSTickISR:      PUSHRS                              ; Save all registers
-     226:	0f 92       	push	r0
-     228:	1f 92       	push	r1
-     22a:	2f 92       	push	r2
-     22c:	3f 92       	push	r3
-     22e:	4f 92       	push	r4
-     230:	5f 92       	push	r5
-     232:	6f 92       	push	r6
-     234:	7f 92       	push	r7
-     236:	8f 92       	push	r8
-     238:	9f 92       	push	r9
-     23a:	af 92       	push	r10
-     23c:	bf 92       	push	r11
-     23e:	cf 92       	push	r12
-     240:	df 92       	push	r13
-     242:	ef 92       	push	r14
-     244:	ff 92       	push	r15
-     246:	0f 93       	push	r16
-     248:	1f 93       	push	r17
-     24a:	2f 93       	push	r18
-     24c:	3f 93       	push	r19
-     24e:	4f 93       	push	r20
-     250:	5f 93       	push	r21
-     252:	6f 93       	push	r22
-     254:	7f 93       	push	r23
-     256:	8f 93       	push	r24
-     258:	9f 93       	push	r25
-     25a:	af 93       	push	r26
-     25c:	bf 93       	push	r27
-     25e:	cf 93       	push	r28
-     260:	df 93       	push	r29
-     262:	ef 93       	push	r30
-     264:	ff 93       	push	r31
-                PUSHSREGISR                         ; Save SREG with I bit set!
-     266:	0f b7       	in	r16, 0x3f	; 63
-     268:	00 68       	ori	r16, 0x80	; 128
-     26a:	0f 93       	push	r16
-
-                lds     R16,OSIntNesting            ; Notify uC/OS-II of ISR
-     26c:	00 91 38 05 	lds	r16, 0x0538
-                inc     R16                         ;
-     270:	03 95       	inc	r16
-                sts     OSIntNesting,R16            ;
-     272:	00 93 38 05 	sts	0x0538, r16
-; You should disable the lines between #if 1 and #endif if you use uC/OS-II version 2.51 or below!
-; (Unfortunately OS_VERSION is not defined here (how to do it elegantly? On possibility would be to
-;  code this ISR with C in os_cpu_c.c or use inline assembler in os_cpu_c.c)
-;*********************************************************************************************************
-#if 1
-                cpi     R16,0x01
-     276:	01 30       	cpi	r16, 0x01	; 1
-                brne    _not_first_int
-     278:	41 f4       	brne	.+16     	; 0x28a <_not_first_int>
-
-                in      R28,_SFR_IO_ADDR(SPL)       ; Z = SP
-     27a:	cd b7       	in	r28, 0x3d	; 61
-                in      R29,_SFR_IO_ADDR(SPH)
-     27c:	de b7       	in	r29, 0x3e	; 62
-                lds     R30,OSTCBCur                ; Z = OSTCBCur->OSTCBStkPtr
-     27e:	e0 91 39 05 	lds	r30, 0x0539
-                lds     R31,OSTCBCur+1              ;
-     282:	f0 91 3a 05 	lds	r31, 0x053A
-                st      Z+,R28                      ; Save Y pointer
-     286:	c1 93       	st	Z+, r28
-                st      Z+,R29                      ;
-     288:	d1 93       	st	Z+, r29
+ 226:	0f 92       	push	r0
+ 228:	1f 92       	push	r1
+ 22a:	2f 92       	push	r2
+ 22c:	3f 92       	push	r3
+ 22e:	4f 92       	push	r4
+ 230:	5f 92       	push	r5
+ 232:	6f 92       	push	r6
+ 234:	7f 92       	push	r7
+ 236:	8f 92       	push	r8
+ 238:	9f 92       	push	r9
+ 23a:	af 92       	push	r10
+ 23c:	bf 92       	push	r11
+ 23e:	cf 92       	push	r12
+ 240:	df 92       	push	r13
+ 242:	ef 92       	push	r14
+ 244:	ff 92       	push	r15
+ 246:	0f 93       	push	r16
+ 248:	1f 93       	push	r17
+ 24a:	2f 93       	push	r18
+ 24c:	3f 93       	push	r19
+ 24e:	4f 93       	push	r20
+ 250:	5f 93       	push	r21
+ 252:	6f 93       	push	r22
+ 254:	7f 93       	push	r23
+ 256:	8f 93       	push	r24
+ 258:	9f 93       	push	r25
+ 25a:	af 93       	push	r26
+ 25c:	bf 93       	push	r27
+ 25e:	cf 93       	push	r28
+ 260:	df 93       	push	r29
+ 262:	ef 93       	push	r30
+ 264:	ff 93       	push	r31
+ 266:	0f b7       	in	r16, 0x3f	; 63
+ 268:	00 68       	ori	r16, 0x80	; 128
+ 26a:	0f 93       	push	r16
+ 26c:	00 91 b8 05 	lds	r16, 0x05B8
+ 270:	03 95       	inc	r16
+ 272:	00 93 b8 05 	sts	0x05B8, r16
+ 276:	01 30       	cpi	r16, 0x01	; 1
+ 278:	41 f4       	brne	.+16     	; 0x28a <_not_first_int>
+ 27a:	cd b7       	in	r28, 0x3d	; 61
+ 27c:	de b7       	in	r29, 0x3e	; 62
+ 27e:	e0 91 b9 05 	lds	r30, 0x05B9
+ 282:	f0 91 ba 05 	lds	r31, 0x05BA
+ 286:	c1 93       	st	Z+, r28
+ 288:	d1 93       	st	Z+, r29
 
 0000028a <_not_first_int>:
-_not_first_int:
-#endif
-                ldi     R16,256-(CPU_CLOCK_HZ/OS_TICKS_PER_SEC/1024)   
-     28a:	0d ee       	ldi	r16, 0xED	; 237
-                                                    ; Reload timer to overflow at a rate of OS_TICKS_PER_SEC
-                out     _SFR_IO_ADDR(TCNT0),R16     ; at a prescaler of 1024 and CPU_CLOCK_HZ AVR clock
-     28c:	06 bd       	out	0x26, r16	; 38
-	
-                sei                                 ; Enable interrupts
-     28e:	78 94       	sei
-                
-                call    OSTimeTick                  ; Call uC/OS-IIs tick updating function
-     290:	0e 94 8d 05 	call	0xb1a	; 0xb1a <OSTimeTick>
-                nop
-     294:	00 00       	nop
-                call    OSIntExit                   ; Notify uC/OS-II about end of ISR
-     296:	0e 94 77 04 	call	0x8ee	; 0x8ee <OSIntExit>
-
-                POPSREG
-     29a:	0f 91       	pop	r16
-     29c:	0f bf       	out	0x3f, r16	; 63
-                POPRS                               ; Restore all registers and status register
-     29e:	ff 91       	pop	r31
-     2a0:	ef 91       	pop	r30
-     2a2:	df 91       	pop	r29
-     2a4:	cf 91       	pop	r28
-     2a6:	bf 91       	pop	r27
-     2a8:	af 91       	pop	r26
-     2aa:	9f 91       	pop	r25
-     2ac:	8f 91       	pop	r24
-     2ae:	7f 91       	pop	r23
-     2b0:	6f 91       	pop	r22
-     2b2:	5f 91       	pop	r21
-     2b4:	4f 91       	pop	r20
-     2b6:	3f 91       	pop	r19
-     2b8:	2f 91       	pop	r18
-     2ba:	1f 91       	pop	r17
-     2bc:	0f 91       	pop	r16
-     2be:	ff 90       	pop	r15
-     2c0:	ef 90       	pop	r14
-     2c2:	df 90       	pop	r13
-     2c4:	cf 90       	pop	r12
-     2c6:	bf 90       	pop	r11
-     2c8:	af 90       	pop	r10
-     2ca:	9f 90       	pop	r9
-     2cc:	8f 90       	pop	r8
-     2ce:	7f 90       	pop	r7
-     2d0:	6f 90       	pop	r6
-     2d2:	5f 90       	pop	r5
-     2d4:	4f 90       	pop	r4
-     2d6:	3f 90       	pop	r3
-     2d8:	2f 90       	pop	r2
-     2da:	1f 90       	pop	r1
-     2dc:	0f 90       	pop	r0
-                ret                                 ; Note: RET instead of RETI
-     2de:	08 95       	ret
+ 28a:	0d ee       	ldi	r16, 0xED	; 237
+ 28c:	06 bd       	out	0x26, r16	; 38
+ 28e:	78 94       	sei
+ 290:	0e 94 cc 03 	call	0x798	; 0x798 <OSTimeTick>
+ 294:	00 00       	nop
+ 296:	0e 94 b6 02 	call	0x56c	; 0x56c <OSIntExit>
+ 29a:	0f 91       	pop	r16
+ 29c:	0f bf       	out	0x3f, r16	; 63
+ 29e:	ff 91       	pop	r31
+ 2a0:	ef 91       	pop	r30
+ 2a2:	df 91       	pop	r29
+ 2a4:	cf 91       	pop	r28
+ 2a6:	bf 91       	pop	r27
+ 2a8:	af 91       	pop	r26
+ 2aa:	9f 91       	pop	r25
+ 2ac:	8f 91       	pop	r24
+ 2ae:	7f 91       	pop	r23
+ 2b0:	6f 91       	pop	r22
+ 2b2:	5f 91       	pop	r21
+ 2b4:	4f 91       	pop	r20
+ 2b6:	3f 91       	pop	r19
+ 2b8:	2f 91       	pop	r18
+ 2ba:	1f 91       	pop	r17
+ 2bc:	0f 91       	pop	r16
+ 2be:	ff 90       	pop	r15
+ 2c0:	ef 90       	pop	r14
+ 2c2:	df 90       	pop	r13
+ 2c4:	cf 90       	pop	r12
+ 2c6:	bf 90       	pop	r11
+ 2c8:	af 90       	pop	r10
+ 2ca:	9f 90       	pop	r9
+ 2cc:	8f 90       	pop	r8
+ 2ce:	7f 90       	pop	r7
+ 2d0:	6f 90       	pop	r6
+ 2d2:	5f 90       	pop	r5
+ 2d4:	4f 90       	pop	r4
+ 2d6:	3f 90       	pop	r3
+ 2d8:	2f 90       	pop	r2
+ 2da:	1f 90       	pop	r1
+ 2dc:	0f 90       	pop	r0
+ 2de:	08 95       	ret
 
 000002e0 <WatchDogReset>:
-
-
-
-.global WatchDogReset
-WatchDogReset:
-				wdr									; tickle the watchdog timer
-     2e0:	a8 95       	wdr
-				ret
-     2e2:	08 95       	ret
+ 2e0:	a8 95       	wdr
+ 2e2:	08 95       	ret
 
 000002e4 <SerTxISR>:
+ 2e4:	08 95       	ret
 
-.global USART_TX_vect							   ; Transmit Complete Interrupt
-USART_TX_vect:
-SerTxISR:      
-.extern PostTxCompleteSem
-			   ret
-     2e4:	08 95       	ret
+000002e6 <Button>:
+	//if pin8 is high
+	//turn on LED
+	
+	for (;;)
+	{
+		DDRB = 0b11111100;
+ 2e6:	8c ef       	ldi	r24, 0xFC	; 252
+ 2e8:	84 b9       	out	0x04, r24	; 4
+		
+		if (PINB & _BV(PORTB2))
+ 2ea:	1a 9b       	sbis	0x03, 2	; 3
+ 2ec:	fd cf       	rjmp	.-6      	; 0x2e8 <Button+0x2>
+		{
+			PORTB &= ~_BV(PORTB1); // turn on debug pin
+ 2ee:	29 98       	cbi	0x05, 1	; 5
+ 2f0:	fb cf       	rjmp	.-10     	; 0x2e8 <Button+0x2>
 
-000002e6 <TaskStart>:
+000002f2 <TaskStart>:
 	char *threeDollarSign = "$$$";
 	char *baudString = "U,38400,N";
 	char *sys_on_str = "\r\nuCOS ON\r\n---\r\n";			//helps see when the system turns on
 	pdata = pdata;                                         /* Prevent compiler warning                 */
 	
 	OSStatInit();                                          /* Initialize uC/OS-II's statistics         */
-     2e6:	0e 94 99 07 	call	0xf32	; 0xf32 <OSStatInit>
-	
-	OSTaskCreate(TimerTask, (void *)0, &TaskTimerStk[TRANSMIT_TASK_STK_SIZE - 1], 11);
-     2ea:	2b e0       	ldi	r18, 0x0B	; 11
-     2ec:	42 e1       	ldi	r20, 0x12	; 18
-     2ee:	54 e0       	ldi	r21, 0x04	; 4
-     2f0:	60 e0       	ldi	r22, 0x00	; 0
-     2f2:	70 e0       	ldi	r23, 0x00	; 0
-     2f4:	8d eb       	ldi	r24, 0xBD	; 189
-     2f6:	91 e0       	ldi	r25, 0x01	; 1
-     2f8:	0e 94 8e 06 	call	0xd1c	; 0xd1c <OSTaskCreate>
+ 2f2:	0e 94 79 05 	call	0xaf2	; 0xaf2 <OSStatInit>
 
-	OSTaskCreate(LedTask, (void *) 0, &TaskLedStk[TASK_STK_SIZE - 1], 10);
-     2fc:	2a e0       	ldi	r18, 0x0A	; 10
-     2fe:	44 ed       	ldi	r20, 0xD4	; 212
-     300:	54 e0       	ldi	r21, 0x04	; 4
-     302:	60 e0       	ldi	r22, 0x00	; 0
-     304:	70 e0       	ldi	r23, 0x00	; 0
-     306:	83 e3       	ldi	r24, 0x33	; 51
-     308:	92 e0       	ldi	r25, 0x02	; 2
-     30a:	0e 94 8e 06 	call	0xd1c	; 0xd1c <OSTaskCreate>
+	//OSTaskCreate(LedTask, (void *) 0, &TaskLedStk[TASK_STK_SIZE - 1], 10);
 	
-	OSTaskCreate(SerialTransmitTask, (void *) 0, &SerialTransmitTaskStk[TRANSMIT_TASK_STK_SIZE-1], 20);
-     30e:	24 e1       	ldi	r18, 0x14	; 20
-     310:	44 e9       	ldi	r20, 0x94	; 148
-     312:	54 e0       	ldi	r21, 0x04	; 4
-     314:	60 e0       	ldi	r22, 0x00	; 0
-     316:	70 e0       	ldi	r23, 0x00	; 0
-     318:	8c ec       	ldi	r24, 0xCC	; 204
-     31a:	92 e0       	ldi	r25, 0x02	; 2
-     31c:	0e 94 8e 06 	call	0xd1c	; 0xd1c <OSTaskCreate>
+	//OSTaskCreate(SerialTransmitTask, (void *) 0, &SerialTransmitTaskStk[TRANSMIT_TASK_STK_SIZE-1], 20);
+	
+	OSTaskCreate(Button, (void *) 0, &ButtonStk[TASK_STK_SIZE - 1], 5);
+ 2f6:	25 e0       	ldi	r18, 0x05	; 5
+ 2f8:	44 ed       	ldi	r20, 0xD4	; 212
+ 2fa:	54 e0       	ldi	r21, 0x04	; 4
+ 2fc:	60 e0       	ldi	r22, 0x00	; 0
+ 2fe:	70 e0       	ldi	r23, 0x00	; 0
+ 300:	83 e7       	ldi	r24, 0x73	; 115
+ 302:	91 e0       	ldi	r25, 0x01	; 1
+ 304:	0e 94 6e 04 	call	0x8dc	; 0x8dc <OSTaskCreate>
 	
 	OSMboxPost(SerialTxMBox, (void *)threeDollarSign); //enter command mode
-     320:	60 e0       	ldi	r22, 0x00	; 0
-     322:	71 e0       	ldi	r23, 0x01	; 1
-     324:	80 91 91 03 	lds	r24, 0x0391
-     328:	90 91 92 03 	lds	r25, 0x0392
-     32c:	0e 94 04 06 	call	0xc08	; 0xc08 <OSMboxPost>
+ 308:	60 e0       	ldi	r22, 0x00	; 0
+ 30a:	71 e0       	ldi	r23, 0x01	; 1
+ 30c:	80 91 91 03 	lds	r24, 0x0391
+ 310:	90 91 92 03 	lds	r25, 0x0392
+ 314:	0e 94 2f 04 	call	0x85e	; 0x85e <OSMboxPost>
 	OSTimeDly(2*OS_TICKS_PER_SEC);
-     330:	80 e9       	ldi	r24, 0x90	; 144
-     332:	91 e0       	ldi	r25, 0x01	; 1
-     334:	0e 94 7a 07 	call	0xef4	; 0xef4 <OSTimeDly>
+ 318:	80 e9       	ldi	r24, 0x90	; 144
+ 31a:	91 e0       	ldi	r25, 0x01	; 1
+ 31c:	0e 94 5a 05 	call	0xab4	; 0xab4 <OSTimeDly>
 	OSMboxPost(SerialTxMBox, (void *)baudString); //set baud to 38400
-     338:	64 e0       	ldi	r22, 0x04	; 4
-     33a:	71 e0       	ldi	r23, 0x01	; 1
-     33c:	80 91 91 03 	lds	r24, 0x0391
-     340:	90 91 92 03 	lds	r25, 0x0392
-     344:	0e 94 04 06 	call	0xc08	; 0xc08 <OSMboxPost>
+ 320:	64 e0       	ldi	r22, 0x04	; 4
+ 322:	71 e0       	ldi	r23, 0x01	; 1
+ 324:	80 91 91 03 	lds	r24, 0x0391
+ 328:	90 91 92 03 	lds	r25, 0x0392
+ 32c:	0e 94 2f 04 	call	0x85e	; 0x85e <OSMboxPost>
 	OSTimeDly(2*OS_TICKS_PER_SEC);
-     348:	80 e9       	ldi	r24, 0x90	; 144
-     34a:	91 e0       	ldi	r25, 0x01	; 1
-     34c:	0e 94 7a 07 	call	0xef4	; 0xef4 <OSTimeDly>
+ 330:	80 e9       	ldi	r24, 0x90	; 144
+ 332:	91 e0       	ldi	r25, 0x01	; 1
+ 334:	0e 94 5a 05 	call	0xab4	; 0xab4 <OSTimeDly>
 	OSMboxPost(SerialTxMBox, (void *)sys_on_str);	//tell the user debugging that we're on!
-     350:	6e e0       	ldi	r22, 0x0E	; 14
-     352:	71 e0       	ldi	r23, 0x01	; 1
-     354:	80 91 91 03 	lds	r24, 0x0391
-     358:	90 91 92 03 	lds	r25, 0x0392
-     35c:	0e 94 04 06 	call	0xc08	; 0xc08 <OSMboxPost>
+ 338:	6e e0       	ldi	r22, 0x0E	; 14
+ 33a:	71 e0       	ldi	r23, 0x01	; 1
+ 33c:	80 91 91 03 	lds	r24, 0x0391
+ 340:	90 91 92 03 	lds	r25, 0x0392
+ 344:	0e 94 2f 04 	call	0x85e	; 0x85e <OSMboxPost>
 
     for (;;) {	
         OSCtxSwCtr = 0;                         /* Clear context switch counter             */
-     360:	10 92 1f 05 	sts	0x051F, r1
-     364:	10 92 20 05 	sts	0x0520, r1
-     368:	10 92 21 05 	sts	0x0521, r1
-     36c:	10 92 22 05 	sts	0x0522, r1
+ 348:	10 92 9f 05 	sts	0x059F, r1
+ 34c:	10 92 a0 05 	sts	0x05A0, r1
+ 350:	10 92 a1 05 	sts	0x05A1, r1
+ 354:	10 92 a2 05 	sts	0x05A2, r1
         OSTimeDly(OS_TICKS_PER_SEC);			/* Wait one second                          */
-     370:	88 ec       	ldi	r24, 0xC8	; 200
-     372:	90 e0       	ldi	r25, 0x00	; 0
-     374:	0e 94 7a 07 	call	0xef4	; 0xef4 <OSTimeDly>
-     378:	f3 cf       	rjmp	.-26     	; 0x360 <TaskStart+0x7a>
+ 358:	88 ec       	ldi	r24, 0xC8	; 200
+ 35a:	90 e0       	ldi	r25, 0x00	; 0
+ 35c:	0e 94 5a 05 	call	0xab4	; 0xab4 <OSTimeDly>
+ 360:	f3 cf       	rjmp	.-26     	; 0x348 <TaskStart+0x56>
 
-0000037a <TimerTask>:
- *                                                  TimerTASK
- *********************************************************************************************************
- */
-
-void  TimerTask (void *pdata)
-{
-     37a:	cf 93       	push	r28
-     37c:	df 93       	push	r29
-     37e:	cd b7       	in	r28, 0x3d	; 61
-     380:	de b7       	in	r29, 0x3e	; 62
-     382:	69 97       	sbiw	r28, 0x19	; 25
-     384:	0f b6       	in	r0, 0x3f	; 63
-     386:	f8 94       	cli
-     388:	de bf       	out	0x3e, r29	; 62
-     38a:	0f be       	out	0x3f, r0	; 63
-     38c:	cd bf       	out	0x3d, r28	; 61
-	INT8U tmp;
-	char  TextMessage[TRANSMIT_BUFFER_SIZE];
-	
-    for (;;) {
-		OSTimeDly (10*OS_TICKS_PER_SEC);
-		tmp = HIGH_PRIORITY_ERROR;
-     38e:	68 94       	set
-     390:	dd 24       	eor	r13, r13
-     392:	d1 f8       	bld	r13, 1
-		OSMboxPost(LedMBox, (void *)&tmp);
-		strcpy(TextMessage, "HIGH ERR STATE\n\r");
-     394:	0f 2e       	mov	r0, r31
-     396:	f1 e1       	ldi	r31, 0x11	; 17
-     398:	ef 2e       	mov	r14, r31
-     39a:	f0 2d       	mov	r31, r0
-		OSMboxPost(SerialTxMBox, (void *)TextMessage);
-
-		OSTimeDly (10*OS_TICKS_PER_SEC);
-		tmp = MEDIUM_PRIORITY_ERROR;
-     39c:	ff 24       	eor	r15, r15
-     39e:	f3 94       	inc	r15
-		OSMboxPost(LedMBox, (void *)&tmp);	
-		strcpy(TextMessage, "MED ERR STATE\n\r");
-     3a0:	00 e1       	ldi	r16, 0x10	; 16
-		OSMboxPost(SerialTxMBox, (void *)TextMessage);
-	
-		OSTimeDly (10*OS_TICKS_PER_SEC);
-		tmp = NO_SYSTEM_ERROR;
-		OSMboxPost(LedMBox, (void *)&tmp);
-		strcpy(TextMessage, "NO ERR STATE\n\r");
-     3a2:	1f e0       	ldi	r17, 0x0F	; 15
-	INT16U Message;
-	INT8U tmp;
-	char  TextMessage[TRANSMIT_BUFFER_SIZE];
-	
-    for (;;) {
-		OSTimeDly (10*OS_TICKS_PER_SEC);
-     3a4:	80 ed       	ldi	r24, 0xD0	; 208
-     3a6:	97 e0       	ldi	r25, 0x07	; 7
-     3a8:	0e 94 7a 07 	call	0xef4	; 0xef4 <OSTimeDly>
-		tmp = HIGH_PRIORITY_ERROR;
-     3ac:	d9 82       	std	Y+1, r13	; 0x01
-		OSMboxPost(LedMBox, (void *)&tmp);
-     3ae:	be 01       	movw	r22, r28
-     3b0:	6f 5f       	subi	r22, 0xFF	; 255
-     3b2:	7f 4f       	sbci	r23, 0xFF	; 255
-     3b4:	80 91 8d 03 	lds	r24, 0x038D
-     3b8:	90 91 8e 03 	lds	r25, 0x038E
-     3bc:	0e 94 04 06 	call	0xc08	; 0xc08 <OSMboxPost>
-		strcpy(TextMessage, "HIGH ERR STATE\n\r");
-     3c0:	ef e1       	ldi	r30, 0x1F	; 31
-     3c2:	f1 e0       	ldi	r31, 0x01	; 1
-     3c4:	de 01       	movw	r26, r28
-     3c6:	12 96       	adiw	r26, 0x02	; 2
-     3c8:	8e 2d       	mov	r24, r14
-     3ca:	01 90       	ld	r0, Z+
-     3cc:	0d 92       	st	X+, r0
-     3ce:	8a 95       	dec	r24
-     3d0:	e1 f7       	brne	.-8      	; 0x3ca <TimerTask+0x50>
-		OSMboxPost(SerialTxMBox, (void *)TextMessage);
-     3d2:	be 01       	movw	r22, r28
-     3d4:	6e 5f       	subi	r22, 0xFE	; 254
-     3d6:	7f 4f       	sbci	r23, 0xFF	; 255
-     3d8:	80 91 91 03 	lds	r24, 0x0391
-     3dc:	90 91 92 03 	lds	r25, 0x0392
-     3e0:	0e 94 04 06 	call	0xc08	; 0xc08 <OSMboxPost>
-
-		OSTimeDly (10*OS_TICKS_PER_SEC);
-     3e4:	80 ed       	ldi	r24, 0xD0	; 208
-     3e6:	97 e0       	ldi	r25, 0x07	; 7
-     3e8:	0e 94 7a 07 	call	0xef4	; 0xef4 <OSTimeDly>
-		tmp = MEDIUM_PRIORITY_ERROR;
-     3ec:	f9 82       	std	Y+1, r15	; 0x01
-		OSMboxPost(LedMBox, (void *)&tmp);	
-     3ee:	be 01       	movw	r22, r28
-     3f0:	6f 5f       	subi	r22, 0xFF	; 255
-     3f2:	7f 4f       	sbci	r23, 0xFF	; 255
-     3f4:	80 91 8d 03 	lds	r24, 0x038D
-     3f8:	90 91 8e 03 	lds	r25, 0x038E
-     3fc:	0e 94 04 06 	call	0xc08	; 0xc08 <OSMboxPost>
-		strcpy(TextMessage, "MED ERR STATE\n\r");
-     400:	e0 e3       	ldi	r30, 0x30	; 48
-     402:	f1 e0       	ldi	r31, 0x01	; 1
-     404:	de 01       	movw	r26, r28
-     406:	12 96       	adiw	r26, 0x02	; 2
-     408:	80 2f       	mov	r24, r16
-     40a:	01 90       	ld	r0, Z+
-     40c:	0d 92       	st	X+, r0
-     40e:	8a 95       	dec	r24
-     410:	e1 f7       	brne	.-8      	; 0x40a <TimerTask+0x90>
-		OSMboxPost(SerialTxMBox, (void *)TextMessage);
-     412:	be 01       	movw	r22, r28
-     414:	6e 5f       	subi	r22, 0xFE	; 254
-     416:	7f 4f       	sbci	r23, 0xFF	; 255
-     418:	80 91 91 03 	lds	r24, 0x0391
-     41c:	90 91 92 03 	lds	r25, 0x0392
-     420:	0e 94 04 06 	call	0xc08	; 0xc08 <OSMboxPost>
-	
-		OSTimeDly (10*OS_TICKS_PER_SEC);
-     424:	80 ed       	ldi	r24, 0xD0	; 208
-     426:	97 e0       	ldi	r25, 0x07	; 7
-     428:	0e 94 7a 07 	call	0xef4	; 0xef4 <OSTimeDly>
-		tmp = NO_SYSTEM_ERROR;
-     42c:	19 82       	std	Y+1, r1	; 0x01
-		OSMboxPost(LedMBox, (void *)&tmp);
-     42e:	be 01       	movw	r22, r28
-     430:	6f 5f       	subi	r22, 0xFF	; 255
-     432:	7f 4f       	sbci	r23, 0xFF	; 255
-     434:	80 91 8d 03 	lds	r24, 0x038D
-     438:	90 91 8e 03 	lds	r25, 0x038E
-     43c:	0e 94 04 06 	call	0xc08	; 0xc08 <OSMboxPost>
-		strcpy(TextMessage, "NO ERR STATE\n\r");
-     440:	e0 e4       	ldi	r30, 0x40	; 64
-     442:	f1 e0       	ldi	r31, 0x01	; 1
-     444:	de 01       	movw	r26, r28
-     446:	12 96       	adiw	r26, 0x02	; 2
-     448:	81 2f       	mov	r24, r17
-     44a:	01 90       	ld	r0, Z+
-     44c:	0d 92       	st	X+, r0
-     44e:	8a 95       	dec	r24
-     450:	e1 f7       	brne	.-8      	; 0x44a <TimerTask+0xd0>
-		OSMboxPost(SerialTxMBox, (void *)TextMessage);
-     452:	be 01       	movw	r22, r28
-     454:	6e 5f       	subi	r22, 0xFE	; 254
-     456:	7f 4f       	sbci	r23, 0xFF	; 255
-     458:	80 91 91 03 	lds	r24, 0x0391
-     45c:	90 91 92 03 	lds	r25, 0x0392
-     460:	0e 94 04 06 	call	0xc08	; 0xc08 <OSMboxPost>
-     464:	9f cf       	rjmp	.-194    	; 0x3a4 <TimerTask+0x2a>
-
-00000466 <LedTask>:
-	void *msg;
-	INT16U OnPeriodTimeout = OS_TICKS_PER_SEC/10;
-	INT16U OffPeriodTimeout = OS_TICKS_PER_SEC-OnPeriodTimeout;
-	INT8U LocalMessage = NO_SYSTEM_ERROR;
-	float blink_freq = 1.0;	//in Hz
-	float duty_cycle = 0.1; //as percentage
-     466:	0d ec       	ldi	r16, 0xCD	; 205
-     468:	1c ec       	ldi	r17, 0xCC	; 204
-     46a:	dc ec       	ldi	r29, 0xCC	; 204
-     46c:	cd e3       	ldi	r28, 0x3D	; 61
-	INT8U tmp;
-	void *msg;
-	INT16U OnPeriodTimeout = OS_TICKS_PER_SEC/10;
-	INT16U OffPeriodTimeout = OS_TICKS_PER_SEC-OnPeriodTimeout;
-	INT8U LocalMessage = NO_SYSTEM_ERROR;
-	float blink_freq = 1.0;	//in Hz
-     46e:	81 2c       	mov	r8, r1
-     470:	91 2c       	mov	r9, r1
-     472:	68 94       	set
-     474:	aa 24       	eor	r10, r10
-     476:	a7 f8       	bld	r10, 7
-     478:	0f 2e       	mov	r0, r31
-     47a:	ff e3       	ldi	r31, 0x3F	; 63
-     47c:	bf 2e       	mov	r11, r31
-     47e:	f0 2d       	mov	r31, r0
-					blink_freq = 2.4;
-					duty_cycle = 0.5;
-					break;
-				case MEDIUM_PRIORITY_ERROR:
-					blink_freq = 0.4;
-					duty_cycle = 0.5;
-     480:	41 2c       	mov	r4, r1
-     482:	51 2c       	mov	r5, r1
-     484:	61 2c       	mov	r6, r1
-     486:	0f 2e       	mov	r0, r31
-     488:	ff e3       	ldi	r31, 0x3F	; 63
-     48a:	7f 2e       	mov	r7, r31
-     48c:	f0 2d       	mov	r31, r0
-				case HIGH_PRIORITY_ERROR:
-					blink_freq = 2.4;
-					duty_cycle = 0.5;
-					break;
-				case MEDIUM_PRIORITY_ERROR:
-					blink_freq = 0.4;
-     48e:	0f 2e       	mov	r0, r31
-     490:	fd ec       	ldi	r31, 0xCD	; 205
-     492:	2f 2e       	mov	r2, r31
-     494:	f0 2d       	mov	r31, r0
-     496:	0f 2e       	mov	r0, r31
-     498:	fc ec       	ldi	r31, 0xCC	; 204
-     49a:	3f 2e       	mov	r3, r31
-     49c:	f0 2d       	mov	r31, r0
-     49e:	0d c0       	rjmp	.+26     	; 0x4ba <LedTask+0x54>
-		if (msg != NULL){	//ONLY CHANGE IF YOU RECEIVE A MESSAGE
-			LocalMessage = *((INT8U *)msg);
-			switch(LocalMessage){	//react to localmessage FSM
-				case NO_SYSTEM_ERROR:
-					blink_freq = 1.0;
-					duty_cycle = 0.1;
-     4a0:	0d ec       	ldi	r16, 0xCD	; 205
-     4a2:	1c ec       	ldi	r17, 0xCC	; 204
-     4a4:	dc ec       	ldi	r29, 0xCC	; 204
-     4a6:	cd e3       	ldi	r28, 0x3D	; 61
-
-		if (msg != NULL){	//ONLY CHANGE IF YOU RECEIVE A MESSAGE
-			LocalMessage = *((INT8U *)msg);
-			switch(LocalMessage){	//react to localmessage FSM
-				case NO_SYSTEM_ERROR:
-					blink_freq = 1.0;
-     4a8:	81 2c       	mov	r8, r1
-     4aa:	91 2c       	mov	r9, r1
-     4ac:	68 94       	set
-     4ae:	aa 24       	eor	r10, r10
-     4b0:	a7 f8       	bld	r10, 7
-     4b2:	0f 2e       	mov	r0, r31
-     4b4:	ff e3       	ldi	r31, 0x3F	; 63
-     4b6:	bf 2e       	mov	r11, r31
-     4b8:	f0 2d       	mov	r31, r0
-	float blink_freq = 1.0;	//in Hz
-	float duty_cycle = 0.1; //as percentage
-
-    for (;;) {
-		/*HANDLE LED BLINKING*/
-		PORTB |= _BV(PORTB5); // turn off led
-     4ba:	2d 9a       	sbi	0x05, 5	; 5
-		OSTimeDly ((1.0 / blink_freq) * duty_cycle * OS_TICKS_PER_SEC); //keep it off for the 1 - duty cycle %
-     4bc:	28 2d       	mov	r18, r8
-     4be:	39 2d       	mov	r19, r9
-     4c0:	4a 2d       	mov	r20, r10
-     4c2:	5b 2d       	mov	r21, r11
-     4c4:	60 e0       	ldi	r22, 0x00	; 0
-     4c6:	70 e0       	ldi	r23, 0x00	; 0
-     4c8:	80 e8       	ldi	r24, 0x80	; 128
-     4ca:	9f e3       	ldi	r25, 0x3F	; 63
-     4cc:	0e 94 7a 08 	call	0x10f4	; 0x10f4 <__divsf3>
-     4d0:	6b 01       	movw	r12, r22
-     4d2:	7c 01       	movw	r14, r24
-     4d4:	20 2f       	mov	r18, r16
-     4d6:	31 2f       	mov	r19, r17
-     4d8:	4d 2f       	mov	r20, r29
-     4da:	5c 2f       	mov	r21, r28
-     4dc:	0e 94 5f 09 	call	0x12be	; 0x12be <__mulsf3>
-     4e0:	20 e0       	ldi	r18, 0x00	; 0
-     4e2:	30 e0       	ldi	r19, 0x00	; 0
-     4e4:	48 e4       	ldi	r20, 0x48	; 72
-     4e6:	53 e4       	ldi	r21, 0x43	; 67
-     4e8:	0e 94 5f 09 	call	0x12be	; 0x12be <__mulsf3>
-     4ec:	0e 94 e2 08 	call	0x11c4	; 0x11c4 <__fixunssfsi>
-     4f0:	cb 01       	movw	r24, r22
-     4f2:	0e 94 7a 07 	call	0xef4	; 0xef4 <OSTimeDly>
-		PORTB &= ~_BV(PORTB5); // turn on led
-     4f6:	2d 98       	cbi	0x05, 5	; 5
-		OSTimeDly ((1.0 / blink_freq) * (1 - duty_cycle) * OS_TICKS_PER_SEC); //keep it off for the 1 - duty cycle %
-     4f8:	20 2f       	mov	r18, r16
-     4fa:	31 2f       	mov	r19, r17
-     4fc:	4d 2f       	mov	r20, r29
-     4fe:	5c 2f       	mov	r21, r28
-     500:	60 e0       	ldi	r22, 0x00	; 0
-     502:	70 e0       	ldi	r23, 0x00	; 0
-     504:	80 e8       	ldi	r24, 0x80	; 128
-     506:	9f e3       	ldi	r25, 0x3F	; 63
-     508:	0e 94 15 08 	call	0x102a	; 0x102a <__subsf3>
-     50c:	9b 01       	movw	r18, r22
-     50e:	ac 01       	movw	r20, r24
-     510:	c7 01       	movw	r24, r14
-     512:	b6 01       	movw	r22, r12
-     514:	0e 94 5f 09 	call	0x12be	; 0x12be <__mulsf3>
-     518:	20 e0       	ldi	r18, 0x00	; 0
-     51a:	30 e0       	ldi	r19, 0x00	; 0
-     51c:	48 e4       	ldi	r20, 0x48	; 72
-     51e:	53 e4       	ldi	r21, 0x43	; 67
-     520:	0e 94 5f 09 	call	0x12be	; 0x12be <__mulsf3>
-     524:	0e 94 e2 08 	call	0x11c4	; 0x11c4 <__fixunssfsi>
-     528:	cb 01       	movw	r24, r22
-     52a:	0e 94 7a 07 	call	0xef4	; 0xef4 <OSTimeDly>
-
-		/*SEE IF LED STATE HAS CHANGED*/
-		msg = OSMboxAccept(LedMBox); //receive message
-     52e:	80 91 8d 03 	lds	r24, 0x038D
-     532:	90 91 8e 03 	lds	r25, 0x038E
-     536:	0e 94 d3 05 	call	0xba6	; 0xba6 <OSMboxAccept>
-
-		if (msg != NULL){	//ONLY CHANGE IF YOU RECEIVE A MESSAGE
-     53a:	00 97       	sbiw	r24, 0x00	; 0
-     53c:	09 f4       	brne	.+2      	; 0x540 <LedTask+0xda>
-     53e:	bd cf       	rjmp	.-134    	; 0x4ba <LedTask+0x54>
-			LocalMessage = *((INT8U *)msg);
-			switch(LocalMessage){	//react to localmessage FSM
-     540:	fc 01       	movw	r30, r24
-     542:	80 81       	ld	r24, Z
-     544:	81 30       	cpi	r24, 0x01	; 1
-     546:	c9 f0       	breq	.+50     	; 0x57a <LedTask+0x114>
-     548:	08 f4       	brcc	.+2      	; 0x54c <LedTask+0xe6>
-     54a:	aa cf       	rjmp	.-172    	; 0x4a0 <LedTask+0x3a>
-     54c:	82 30       	cpi	r24, 0x02	; 2
-     54e:	09 f0       	breq	.+2      	; 0x552 <LedTask+0xec>
-     550:	b4 cf       	rjmp	.-152    	; 0x4ba <LedTask+0x54>
-					blink_freq = 1.0;
-					duty_cycle = 0.1;
-					break;
-				case HIGH_PRIORITY_ERROR:
-					blink_freq = 2.4;
-					duty_cycle = 0.5;
-     552:	04 2d       	mov	r16, r4
-     554:	15 2d       	mov	r17, r5
-     556:	d6 2d       	mov	r29, r6
-     558:	c7 2d       	mov	r28, r7
-				case NO_SYSTEM_ERROR:
-					blink_freq = 1.0;
-					duty_cycle = 0.1;
-					break;
-				case HIGH_PRIORITY_ERROR:
-					blink_freq = 2.4;
-     55a:	0f 2e       	mov	r0, r31
-     55c:	fa e9       	ldi	r31, 0x9A	; 154
-     55e:	8f 2e       	mov	r8, r31
-     560:	f0 2d       	mov	r31, r0
-     562:	0f 2e       	mov	r0, r31
-     564:	f9 e9       	ldi	r31, 0x99	; 153
-     566:	9f 2e       	mov	r9, r31
-     568:	f0 2d       	mov	r31, r0
-     56a:	0f 2e       	mov	r0, r31
-     56c:	f9 e1       	ldi	r31, 0x19	; 25
-     56e:	af 2e       	mov	r10, r31
-     570:	f0 2d       	mov	r31, r0
-     572:	68 94       	set
-     574:	bb 24       	eor	r11, r11
-     576:	b6 f8       	bld	r11, 6
-					duty_cycle = 0.5;
-					break;
-     578:	a0 cf       	rjmp	.-192    	; 0x4ba <LedTask+0x54>
-				case MEDIUM_PRIORITY_ERROR:
-					blink_freq = 0.4;
-					duty_cycle = 0.5;
-     57a:	04 2d       	mov	r16, r4
-     57c:	15 2d       	mov	r17, r5
-     57e:	d6 2d       	mov	r29, r6
-     580:	c7 2d       	mov	r28, r7
-				case HIGH_PRIORITY_ERROR:
-					blink_freq = 2.4;
-					duty_cycle = 0.5;
-					break;
-				case MEDIUM_PRIORITY_ERROR:
-					blink_freq = 0.4;
-     582:	82 2c       	mov	r8, r2
-     584:	93 2c       	mov	r9, r3
-     586:	0f 2e       	mov	r0, r31
-     588:	fc ec       	ldi	r31, 0xCC	; 204
-     58a:	af 2e       	mov	r10, r31
-     58c:	f0 2d       	mov	r31, r0
-     58e:	0f 2e       	mov	r0, r31
-     590:	fe e3       	ldi	r31, 0x3E	; 62
-     592:	bf 2e       	mov	r11, r31
-     594:	f0 2d       	mov	r31, r0
-					duty_cycle = 0.5;
-					break; 
-     596:	91 cf       	rjmp	.-222    	; 0x4ba <LedTask+0x54>
-
-00000598 <SerialTransmitTask>:
-		}
-    }
-}
-
-void  SerialTransmitTask (void *pdata)
-{
-     598:	cf 93       	push	r28
-     59a:	df 93       	push	r29
-     59c:	cd b7       	in	r28, 0x3d	; 61
-     59e:	de b7       	in	r29, 0x3e	; 62
-     5a0:	69 97       	sbiw	r28, 0x19	; 25
-     5a2:	0f b6       	in	r0, 0x3f	; 63
-     5a4:	f8 94       	cli
-     5a6:	de bf       	out	0x3e, r29	; 62
-     5a8:	0f be       	out	0x3f, r0	; 63
-     5aa:	cd bf       	out	0x3d, r28	; 61
-		msg = OSMboxAccept(SerialTxMBox);
-		
-		if(msg != NULL){
-			strcpy(TextMessage, msg);	//copy the contents of the passed pointer to the new local string
-
-			UCSR0B |= TXCIE0;	//ENABLE TX COMPLETE INTERRUPT
-     5ac:	0f 2e       	mov	r0, r31
-     5ae:	f1 ec       	ldi	r31, 0xC1	; 193
-     5b0:	cf 2e       	mov	r12, r31
-     5b2:	d1 2c       	mov	r13, r1
-     5b4:	f0 2d       	mov	r31, r0
-			for(str_index=0;TextMessage[str_index]!='\0';str_index++){ //print the string
-     5b6:	81 2c       	mov	r8, r1
-     5b8:	91 2c       	mov	r9, r1
-     5ba:	a1 2c       	mov	r10, r1
-					/* Wait for empty transmit buffer */
-					OSSemPend(SerialTxSem, 1, &err);
-					
-					PORTB |= _BV(PORTB4); // turn on debug port
-					/* Put data into buffer, sends the data */
-					UDR0 = TextMessage[str_index];
-     5bc:	0f 2e       	mov	r0, r31
-     5be:	f6 ec       	ldi	r31, 0xC6	; 198
-     5c0:	ef 2e       	mov	r14, r31
-     5c2:	f1 2c       	mov	r15, r1
-     5c4:	f0 2d       	mov	r31, r0
-	INT8U str_index;
-	INT16U StringLength;
-	char TextMessage[TRANSMIT_BUFFER_SIZE];
-	
-	for (;;) {
-		OSTimeDly (1*OS_TICKS_PER_SEC);
-     5c6:	88 ec       	ldi	r24, 0xC8	; 200
-     5c8:	90 e0       	ldi	r25, 0x00	; 0
-     5ca:	0e 94 7a 07 	call	0xef4	; 0xef4 <OSTimeDly>
-		msg = OSMboxAccept(SerialTxMBox);
-     5ce:	80 91 91 03 	lds	r24, 0x0391
-     5d2:	90 91 92 03 	lds	r25, 0x0392
-     5d6:	0e 94 d3 05 	call	0xba6	; 0xba6 <OSMboxAccept>
-		
-		if(msg != NULL){
-     5da:	00 97       	sbiw	r24, 0x00	; 0
-     5dc:	89 f1       	breq	.+98     	; 0x640 <SerialTransmitTask+0xa8>
-			strcpy(TextMessage, msg);	//copy the contents of the passed pointer to the new local string
-     5de:	bc 01       	movw	r22, r24
-     5e0:	ce 01       	movw	r24, r28
-     5e2:	02 96       	adiw	r24, 0x02	; 2
-     5e4:	0e 94 fe 09 	call	0x13fc	; 0x13fc <strcpy>
-
-			UCSR0B |= TXCIE0;	//ENABLE TX COMPLETE INTERRUPT
-     5e8:	f6 01       	movw	r30, r12
-     5ea:	80 81       	ld	r24, Z
-     5ec:	86 60       	ori	r24, 0x06	; 6
-     5ee:	80 83       	st	Z, r24
-			for(str_index=0;TextMessage[str_index]!='\0';str_index++){ //print the string
-     5f0:	8a 81       	ldd	r24, Y+2	; 0x02
-     5f2:	88 23       	and	r24, r24
-     5f4:	29 f1       	breq	.+74     	; 0x640 <SerialTransmitTask+0xa8>
-     5f6:	08 2d       	mov	r16, r8
-     5f8:	19 2d       	mov	r17, r9
-     5fa:	ba 2c       	mov	r11, r10
-	//				USART_Transmit(TextMessage[str_index]);
-					
-					/* Wait for empty transmit buffer */
-					OSSemPend(SerialTxSem, 1, &err);
-     5fc:	ae 01       	movw	r20, r28
-     5fe:	4f 5f       	subi	r20, 0xFF	; 255
-     600:	5f 4f       	sbci	r21, 0xFF	; 255
-     602:	61 e0       	ldi	r22, 0x01	; 1
-     604:	70 e0       	ldi	r23, 0x00	; 0
-     606:	80 91 13 04 	lds	r24, 0x0413
-     60a:	90 91 14 04 	lds	r25, 0x0414
-     60e:	0e 94 43 06 	call	0xc86	; 0xc86 <OSSemPend>
-					
-					PORTB |= _BV(PORTB4); // turn on debug port
-     612:	2c 9a       	sbi	0x05, 4	; 5
-					/* Put data into buffer, sends the data */
-					UDR0 = TextMessage[str_index];
-     614:	e2 e0       	ldi	r30, 0x02	; 2
-     616:	f0 e0       	ldi	r31, 0x00	; 0
-     618:	ec 0f       	add	r30, r28
-     61a:	fd 1f       	adc	r31, r29
-     61c:	e0 0f       	add	r30, r16
-     61e:	f1 1f       	adc	r31, r17
-     620:	80 81       	ld	r24, Z
-     622:	f7 01       	movw	r30, r14
-     624:	80 83       	st	Z, r24
-					PORTB &= ~_BV(PORTB4); // turn off debug port
-     626:	2c 98       	cbi	0x05, 4	; 5
-		
-		if(msg != NULL){
-			strcpy(TextMessage, msg);	//copy the contents of the passed pointer to the new local string
-
-			UCSR0B |= TXCIE0;	//ENABLE TX COMPLETE INTERRUPT
-			for(str_index=0;TextMessage[str_index]!='\0';str_index++){ //print the string
-     628:	b3 94       	inc	r11
-     62a:	0b 2d       	mov	r16, r11
-     62c:	10 e0       	ldi	r17, 0x00	; 0
-     62e:	e2 e0       	ldi	r30, 0x02	; 2
-     630:	f0 e0       	ldi	r31, 0x00	; 0
-     632:	ec 0f       	add	r30, r28
-     634:	fd 1f       	adc	r31, r29
-     636:	e0 0f       	add	r30, r16
-     638:	f1 1f       	adc	r31, r17
-     63a:	80 81       	ld	r24, Z
-     63c:	81 11       	cpse	r24, r1
-     63e:	de cf       	rjmp	.-68     	; 0x5fc <SerialTransmitTask+0x64>
-					UDR0 = TextMessage[str_index];
-					PORTB &= ~_BV(PORTB4); // turn off debug port
-				}
-
-		}
-		UCSR0B &= ~TXCIE0;	//DISABLE TX COMPLETE INTERRUPT
-     640:	f6 01       	movw	r30, r12
-     642:	80 81       	ld	r24, Z
-     644:	89 7f       	andi	r24, 0xF9	; 249
-     646:	80 83       	st	Z, r24
-	}
-     648:	be cf       	rjmp	.-132    	; 0x5c6 <SerialTransmitTask+0x2e>
-
-0000064a <main>:
+00000362 <main>:
  *                                                MAIN
  *********************************************************************************************************
  */
 int main (void)
 {
 	InitPeripherals();
-     64a:	0e 94 4f 03 	call	0x69e	; 0x69e <InitPeripherals>
+ 362:	0e 94 db 01 	call	0x3b6	; 0x3b6 <InitPeripherals>
 	
     OSInit();                                              /* Initialize uC/OS-II                      */
-     64e:	0e 94 f8 06 	call	0xdf0	; 0xdf0 <OSInit>
+ 366:	0e 94 d8 04 	call	0x9b0	; 0x9b0 <OSInit>
 	
 	USART_Init();
-     652:	0e 94 71 03 	call	0x6e2	; 0x6e2 <USART_Init>
+ 36a:	0e 94 fe 01 	call	0x3fc	; 0x3fc <USART_Init>
 
 /* Create OS_EVENT resources here  */
 
 	LedMBox = OSMboxCreate((void *)0);
-     656:	80 e0       	ldi	r24, 0x00	; 0
-     658:	90 e0       	ldi	r25, 0x00	; 0
-     65a:	0e 94 e7 05 	call	0xbce	; 0xbce <OSMboxCreate>
-     65e:	90 93 8e 03 	sts	0x038E, r25
-     662:	80 93 8d 03 	sts	0x038D, r24
+ 36e:	80 e0       	ldi	r24, 0x00	; 0
+ 370:	90 e0       	ldi	r25, 0x00	; 0
+ 372:	0e 94 12 04 	call	0x824	; 0x824 <OSMboxCreate>
+ 376:	90 93 8e 03 	sts	0x038E, r25
+ 37a:	80 93 8d 03 	sts	0x038D, r24
 	SerialTxMBox = OSMboxCreate((void *)0);
-     666:	80 e0       	ldi	r24, 0x00	; 0
-     668:	90 e0       	ldi	r25, 0x00	; 0
-     66a:	0e 94 e7 05 	call	0xbce	; 0xbce <OSMboxCreate>
-     66e:	90 93 92 03 	sts	0x0392, r25
-     672:	80 93 91 03 	sts	0x0391, r24
+ 37e:	80 e0       	ldi	r24, 0x00	; 0
+ 380:	90 e0       	ldi	r25, 0x00	; 0
+ 382:	0e 94 12 04 	call	0x824	; 0x824 <OSMboxCreate>
+ 386:	90 93 92 03 	sts	0x0392, r25
+ 38a:	80 93 91 03 	sts	0x0391, r24
 	SerialTxSem = OSSemCreate(1);
-     676:	81 e0       	ldi	r24, 0x01	; 1
-     678:	90 e0       	ldi	r25, 0x00	; 0
-     67a:	0e 94 26 06 	call	0xc4c	; 0xc4c <OSSemCreate>
-     67e:	90 93 14 04 	sts	0x0414, r25
-     682:	80 93 13 04 	sts	0x0413, r24
+ 38e:	81 e0       	ldi	r24, 0x01	; 1
+ 390:	90 e0       	ldi	r25, 0x00	; 0
+ 392:	0e 94 51 04 	call	0x8a2	; 0x8a2 <OSSemCreate>
+ 396:	90 93 14 04 	sts	0x0414, r25
+ 39a:	80 93 13 04 	sts	0x0413, r24
 	
 /* END Create OS_EVENT resources   */
 
     OSTaskCreate(TaskStart, (void *)0, &TaskStartStk[TASK_STK_SIZE - 1], 0);
-     686:	20 e0       	ldi	r18, 0x00	; 0
-     688:	44 e1       	ldi	r20, 0x14	; 20
-     68a:	55 e0       	ldi	r21, 0x05	; 5
-     68c:	60 e0       	ldi	r22, 0x00	; 0
-     68e:	70 e0       	ldi	r23, 0x00	; 0
-     690:	83 e7       	ldi	r24, 0x73	; 115
-     692:	91 e0       	ldi	r25, 0x01	; 1
-     694:	0e 94 8e 06 	call	0xd1c	; 0xd1c <OSTaskCreate>
+ 39e:	20 e0       	ldi	r18, 0x00	; 0
+ 3a0:	44 e9       	ldi	r20, 0x94	; 148
+ 3a2:	55 e0       	ldi	r21, 0x05	; 5
+ 3a4:	60 e0       	ldi	r22, 0x00	; 0
+ 3a6:	70 e0       	ldi	r23, 0x00	; 0
+ 3a8:	89 e7       	ldi	r24, 0x79	; 121
+ 3aa:	91 e0       	ldi	r25, 0x01	; 1
+ 3ac:	0e 94 6e 04 	call	0x8dc	; 0x8dc <OSTaskCreate>
 	
     OSStart();                                             /* Start multitasking                       */
-     698:	0e 94 02 05 	call	0xa04	; 0xa04 <OSStart>
-     69c:	ff cf       	rjmp	.-2      	; 0x69c <main+0x52>
+ 3b0:	0e 94 41 03 	call	0x682	; 0x682 <OSStart>
+ 3b4:	ff cf       	rjmp	.-2      	; 0x3b4 <main+0x52>
 
-0000069e <InitPeripherals>:
+000003b6 <InitPeripherals>:
 
 void InitPeripherals(void)
 {
 
 	// manage WDT
 	cli();	
-     69e:	f8 94       	cli
+ 3b6:	f8 94       	cli
 	WatchDogReset();
-     6a0:	0e 94 70 01 	call	0x2e0	; 0x2e0 <WatchDogReset>
+ 3b8:	0e 94 70 01 	call	0x2e0	; 0x2e0 <WatchDogReset>
 	MCUSR &= ~(1<<WDRF);			// clear WDRF in MCUSR
-     6a4:	84 b7       	in	r24, 0x34	; 52
-     6a6:	87 7f       	andi	r24, 0xF7	; 247
-     6a8:	84 bf       	out	0x34, r24	; 52
+ 3bc:	84 b7       	in	r24, 0x34	; 52
+ 3be:	87 7f       	andi	r24, 0xF7	; 247
+ 3c0:	84 bf       	out	0x34, r24	; 52
 	WDTCSR |= (1<<WDCE)|(1<<WDE)|0x08;	// write a logic one to WDCE and WDE and keep old prescalar setting to prevent unintentional timeout
-     6aa:	e0 e6       	ldi	r30, 0x60	; 96
-     6ac:	f0 e0       	ldi	r31, 0x00	; 0
-     6ae:	80 81       	ld	r24, Z
-     6b0:	88 61       	ori	r24, 0x18	; 24
-     6b2:	80 83       	st	Z, r24
+ 3c2:	e0 e6       	ldi	r30, 0x60	; 96
+ 3c4:	f0 e0       	ldi	r31, 0x00	; 0
+ 3c6:	80 81       	ld	r24, Z
+ 3c8:	88 61       	ori	r24, 0x18	; 24
+ 3ca:	80 83       	st	Z, r24
 	WDTCSR=0x00;					// turn wdt off
-     6b4:	10 82       	st	Z, r1
+ 3cc:	10 82       	st	Z, r1
 
 	
 	// PortB: set 
 	//
 	PORTB &= ~_BV(PORTB5); // set pin 5 (Arduino DIO pin 13) low to turn led off
-     6b6:	2d 98       	cbi	0x05, 5	; 5
+ 3ce:	2d 98       	cbi	0x05, 5	; 5
 	PORTB &= ~_BV(PORTB4); // set pin 4 low to turn led off
-     6b8:	2c 98       	cbi	0x05, 4	; 5
+ 3d0:	2c 98       	cbi	0x05, 4	; 5
 	DDRB |= _BV(DDB5); // set pin 5 of PORTB for output
-     6ba:	25 9a       	sbi	0x04, 5	; 4
+ 3d2:	25 9a       	sbi	0x04, 5	; 4
 	DDRB |= _BV(DDB4); // set pin 4 of PORTB for output
-     6bc:	24 9a       	sbi	0x04, 4	; 4
+ 3d4:	24 9a       	sbi	0x04, 4	; 4
+	
+	DDRB &= ~_BV(DDB2); // set pin 2 of PORTB for io
+ 3d6:	22 98       	cbi	0x04, 2	; 4
 
 	// setup Timer0 for UC/OS-II timer tick
 	//
 	TCCR0A = _BV(WGM01) | _BV(WGM00);				/* set timer0: OC0A/OC0B disconnected; fast PCM mode           */
-     6be:	83 e0       	ldi	r24, 0x03	; 3
-     6c0:	84 bd       	out	0x24, r24	; 36
+ 3d8:	83 e0       	ldi	r24, 0x03	; 3
+ 3da:	84 bd       	out	0x24, r24	; 36
 	TCCR0B = _BV(WGM02) | _BV(CS02)| _BV(CS00);		/* timer0 clock = system clock/1024      */
-     6c2:	8d e0       	ldi	r24, 0x0D	; 13
-     6c4:	85 bd       	out	0x25, r24	; 37
+ 3dc:	8d e0       	ldi	r24, 0x0D	; 13
+ 3de:	85 bd       	out	0x25, r24	; 37
 	OCR0A = (CPU_CLOCK_HZ/OS_TICKS_PER_SEC/1024)-1; /* This combination yields an interrupt every 5 msec  */
-     6c6:	82 e1       	ldi	r24, 0x12	; 18
-     6c8:	87 bd       	out	0x27, r24	; 39
+ 3e0:	82 e1       	ldi	r24, 0x12	; 18
+ 3e2:	87 bd       	out	0x27, r24	; 39
 	TIMSK0 |= _BV(TOIE0);							/* enable timer0 CTC-A interrupt */
-     6ca:	ee e6       	ldi	r30, 0x6E	; 110
-     6cc:	f0 e0       	ldi	r31, 0x00	; 0
-     6ce:	80 81       	ld	r24, Z
-     6d0:	81 60       	ori	r24, 0x01	; 1
-     6d2:	80 83       	st	Z, r24
+ 3e4:	ee e6       	ldi	r30, 0x6E	; 110
+ 3e6:	f0 e0       	ldi	r31, 0x00	; 0
+ 3e8:	80 81       	ld	r24, Z
+ 3ea:	81 60       	ori	r24, 0x01	; 1
+ 3ec:	80 83       	st	Z, r24
 	PRR &= ~_BV(PRTIM0);							/* turn on the module in the power management section */
-     6d4:	e4 e6       	ldi	r30, 0x64	; 100
-     6d6:	f0 e0       	ldi	r31, 0x00	; 0
-     6d8:	80 81       	ld	r24, Z
-     6da:	8f 7d       	andi	r24, 0xDF	; 223
-     6dc:	80 83       	st	Z, r24
+ 3ee:	e4 e6       	ldi	r30, 0x64	; 100
+ 3f0:	f0 e0       	ldi	r31, 0x00	; 0
+ 3f2:	80 81       	ld	r24, Z
+ 3f4:	8f 7d       	andi	r24, 0xDF	; 223
+ 3f6:	80 83       	st	Z, r24
 /* END setup USART   */	
 	
 
 	// Enable Global Interrupts
 	//
 	sei();							/* enable interrupts                */
-     6de:	78 94       	sei
-     6e0:	08 95       	ret
+ 3f8:	78 94       	sei
+ 3fa:	08 95       	ret
 
-000006e2 <USART_Init>:
+000003fc <USART_Init>:
 }
 
 void USART_Init();
 
 void USART_Init(){
 	UBRR0H = (unsigned char)(UBRR>>8);
-     6e2:	10 92 c5 00 	sts	0x00C5, r1
+ 3fc:	10 92 c5 00 	sts	0x00C5, r1
 	UBRR0L = (unsigned char)UBRR;
-     6e6:	89 e1       	ldi	r24, 0x19	; 25
-     6e8:	80 93 c4 00 	sts	0x00C4, r24
+ 400:	89 e1       	ldi	r24, 0x19	; 25
+ 402:	80 93 c4 00 	sts	0x00C4, r24
 	/* Enable receiver and transmitter */
 	UCSR0B = (1<<RXEN0)|(1<<TXEN0);
-     6ec:	88 e1       	ldi	r24, 0x18	; 24
-     6ee:	80 93 c1 00 	sts	0x00C1, r24
+ 406:	88 e1       	ldi	r24, 0x18	; 24
+ 408:	80 93 c1 00 	sts	0x00C1, r24
 	/* Set frame format: 8data, 2stop bit */
 	UCSR0C = (1<<USBS0)|(3<<UCSZ00);
-     6f2:	8e e0       	ldi	r24, 0x0E	; 14
-     6f4:	80 93 c2 00 	sts	0x00C2, r24
-     6f8:	08 95       	ret
+ 40c:	8e e0       	ldi	r24, 0x0E	; 14
+ 40e:	80 93 c2 00 	sts	0x00C2, r24
+ 412:	08 95       	ret
 
-000006fa <OSTaskStkInit>:
+00000414 <OSTaskStkInit>:
     stk     = (INT8U *)ptos;		    /* AVR return stack ("hardware stack")          		*/
     tmp     = (INT16U)task;
 
     /* "push" initial register values onto the stack */
 
     *stk-- = (INT8U)tmp;                   /* Put task start address on top of stack          	        */
-     6fa:	fa 01       	movw	r30, r20
-     6fc:	80 83       	st	Z, r24
+ 414:	fa 01       	movw	r30, r20
+ 416:	80 83       	st	Z, r24
     *stk-- = (INT8U)(tmp >> 8);
-     6fe:	31 97       	sbiw	r30, 0x01	; 1
-     700:	90 83       	st	Z, r25
+ 418:	31 97       	sbiw	r30, 0x01	; 1
+ 41a:	90 83       	st	Z, r25
 
     *stk-- = (INT8U)0x00;                   /* R0  = 0x00                                               */
-     702:	31 97       	sbiw	r30, 0x01	; 1
-     704:	10 82       	st	Z, r1
+ 41c:	31 97       	sbiw	r30, 0x01	; 1
+ 41e:	10 82       	st	Z, r1
     *stk-- = (INT8U)0x00;                   /* R1  = 0x00                                               */
-     706:	31 97       	sbiw	r30, 0x01	; 1
-     708:	10 82       	st	Z, r1
+ 420:	31 97       	sbiw	r30, 0x01	; 1
+ 422:	10 82       	st	Z, r1
     *stk-- = (INT8U)0x00;                   /* R2  = 0x00                                               */
-     70a:	31 97       	sbiw	r30, 0x01	; 1
-     70c:	10 82       	st	Z, r1
+ 424:	31 97       	sbiw	r30, 0x01	; 1
+ 426:	10 82       	st	Z, r1
     *stk-- = (INT8U)0x00;                   /* R3  = 0x00                                               */
-     70e:	31 97       	sbiw	r30, 0x01	; 1
-     710:	10 82       	st	Z, r1
+ 428:	31 97       	sbiw	r30, 0x01	; 1
+ 42a:	10 82       	st	Z, r1
     *stk-- = (INT8U)0x00;                   /* R4  = 0x00                                               */
-     712:	31 97       	sbiw	r30, 0x01	; 1
-     714:	10 82       	st	Z, r1
+ 42c:	31 97       	sbiw	r30, 0x01	; 1
+ 42e:	10 82       	st	Z, r1
     *stk-- = (INT8U)0x00;                   /* R5  = 0x00                                               */
-     716:	31 97       	sbiw	r30, 0x01	; 1
-     718:	10 82       	st	Z, r1
+ 430:	31 97       	sbiw	r30, 0x01	; 1
+ 432:	10 82       	st	Z, r1
     *stk-- = (INT8U)0x00;                   /* R6  = 0x00                                               */
-     71a:	31 97       	sbiw	r30, 0x01	; 1
-     71c:	10 82       	st	Z, r1
+ 434:	31 97       	sbiw	r30, 0x01	; 1
+ 436:	10 82       	st	Z, r1
     *stk-- = (INT8U)0x00;                   /* R7  = 0x00                                               */
-     71e:	31 97       	sbiw	r30, 0x01	; 1
-     720:	10 82       	st	Z, r1
+ 438:	31 97       	sbiw	r30, 0x01	; 1
+ 43a:	10 82       	st	Z, r1
     *stk-- = (INT8U)0x00;                   /* R8  = 0x00                                               */
-     722:	31 97       	sbiw	r30, 0x01	; 1
-     724:	10 82       	st	Z, r1
+ 43c:	31 97       	sbiw	r30, 0x01	; 1
+ 43e:	10 82       	st	Z, r1
     *stk-- = (INT8U)0x00;                   /* R9  = 0x00                                               */
-     726:	31 97       	sbiw	r30, 0x01	; 1
-     728:	10 82       	st	Z, r1
+ 440:	31 97       	sbiw	r30, 0x01	; 1
+ 442:	10 82       	st	Z, r1
     *stk-- = (INT8U)0x00;                   /* R10 = 0x00                                               */
-     72a:	31 97       	sbiw	r30, 0x01	; 1
-     72c:	10 82       	st	Z, r1
+ 444:	31 97       	sbiw	r30, 0x01	; 1
+ 446:	10 82       	st	Z, r1
     *stk-- = (INT8U)0x00;                   /* R11 = 0x00                                               */
-     72e:	31 97       	sbiw	r30, 0x01	; 1
-     730:	10 82       	st	Z, r1
+ 448:	31 97       	sbiw	r30, 0x01	; 1
+ 44a:	10 82       	st	Z, r1
     *stk-- = (INT8U)0x00;                   /* R12 = 0x00                                               */
-     732:	31 97       	sbiw	r30, 0x01	; 1
-     734:	10 82       	st	Z, r1
+ 44c:	31 97       	sbiw	r30, 0x01	; 1
+ 44e:	10 82       	st	Z, r1
     *stk-- = (INT8U)0x00;                   /* R13 = 0x00                                               */
-     736:	31 97       	sbiw	r30, 0x01	; 1
-     738:	10 82       	st	Z, r1
+ 450:	31 97       	sbiw	r30, 0x01	; 1
+ 452:	10 82       	st	Z, r1
     *stk-- = (INT8U)0x00;                   /* R14 = 0x00                                               */
-     73a:	31 97       	sbiw	r30, 0x01	; 1
-     73c:	10 82       	st	Z, r1
+ 454:	31 97       	sbiw	r30, 0x01	; 1
+ 456:	10 82       	st	Z, r1
     *stk-- = (INT8U)0x00;                   /* R15 = 0x00                                               */
-     73e:	31 97       	sbiw	r30, 0x01	; 1
-     740:	10 82       	st	Z, r1
+ 458:	31 97       	sbiw	r30, 0x01	; 1
+ 45a:	10 82       	st	Z, r1
     *stk-- = (INT8U)0x00;                   /* R16 = 0x00                                               */
-     742:	31 97       	sbiw	r30, 0x01	; 1
-     744:	10 82       	st	Z, r1
+ 45c:	31 97       	sbiw	r30, 0x01	; 1
+ 45e:	10 82       	st	Z, r1
     *stk-- = (INT8U)0x00;                   /* R17 = 0x00                                               */
-     746:	31 97       	sbiw	r30, 0x01	; 1
-     748:	10 82       	st	Z, r1
+ 460:	31 97       	sbiw	r30, 0x01	; 1
+ 462:	10 82       	st	Z, r1
     *stk-- = (INT8U)0x00;                   /* R18 = 0x00                                               */
-     74a:	31 97       	sbiw	r30, 0x01	; 1
-     74c:	10 82       	st	Z, r1
+ 464:	31 97       	sbiw	r30, 0x01	; 1
+ 466:	10 82       	st	Z, r1
     *stk-- = (INT8U)0x00;                   /* R19 = 0x00                                               */
-     74e:	31 97       	sbiw	r30, 0x01	; 1
-     750:	10 82       	st	Z, r1
+ 468:	31 97       	sbiw	r30, 0x01	; 1
+ 46a:	10 82       	st	Z, r1
     *stk-- = (INT8U)0x00;                   /* R20 = 0x00                                               */
-     752:	31 97       	sbiw	r30, 0x01	; 1
-     754:	10 82       	st	Z, r1
+ 46c:	31 97       	sbiw	r30, 0x01	; 1
+ 46e:	10 82       	st	Z, r1
     *stk-- = (INT8U)0x00;                   /* R21 = 0x00                                               */
-     756:	31 97       	sbiw	r30, 0x01	; 1
-     758:	10 82       	st	Z, r1
+ 470:	31 97       	sbiw	r30, 0x01	; 1
+ 472:	10 82       	st	Z, r1
     *stk-- = (INT8U)0x00;                   /* R22 = 0x00                                               */
-     75a:	31 97       	sbiw	r30, 0x01	; 1
-     75c:	10 82       	st	Z, r1
+ 474:	31 97       	sbiw	r30, 0x01	; 1
+ 476:	10 82       	st	Z, r1
     *stk-- = (INT8U)0x00;                   /* R23 = 0x00                                               */
-     75e:	31 97       	sbiw	r30, 0x01	; 1
-     760:	10 82       	st	Z, r1
+ 478:	31 97       	sbiw	r30, 0x01	; 1
+ 47a:	10 82       	st	Z, r1
  	
     tmp    = (INT16U)pdata;
     *stk-- = (INT8U)tmp;                    /* Simulate call to function with argument                  */
-     762:	31 97       	sbiw	r30, 0x01	; 1
-     764:	60 83       	st	Z, r22
+ 47c:	31 97       	sbiw	r30, 0x01	; 1
+ 47e:	60 83       	st	Z, r22
     *stk-- = (INT8U)(tmp >> 8);		    /* R24, R25 contains argument pointer pdata 		*/
-     766:	31 97       	sbiw	r30, 0x01	; 1
-     768:	70 83       	st	Z, r23
+ 480:	31 97       	sbiw	r30, 0x01	; 1
+ 482:	70 83       	st	Z, r23
 
     *stk-- = (INT8U)0x00;                   /* R26 = 0x00                                               */
-     76a:	31 97       	sbiw	r30, 0x01	; 1
-     76c:	10 82       	st	Z, r1
+ 484:	31 97       	sbiw	r30, 0x01	; 1
+ 486:	10 82       	st	Z, r1
     *stk-- = (INT8U)0x00;                   /* R27 = 0x00                                               */
-     76e:	31 97       	sbiw	r30, 0x01	; 1
-     770:	10 82       	st	Z, r1
+ 488:	31 97       	sbiw	r30, 0x01	; 1
+ 48a:	10 82       	st	Z, r1
     *stk-- = (INT8U)0x00;                   /* R28 = 0x00                                               */
-     772:	31 97       	sbiw	r30, 0x01	; 1
-     774:	10 82       	st	Z, r1
+ 48c:	31 97       	sbiw	r30, 0x01	; 1
+ 48e:	10 82       	st	Z, r1
     *stk-- = (INT8U)0x00;                   /* R29 = 0x00                                               */
-     776:	31 97       	sbiw	r30, 0x01	; 1
-     778:	10 82       	st	Z, r1
+ 490:	31 97       	sbiw	r30, 0x01	; 1
+ 492:	10 82       	st	Z, r1
     *stk-- = (INT8U)0x00;                   /* R30 = 0x00                                               */
-     77a:	31 97       	sbiw	r30, 0x01	; 1
-     77c:	10 82       	st	Z, r1
+ 494:	31 97       	sbiw	r30, 0x01	; 1
+ 496:	10 82       	st	Z, r1
     *stk-- = (INT8U)0x00;                   /* R31 = 0x00                                               */
-     77e:	31 97       	sbiw	r30, 0x01	; 1
-     780:	10 82       	st	Z, r1
+ 498:	31 97       	sbiw	r30, 0x01	; 1
+ 49a:	10 82       	st	Z, r1
 #ifdef RAMPZ
     *stk-- = (INT8U)0x00;                   /* RAMPZ = 0x00                                             */
 #endif
     *stk-- = (INT8U)0x80;                   /* SREG = Interrupts enabled                                */
-     782:	31 97       	sbiw	r30, 0x01	; 1
-     784:	80 e8       	ldi	r24, 0x80	; 128
-     786:	80 83       	st	Z, r24
+ 49c:	31 97       	sbiw	r30, 0x01	; 1
+ 49e:	80 e8       	ldi	r24, 0x80	; 128
+ 4a0:	80 83       	st	Z, r24
     return ((OS_STK *)stk);
 }
-     788:	ca 01       	movw	r24, r20
-     78a:	83 97       	sbiw	r24, 0x23	; 35
-     78c:	08 95       	ret
+ 4a2:	ca 01       	movw	r24, r20
+ 4a4:	83 97       	sbiw	r24, 0x23	; 35
+ 4a6:	08 95       	ret
 
-0000078e <OSTaskCreateHook>:
+000004a8 <OSTaskCreateHook>:
 * Note(s)    : 1) Interrupts are disabled during this call.
 *********************************************************************************************************
 */
 #if OS_CPU_HOOKS_EN > 0
 void OSTaskCreateHook (OS_TCB *ptcb)
 {
-     78e:	08 95       	ret
+ 4a8:	08 95       	ret
 
-00000790 <OSTaskStatHook>:
+000004aa <OSTaskStatHook>:
 *
 * Arguments  : none
 *********************************************************************************************************
 */
 void OSTaskStatHook (void)
 {
-     790:	08 95       	ret
+ 4aa:	08 95       	ret
 
-00000792 <OSTimeTickHook>:
+000004ac <OSTimeTickHook>:
 *********************************************************************************************************
 */
 #if (OS_CPU_HOOKS_EN > 0) 
 //#if (OS_CPU_HOOKS_EN > 0) && (OS_TIME_TICK_HOOK_EN > 0)
 void OSTimeTickHook (void)
 {
-     792:	08 95       	ret
-
-00000794 <OSTaskIdle>:
-
-void OSTaskIdle (void *pdata)
-{
-    pdata = pdata;                               /* Prevent compiler warning for not using 'pdata'     */
-    for (;;) {
-        OS_ENTER_CRITICAL();
-     794:	f8 94       	cli
-        OSIdleCtr++;
-        OS_EXIT_CRITICAL();
-     796:	78 94       	sei
-     798:	fd cf       	rjmp	.-6      	; 0x794 <OSTaskIdle>
-
-0000079a <OSEventTaskRdy>:
-* Note       : This function is INTERNAL to uC/OS-II and your application should not call it.
-*********************************************************************************************************
-*/
-#if  (OS_Q_EN && (OS_MAX_QS >= 2)) || OS_MBOX_EN || OS_SEM_EN
-void  OSEventTaskRdy (OS_EVENT *pevent, void *msg, INT8U msk)
-{
-     79a:	0f 93       	push	r16
-     79c:	1f 93       	push	r17
-     79e:	cf 93       	push	r28
-     7a0:	df 93       	push	r29
-    INT8U   bitx;
-    INT8U   bity;
-    INT8U   prio;
-
-
-    y    = OSUnMapTbl[pevent->OSEventGrp];            /* Find highest prio. task waiting for message   */
-     7a2:	fc 01       	movw	r30, r24
-     7a4:	05 85       	ldd	r16, Z+13	; 0x0d
-     7a6:	e0 2f       	mov	r30, r16
-     7a8:	f0 e0       	ldi	r31, 0x00	; 0
-     7aa:	e1 5b       	subi	r30, 0xB1	; 177
-     7ac:	fe 4f       	sbci	r31, 0xFE	; 254
-     7ae:	10 81       	ld	r17, Z
-    bity = OSMapTbl[y];
-     7b0:	21 2f       	mov	r18, r17
-     7b2:	30 e0       	ldi	r19, 0x00	; 0
-     7b4:	d9 01       	movw	r26, r18
-     7b6:	a1 5b       	subi	r26, 0xB1	; 177
-     7b8:	bd 4f       	sbci	r27, 0xFD	; 253
-     7ba:	dc 91       	ld	r29, X
-    x    = OSUnMapTbl[pevent->OSEventTbl[y]];
-     7bc:	fc 01       	movw	r30, r24
-     7be:	e2 0f       	add	r30, r18
-     7c0:	f3 1f       	adc	r31, r19
-     7c2:	52 81       	ldd	r21, Z+2	; 0x02
-     7c4:	a5 2f       	mov	r26, r21
-     7c6:	b0 e0       	ldi	r27, 0x00	; 0
-     7c8:	a1 5b       	subi	r26, 0xB1	; 177
-     7ca:	be 4f       	sbci	r27, 0xFE	; 254
-     7cc:	cc 91       	ld	r28, X
-    bitx = OSMapTbl[x];
-     7ce:	ac 2f       	mov	r26, r28
-     7d0:	b0 e0       	ldi	r27, 0x00	; 0
-     7d2:	a1 5b       	subi	r26, 0xB1	; 177
-     7d4:	bd 4f       	sbci	r27, 0xFD	; 253
-     7d6:	ac 91       	ld	r26, X
-    prio = (INT8U)((y << 3) + x);                     /* Find priority of task getting the msg         */
-     7d8:	11 0f       	add	r17, r17
-     7da:	11 0f       	add	r17, r17
-     7dc:	11 0f       	add	r17, r17
-     7de:	c1 0f       	add	r28, r17
-    if ((pevent->OSEventTbl[y] &= ~bitx) == 0) {      /* Remove this task from the waiting list        */
-     7e0:	ba 2f       	mov	r27, r26
-     7e2:	b0 95       	com	r27
-     7e4:	5b 23       	and	r21, r27
-     7e6:	52 83       	std	Z+2, r21	; 0x02
-     7e8:	51 11       	cpse	r21, r1
-     7ea:	05 c0       	rjmp	.+10     	; 0x7f6 <OSEventTaskRdy+0x5c>
-        pevent->OSEventGrp &= ~bity;
-     7ec:	5d 2f       	mov	r21, r29
-     7ee:	50 95       	com	r21
-     7f0:	05 23       	and	r16, r21
-     7f2:	fc 01       	movw	r30, r24
-     7f4:	05 87       	std	Z+13, r16	; 0x0d
-    }
-    ptcb                 =  OSTCBPrioTbl[prio];       /* Point to this task's OS_TCB                   */
-     7f6:	ec 2f       	mov	r30, r28
-     7f8:	f0 e0       	ldi	r31, 0x00	; 0
-     7fa:	ee 0f       	add	r30, r30
-     7fc:	ff 1f       	adc	r31, r31
-     7fe:	e4 53       	subi	r30, 0x34	; 52
-     800:	fa 4f       	sbci	r31, 0xFA	; 250
-     802:	01 90       	ld	r0, Z+
-     804:	f0 81       	ld	r31, Z
-     806:	e0 2d       	mov	r30, r0
-    ptcb->OSTCBDly       =  0;                        /* Prevent OSTimeTick() from readying task       */
-     808:	13 86       	std	Z+11, r1	; 0x0b
-     80a:	12 86       	std	Z+10, r1	; 0x0a
-    ptcb->OSTCBEventPtr  = (OS_EVENT *)0;             /* Unlink ECB from this task                     */
-     80c:	17 82       	std	Z+7, r1	; 0x07
-     80e:	16 82       	std	Z+6, r1	; 0x06
-#if (OS_Q_EN && (OS_MAX_QS >= 2)) || OS_MBOX_EN
-    ptcb->OSTCBMsg       = msg;                       /* Send message directly to waiting task         */
-     810:	71 87       	std	Z+9, r23	; 0x09
-     812:	60 87       	std	Z+8, r22	; 0x08
-#else
-    msg                  = msg;                       /* Prevent compiler warning if not used          */    
-#endif    
-    ptcb->OSTCBStat     &= ~msk;                      /* Clear bit associated with event type          */
-     814:	40 95       	com	r20
-     816:	84 85       	ldd	r24, Z+12	; 0x0c
-     818:	48 23       	and	r20, r24
-     81a:	44 87       	std	Z+12, r20	; 0x0c
-    if (ptcb->OSTCBStat == OS_STAT_RDY) {             /* See if task is ready (could be susp'd)        */
-     81c:	41 11       	cpse	r20, r1
-     81e:	0b c0       	rjmp	.+22     	; 0x836 <OSEventTaskRdy+0x9c>
-        OSRdyGrp        |=  bity;                     /* Put task in the ready to run list             */
-     820:	80 91 2d 05 	lds	r24, 0x052D
-     824:	d8 2b       	or	r29, r24
-     826:	d0 93 2d 05 	sts	0x052D, r29
-        OSRdyTbl[y]     |=  bitx;
-     82a:	f9 01       	movw	r30, r18
-     82c:	e2 5d       	subi	r30, 0xD2	; 210
-     82e:	fa 4f       	sbci	r31, 0xFA	; 250
-     830:	80 81       	ld	r24, Z
-     832:	a8 2b       	or	r26, r24
-     834:	a0 83       	st	Z, r26
-    }
-}
-     836:	df 91       	pop	r29
-     838:	cf 91       	pop	r28
-     83a:	1f 91       	pop	r17
-     83c:	0f 91       	pop	r16
-     83e:	08 95       	ret
-
-00000840 <OSEventTaskWait>:
-* Note       : This function is INTERNAL to uC/OS-II and your application should not call it.
-*********************************************************************************************************
-*/
-#if  (OS_Q_EN && (OS_MAX_QS >= 2)) || OS_MBOX_EN || OS_SEM_EN
-void  OSEventTaskWait (OS_EVENT *pevent)
-{
-     840:	cf 93       	push	r28
-     842:	df 93       	push	r29
-    OSTCBCur->OSTCBEventPtr = pevent;            /* Store pointer to event control block in TCB        */
-     844:	e0 91 39 05 	lds	r30, 0x0539
-     848:	f0 91 3a 05 	lds	r31, 0x053A
-     84c:	97 83       	std	Z+7, r25	; 0x07
-     84e:	86 83       	std	Z+6, r24	; 0x06
-    if ((OSRdyTbl[OSTCBCur->OSTCBY] &= ~OSTCBCur->OSTCBBitX) == 0) {      /* Task no longer ready      */
-     850:	a7 85       	ldd	r26, Z+15	; 0x0f
-     852:	b0 e0       	ldi	r27, 0x00	; 0
-     854:	20 89       	ldd	r18, Z+16	; 0x10
-     856:	ed 01       	movw	r28, r26
-     858:	c2 5d       	subi	r28, 0xD2	; 210
-     85a:	da 4f       	sbci	r29, 0xFA	; 250
-     85c:	42 2f       	mov	r20, r18
-     85e:	40 95       	com	r20
-     860:	38 81       	ld	r19, Y
-     862:	34 23       	and	r19, r20
-     864:	38 83       	st	Y, r19
-     866:	31 11       	cpse	r19, r1
-     868:	07 c0       	rjmp	.+14     	; 0x878 <OSEventTaskWait+0x38>
-        OSRdyGrp &= ~OSTCBCur->OSTCBBitY;
-     86a:	31 89       	ldd	r19, Z+17	; 0x11
-     86c:	30 95       	com	r19
-     86e:	40 91 2d 05 	lds	r20, 0x052D
-     872:	34 23       	and	r19, r20
-     874:	30 93 2d 05 	sts	0x052D, r19
-    }
-    pevent->OSEventTbl[OSTCBCur->OSTCBY] |= OSTCBCur->OSTCBBitX;          /* Put task in waiting list  */
-     878:	a8 0f       	add	r26, r24
-     87a:	b9 1f       	adc	r27, r25
-     87c:	12 96       	adiw	r26, 0x02	; 2
-     87e:	3c 91       	ld	r19, X
-     880:	12 97       	sbiw	r26, 0x02	; 2
-     882:	23 2b       	or	r18, r19
-     884:	12 96       	adiw	r26, 0x02	; 2
-     886:	2c 93       	st	X, r18
-    pevent->OSEventGrp                   |= OSTCBCur->OSTCBBitY;
-     888:	dc 01       	movw	r26, r24
-     88a:	1d 96       	adiw	r26, 0x0d	; 13
-     88c:	3c 91       	ld	r19, X
-     88e:	1d 97       	sbiw	r26, 0x0d	; 13
-     890:	21 89       	ldd	r18, Z+17	; 0x11
-     892:	23 2b       	or	r18, r19
-     894:	1d 96       	adiw	r26, 0x0d	; 13
-     896:	2c 93       	st	X, r18
-}
-     898:	df 91       	pop	r29
-     89a:	cf 91       	pop	r28
-     89c:	08 95       	ret
-
-0000089e <OSEventTO>:
-*********************************************************************************************************
-*/
-#if  (OS_Q_EN && (OS_MAX_QS >= 2)) || OS_MBOX_EN || OS_SEM_EN
-void  OSEventTO (OS_EVENT *pevent)
-{
-    if ((pevent->OSEventTbl[OSTCBCur->OSTCBY] &= ~OSTCBCur->OSTCBBitX) == 0) {
-     89e:	e0 91 39 05 	lds	r30, 0x0539
-     8a2:	f0 91 3a 05 	lds	r31, 0x053A
-     8a6:	27 85       	ldd	r18, Z+15	; 0x0f
-     8a8:	dc 01       	movw	r26, r24
-     8aa:	a2 0f       	add	r26, r18
-     8ac:	b1 1d       	adc	r27, r1
-     8ae:	20 89       	ldd	r18, Z+16	; 0x10
-     8b0:	20 95       	com	r18
-     8b2:	12 96       	adiw	r26, 0x02	; 2
-     8b4:	3c 91       	ld	r19, X
-     8b6:	12 97       	sbiw	r26, 0x02	; 2
-     8b8:	23 23       	and	r18, r19
-     8ba:	12 96       	adiw	r26, 0x02	; 2
-     8bc:	2c 93       	st	X, r18
-     8be:	21 11       	cpse	r18, r1
-     8c0:	09 c0       	rjmp	.+18     	; 0x8d4 <OSEventTO+0x36>
-        pevent->OSEventGrp &= ~OSTCBCur->OSTCBBitY;
-     8c2:	21 89       	ldd	r18, Z+17	; 0x11
-     8c4:	20 95       	com	r18
-     8c6:	dc 01       	movw	r26, r24
-     8c8:	1d 96       	adiw	r26, 0x0d	; 13
-     8ca:	3c 91       	ld	r19, X
-     8cc:	1d 97       	sbiw	r26, 0x0d	; 13
-     8ce:	23 23       	and	r18, r19
-     8d0:	1d 96       	adiw	r26, 0x0d	; 13
-     8d2:	2c 93       	st	X, r18
-    }
-    OSTCBCur->OSTCBStat     = OS_STAT_RDY;       /* Set status to ready                                */
-     8d4:	14 86       	std	Z+12, r1	; 0x0c
-    OSTCBCur->OSTCBEventPtr = (OS_EVENT *)0;     /* No longer waiting for event                        */
-     8d6:	17 82       	std	Z+7, r1	; 0x07
-     8d8:	16 82       	std	Z+6, r1	; 0x06
-     8da:	08 95       	ret
-
-000008dc <OSEventWaitListInit>:
-#if  (OS_Q_EN && (OS_MAX_QS >= 2)) || OS_MBOX_EN || OS_SEM_EN
-void  OSEventWaitListInit (OS_EVENT *pevent)
-{
-    INT8U i;
-    
-    pevent->OSEventGrp = 0x00;                   /* No task waiting on event                           */
-     8dc:	fc 01       	movw	r30, r24
-     8de:	15 86       	std	Z+13, r1	; 0x0d
-     8e0:	32 96       	adiw	r30, 0x02	; 2
-    for (i = 0; i < OS_EVENT_TBL_SIZE; i++) {
-     8e2:	80 e0       	ldi	r24, 0x00	; 0
-        pevent->OSEventTbl[i] = 0x00;
-     8e4:	11 92       	st	Z+, r1
-void  OSEventWaitListInit (OS_EVENT *pevent)
-{
-    INT8U i;
-    
-    pevent->OSEventGrp = 0x00;                   /* No task waiting on event                           */
-    for (i = 0; i < OS_EVENT_TBL_SIZE; i++) {
-     8e6:	8f 5f       	subi	r24, 0xFF	; 255
-     8e8:	88 30       	cpi	r24, 0x08	; 8
-     8ea:	e1 f7       	brne	.-8      	; 0x8e4 <OSEventWaitListInit+0x8>
-        pevent->OSEventTbl[i] = 0x00;
-    }
-}
-     8ec:	08 95       	ret
-
-000008ee <OSIntExit>:
-*********************************************************************************************************
-*/
-
-void OSIntExit (void)
-{
-    OS_ENTER_CRITICAL();
-     8ee:	f8 94       	cli
-    if ((--OSIntNesting | OSLockNesting) == 0) { /* Reschedule only if all ISRs completed & not locked */
-     8f0:	80 91 38 05 	lds	r24, 0x0538
-     8f4:	81 50       	subi	r24, 0x01	; 1
-     8f6:	80 93 38 05 	sts	0x0538, r24
-     8fa:	90 91 15 05 	lds	r25, 0x0515
-     8fe:	89 2b       	or	r24, r25
-     900:	e1 f5       	brne	.+120    	; 0x97a <__stack+0x7b>
-        OSIntExitY    = OSUnMapTbl[OSRdyGrp];
-     902:	e0 91 2d 05 	lds	r30, 0x052D
-     906:	f0 e0       	ldi	r31, 0x00	; 0
-     908:	e1 5b       	subi	r30, 0xB1	; 177
-     90a:	fe 4f       	sbci	r31, 0xFE	; 254
-     90c:	80 81       	ld	r24, Z
-     90e:	80 93 8c 03 	sts	0x038C, r24
-        OSPrioHighRdy = (INT8U)((OSIntExitY << 3) + OSUnMapTbl[OSRdyTbl[OSIntExitY]]);
-     912:	e8 2f       	mov	r30, r24
-     914:	f0 e0       	ldi	r31, 0x00	; 0
-     916:	e2 5d       	subi	r30, 0xD2	; 210
-     918:	fa 4f       	sbci	r31, 0xFA	; 250
-     91a:	e0 81       	ld	r30, Z
-     91c:	f0 e0       	ldi	r31, 0x00	; 0
-     91e:	e1 5b       	subi	r30, 0xB1	; 177
-     920:	fe 4f       	sbci	r31, 0xFE	; 254
-     922:	88 0f       	add	r24, r24
-     924:	88 0f       	add	r24, r24
-     926:	88 0f       	add	r24, r24
-     928:	90 81       	ld	r25, Z
-     92a:	89 0f       	add	r24, r25
-     92c:	80 93 1b 05 	sts	0x051B, r24
-        if (OSPrioHighRdy != OSPrioCur) {        /* No context switch if current task is highest ready */
-     930:	90 91 1c 05 	lds	r25, 0x051C
-     934:	89 17       	cp	r24, r25
-     936:	09 f1       	breq	.+66     	; 0x97a <__stack+0x7b>
-            OSTCBHighRdy  = OSTCBPrioTbl[OSPrioHighRdy];
-     938:	e8 2f       	mov	r30, r24
-     93a:	f0 e0       	ldi	r31, 0x00	; 0
-     93c:	ee 0f       	add	r30, r30
-     93e:	ff 1f       	adc	r31, r31
-     940:	e4 53       	subi	r30, 0x34	; 52
-     942:	fa 4f       	sbci	r31, 0xFA	; 250
-     944:	80 81       	ld	r24, Z
-     946:	91 81       	ldd	r25, Z+1	; 0x01
-     948:	90 93 2c 05 	sts	0x052C, r25
-     94c:	80 93 2b 05 	sts	0x052B, r24
-            OSCtxSwCtr++;                        /* Keep track of the number of context switches       */
-     950:	80 91 1f 05 	lds	r24, 0x051F
-     954:	90 91 20 05 	lds	r25, 0x0520
-     958:	a0 91 21 05 	lds	r26, 0x0521
-     95c:	b0 91 22 05 	lds	r27, 0x0522
-     960:	01 96       	adiw	r24, 0x01	; 1
-     962:	a1 1d       	adc	r26, r1
-     964:	b1 1d       	adc	r27, r1
-     966:	80 93 1f 05 	sts	0x051F, r24
-     96a:	90 93 20 05 	sts	0x0520, r25
-     96e:	a0 93 21 05 	sts	0x0521, r26
-     972:	b0 93 22 05 	sts	0x0522, r27
-            OSIntCtxSw();                        /* Perform interrupt level context switch             */
-     976:	0e 94 e0 00 	call	0x1c0	; 0x1c0 <OSIntCtxSw>
-        }
-    }
-    OS_EXIT_CRITICAL();
-     97a:	78 94       	sei
-     97c:	08 95       	ret
-
-0000097e <OSSched>:
-void OSSched (void)
-{
-    INT8U y;
-
-
-    OS_ENTER_CRITICAL();
-     97e:	f8 94       	cli
-    if ((OSLockNesting | OSIntNesting) == 0) {   /* Task scheduling must be enabled and not ISR level  */
-     980:	90 91 38 05 	lds	r25, 0x0538
-     984:	80 91 15 05 	lds	r24, 0x0515
-     988:	89 2b       	or	r24, r25
-     98a:	d1 f5       	brne	.+116    	; 0xa00 <OSSched+0x82>
-        y             = OSUnMapTbl[OSRdyGrp];    /* Get pointer to highest priority task ready to run  */
-     98c:	e0 91 2d 05 	lds	r30, 0x052D
-     990:	f0 e0       	ldi	r31, 0x00	; 0
-     992:	e1 5b       	subi	r30, 0xB1	; 177
-     994:	fe 4f       	sbci	r31, 0xFE	; 254
-     996:	80 81       	ld	r24, Z
-        OSPrioHighRdy = (INT8U)((y << 3) + OSUnMapTbl[OSRdyTbl[y]]);
-     998:	e8 2f       	mov	r30, r24
-     99a:	f0 e0       	ldi	r31, 0x00	; 0
-     99c:	e2 5d       	subi	r30, 0xD2	; 210
-     99e:	fa 4f       	sbci	r31, 0xFA	; 250
-     9a0:	e0 81       	ld	r30, Z
-     9a2:	f0 e0       	ldi	r31, 0x00	; 0
-     9a4:	e1 5b       	subi	r30, 0xB1	; 177
-     9a6:	fe 4f       	sbci	r31, 0xFE	; 254
-     9a8:	88 0f       	add	r24, r24
-     9aa:	88 0f       	add	r24, r24
-     9ac:	88 0f       	add	r24, r24
-     9ae:	90 81       	ld	r25, Z
-     9b0:	e8 2f       	mov	r30, r24
-     9b2:	e9 0f       	add	r30, r25
-     9b4:	e0 93 1b 05 	sts	0x051B, r30
-        if (OSPrioHighRdy != OSPrioCur) {         /* No context switch if current task is highest ready */
-     9b8:	80 91 1c 05 	lds	r24, 0x051C
-     9bc:	e8 17       	cp	r30, r24
-     9be:	01 f1       	breq	.+64     	; 0xa00 <OSSched+0x82>
-            OSTCBHighRdy = OSTCBPrioTbl[OSPrioHighRdy];
-     9c0:	f0 e0       	ldi	r31, 0x00	; 0
-     9c2:	ee 0f       	add	r30, r30
-     9c4:	ff 1f       	adc	r31, r31
-     9c6:	e4 53       	subi	r30, 0x34	; 52
-     9c8:	fa 4f       	sbci	r31, 0xFA	; 250
-     9ca:	80 81       	ld	r24, Z
-     9cc:	91 81       	ldd	r25, Z+1	; 0x01
-     9ce:	90 93 2c 05 	sts	0x052C, r25
-     9d2:	80 93 2b 05 	sts	0x052B, r24
-            OSCtxSwCtr++;                        /* Increment context switch counter                   */
-     9d6:	80 91 1f 05 	lds	r24, 0x051F
-     9da:	90 91 20 05 	lds	r25, 0x0520
-     9de:	a0 91 21 05 	lds	r26, 0x0521
-     9e2:	b0 91 22 05 	lds	r27, 0x0522
-     9e6:	01 96       	adiw	r24, 0x01	; 1
-     9e8:	a1 1d       	adc	r26, r1
-     9ea:	b1 1d       	adc	r27, r1
-     9ec:	80 93 1f 05 	sts	0x051F, r24
-     9f0:	90 93 20 05 	sts	0x0520, r25
-     9f4:	a0 93 21 05 	sts	0x0521, r26
-     9f8:	b0 93 22 05 	sts	0x0522, r27
-#if 1
-			//DebugPulse ();
-#endif	
-			
-#if 1			
-            OS_TASK_SW();                        /* Perform a context switch                           */
-     9fc:	0e 94 83 00 	call	0x106	; 0x106 <OSCtxSw>
-#endif
-        }
-    }
-    OS_EXIT_CRITICAL();
-     a00:	78 94       	sei
-     a02:	08 95       	ret
-
-00000a04 <OSStart>:
-#if 0
-	DebugPulse();
-#endif	
-	
-	
-    if (OSRunning == FALSE) {
-     a04:	80 91 16 05 	lds	r24, 0x0516
-     a08:	81 11       	cpse	r24, r1
-     a0a:	26 c0       	rjmp	.+76     	; 0xa58 <OSStart+0x54>
-        y             = OSUnMapTbl[OSRdyGrp];        /* Find highest priority's task priority number   */
-     a0c:	e0 91 2d 05 	lds	r30, 0x052D
-     a10:	f0 e0       	ldi	r31, 0x00	; 0
-     a12:	e1 5b       	subi	r30, 0xB1	; 177
-     a14:	fe 4f       	sbci	r31, 0xFE	; 254
-     a16:	e0 81       	ld	r30, Z
-        x             = OSUnMapTbl[OSRdyTbl[y]];
-     a18:	ae 2f       	mov	r26, r30
-     a1a:	b0 e0       	ldi	r27, 0x00	; 0
-     a1c:	a2 5d       	subi	r26, 0xD2	; 210
-     a1e:	ba 4f       	sbci	r27, 0xFA	; 250
-     a20:	ac 91       	ld	r26, X
-     a22:	b0 e0       	ldi	r27, 0x00	; 0
-     a24:	a1 5b       	subi	r26, 0xB1	; 177
-     a26:	be 4f       	sbci	r27, 0xFE	; 254
-        OSPrioHighRdy = (INT8U)((y << 3) + x);
-     a28:	ee 0f       	add	r30, r30
-     a2a:	ee 0f       	add	r30, r30
-     a2c:	ee 0f       	add	r30, r30
-     a2e:	8c 91       	ld	r24, X
-     a30:	e8 0f       	add	r30, r24
-     a32:	e0 93 1b 05 	sts	0x051B, r30
-        OSPrioCur     = OSPrioHighRdy;
-     a36:	e0 93 1c 05 	sts	0x051C, r30
-        OSTCBHighRdy  = OSTCBPrioTbl[OSPrioHighRdy]; /* Point to highest priority task ready to run    */
-     a3a:	f0 e0       	ldi	r31, 0x00	; 0
-     a3c:	ee 0f       	add	r30, r30
-     a3e:	ff 1f       	adc	r31, r31
-     a40:	e4 53       	subi	r30, 0x34	; 52
-     a42:	fa 4f       	sbci	r31, 0xFA	; 250
-     a44:	80 81       	ld	r24, Z
-     a46:	91 81       	ldd	r25, Z+1	; 0x01
-     a48:	90 93 2c 05 	sts	0x052C, r25
-     a4c:	80 93 2b 05 	sts	0x052B, r24
-        OSTCBCur      = OSTCBHighRdy;
-     a50:	90 93 3a 05 	sts	0x053A, r25
-     a54:	80 93 39 05 	sts	0x0539, r24
-    }
-	
-	
-#if 1
-	OSStartHighRdy();                            /* Execute target specific code to start task     */
-     a58:	0e 94 53 00 	call	0xa6	; 0xa6 <OSStartHighRdy>
-     a5c:	08 95       	ret
-
-00000a5e <OSTCBInit>:
-* Note       : This function is INTERNAL to uC/OS-II and your application should not call it.
-*********************************************************************************************************
-*/
-
-INT8U OSTCBInit (INT8U prio, OS_STK *ptos, OS_STK *pbos, INT16U id, INT16U stk_size, void *pext, INT16U opt)
-{
-     a5e:	cf 93       	push	r28
-     a60:	df 93       	push	r29
-    OS_TCB *ptcb;
-
-
-    OS_ENTER_CRITICAL();
-     a62:	f8 94       	cli
-    ptcb = OSTCBFreeList;                                  /* Get a free TCB from the free TCB list    */
-     a64:	e0 91 27 05 	lds	r30, 0x0527
-     a68:	f0 91 28 05 	lds	r31, 0x0528
-    if (ptcb != (OS_TCB *)0) {
-     a6c:	30 97       	sbiw	r30, 0x00	; 0
-     a6e:	09 f4       	brne	.+2      	; 0xa72 <OSTCBInit+0x14>
-     a70:	4f c0       	rjmp	.+158    	; 0xb10 <OSTCBInit+0xb2>
-        OSTCBFreeList        = ptcb->OSTCBNext;            /* Update pointer to free TCB list          */
-     a72:	22 81       	ldd	r18, Z+2	; 0x02
-     a74:	33 81       	ldd	r19, Z+3	; 0x03
-     a76:	30 93 28 05 	sts	0x0528, r19
-     a7a:	20 93 27 05 	sts	0x0527, r18
-        OS_EXIT_CRITICAL();
-     a7e:	78 94       	sei
-        ptcb->OSTCBStkPtr    = ptos;                       /* Load Stack pointer in TCB                */
-     a80:	71 83       	std	Z+1, r23	; 0x01
-     a82:	60 83       	st	Z, r22
-        ptcb->OSTCBPrio      = (INT8U)prio;                /* Load task priority into TCB              */
-     a84:	85 87       	std	Z+13, r24	; 0x0d
-        ptcb->OSTCBStat      = OS_STAT_RDY;                /* Task is ready to run                     */
-     a86:	14 86       	std	Z+12, r1	; 0x0c
-        ptcb->OSTCBDly       = 0;                          /* Task is not delayed                      */
-     a88:	13 86       	std	Z+11, r1	; 0x0b
-     a8a:	12 86       	std	Z+10, r1	; 0x0a
-
-#if OS_TASK_DEL_EN        
-        ptcb->OSTCBDelReq    = OS_NO_ERR;
-#endif
-
-        ptcb->OSTCBY         = prio >> 3;                  /* Pre-compute X, Y, BitX and BitY          */
-     a8c:	c8 2f       	mov	r28, r24
-     a8e:	c6 95       	lsr	r28
-     a90:	c6 95       	lsr	r28
-     a92:	c6 95       	lsr	r28
-     a94:	c7 87       	std	Z+15, r28	; 0x0f
-        ptcb->OSTCBBitY      = OSMapTbl[ptcb->OSTCBY];
-     a96:	d0 e0       	ldi	r29, 0x00	; 0
-     a98:	c1 5b       	subi	r28, 0xB1	; 177
-     a9a:	dd 4f       	sbci	r29, 0xFD	; 253
-     a9c:	98 81       	ld	r25, Y
-     a9e:	91 8b       	std	Z+17, r25	; 0x11
-        ptcb->OSTCBX         = prio & 0x07;
-     aa0:	c8 2f       	mov	r28, r24
-     aa2:	c7 70       	andi	r28, 0x07	; 7
-     aa4:	c6 87       	std	Z+14, r28	; 0x0e
-        ptcb->OSTCBBitX      = OSMapTbl[ptcb->OSTCBX];
-     aa6:	d0 e0       	ldi	r29, 0x00	; 0
-     aa8:	c1 5b       	subi	r28, 0xB1	; 177
-     aaa:	dd 4f       	sbci	r29, 0xFD	; 253
-     aac:	98 81       	ld	r25, Y
-     aae:	90 8b       	std	Z+16, r25	; 0x10
-
-#if     OS_MBOX_EN || (OS_Q_EN && (OS_MAX_QS >= 2)) || OS_SEM_EN
-        ptcb->OSTCBEventPtr  = (OS_EVENT *)0;              /* Task is not pending on an event          */
-     ab0:	17 82       	std	Z+7, r1	; 0x07
-     ab2:	16 82       	std	Z+6, r1	; 0x06
-#endif
-
-#if     OS_MBOX_EN || (OS_Q_EN && (OS_MAX_QS >= 2))
-        ptcb->OSTCBMsg       = (void *)0;                  /* No message received                      */
-     ab4:	11 86       	std	Z+9, r1	; 0x09
-     ab6:	10 86       	std	Z+8, r1	; 0x08
-#endif
-
-        OS_ENTER_CRITICAL();
-     ab8:	f8 94       	cli
-        OSTCBPrioTbl[prio]   = ptcb;
-     aba:	a8 2f       	mov	r26, r24
-     abc:	b0 e0       	ldi	r27, 0x00	; 0
-     abe:	aa 0f       	add	r26, r26
-     ac0:	bb 1f       	adc	r27, r27
-     ac2:	a4 53       	subi	r26, 0x34	; 52
-     ac4:	ba 4f       	sbci	r27, 0xFA	; 250
-     ac6:	ed 93       	st	X+, r30
-     ac8:	fc 93       	st	X, r31
-        ptcb->OSTCBNext      = OSTCBList;                  /* Link into TCB chain                      */
-     aca:	a0 91 1d 05 	lds	r26, 0x051D
-     ace:	b0 91 1e 05 	lds	r27, 0x051E
-     ad2:	b3 83       	std	Z+3, r27	; 0x03
-     ad4:	a2 83       	std	Z+2, r26	; 0x02
-        ptcb->OSTCBPrev      = (OS_TCB *)0;
-     ad6:	15 82       	std	Z+5, r1	; 0x05
-     ad8:	14 82       	std	Z+4, r1	; 0x04
-        if (OSTCBList != (OS_TCB *)0) {
-     ada:	10 97       	sbiw	r26, 0x00	; 0
-     adc:	21 f0       	breq	.+8      	; 0xae6 <OSTCBInit+0x88>
-            OSTCBList->OSTCBPrev = ptcb;
-     ade:	15 96       	adiw	r26, 0x05	; 5
-     ae0:	fc 93       	st	X, r31
-     ae2:	ee 93       	st	-X, r30
-     ae4:	14 97       	sbiw	r26, 0x04	; 4
-        }
-        OSTCBList               = ptcb;
-     ae6:	f0 93 1e 05 	sts	0x051E, r31
-     aea:	e0 93 1d 05 	sts	0x051D, r30
-        OSRdyGrp               |= ptcb->OSTCBBitY;         /* Make task ready to run                   */
-     aee:	90 91 2d 05 	lds	r25, 0x052D
-     af2:	81 89       	ldd	r24, Z+17	; 0x11
-     af4:	89 2b       	or	r24, r25
-     af6:	80 93 2d 05 	sts	0x052D, r24
-        OSRdyTbl[ptcb->OSTCBY] |= ptcb->OSTCBBitX;
-     afa:	a7 85       	ldd	r26, Z+15	; 0x0f
-     afc:	b0 e0       	ldi	r27, 0x00	; 0
-     afe:	a2 5d       	subi	r26, 0xD2	; 210
-     b00:	ba 4f       	sbci	r27, 0xFA	; 250
-     b02:	9c 91       	ld	r25, X
-     b04:	80 89       	ldd	r24, Z+16	; 0x10
-     b06:	89 2b       	or	r24, r25
-     b08:	8c 93       	st	X, r24
-        OS_EXIT_CRITICAL();
-     b0a:	78 94       	sei
-        return (OS_NO_ERR);
-     b0c:	80 e0       	ldi	r24, 0x00	; 0
-     b0e:	02 c0       	rjmp	.+4      	; 0xb14 <OSTCBInit+0xb6>
-    } else {
-        OS_EXIT_CRITICAL();
-     b10:	78 94       	sei
-        return (OS_NO_MORE_TCB);
-     b12:	86 e4       	ldi	r24, 0x46	; 70
-    }
-}
-     b14:	df 91       	pop	r29
-     b16:	cf 91       	pop	r28
-     b18:	08 95       	ret
-
-00000b1a <OSTimeTick>:
-
-void OSTimeTick (void)
-{
-    OS_TCB *ptcb;
-
-    OSTimeTickHook();                                      /* Call user definable hook                 */
-     b1a:	0e 94 c9 03 	call	0x792	; 0x792 <OSTimeTickHook>
-	
-    ptcb = OSTCBList;                                      /* Point at first TCB in TCB list           */
-     b1e:	e0 91 1d 05 	lds	r30, 0x051D
-     b22:	f0 91 1e 05 	lds	r31, 0x051E
-    while (ptcb->OSTCBPrio != OS_IDLE_PRIO) {              /* Go through all TCBs in TCB list          */
-     b26:	85 85       	ldd	r24, Z+13	; 0x0d
-     b28:	8f 33       	cpi	r24, 0x3F	; 63
-     b2a:	39 f1       	breq	.+78     	; 0xb7a <OSTimeTick+0x60>
-     b2c:	40 91 2d 05 	lds	r20, 0x052D
-            if (--ptcb->OSTCBDly == 0) {                   /* Decrement nbr of ticks to end of delay   */
-                if (!(ptcb->OSTCBStat & OS_STAT_SUSPEND)) {    /* Is task suspended?                   */
-                    OSRdyGrp               |= ptcb->OSTCBBitY; /* No,  Make task Rdy to Run (timed out)*/
-                    OSRdyTbl[ptcb->OSTCBY] |= ptcb->OSTCBBitX;
-                } else {                                       /* Yes, Leave 1 tick to prevent ...     */
-                    ptcb->OSTCBDly = 1;                        /* ... loosing the task when the ...    */
-     b30:	21 e0       	ldi	r18, 0x01	; 1
-     b32:	30 e0       	ldi	r19, 0x00	; 0
-
-    OSTimeTickHook();                                      /* Call user definable hook                 */
-	
-    ptcb = OSTCBList;                                      /* Point at first TCB in TCB list           */
-    while (ptcb->OSTCBPrio != OS_IDLE_PRIO) {              /* Go through all TCBs in TCB list          */
-        OS_ENTER_CRITICAL();
-     b34:	f8 94       	cli
-        if (ptcb->OSTCBDly != 0) {                         /* Delayed or waiting for event with TO     */
-     b36:	82 85       	ldd	r24, Z+10	; 0x0a
-     b38:	93 85       	ldd	r25, Z+11	; 0x0b
-     b3a:	00 97       	sbiw	r24, 0x00	; 0
-     b3c:	a9 f0       	breq	.+42     	; 0xb68 <OSTimeTick+0x4e>
-            if (--ptcb->OSTCBDly == 0) {                   /* Decrement nbr of ticks to end of delay   */
-     b3e:	01 97       	sbiw	r24, 0x01	; 1
-     b40:	93 87       	std	Z+11, r25	; 0x0b
-     b42:	82 87       	std	Z+10, r24	; 0x0a
-     b44:	89 2b       	or	r24, r25
-     b46:	81 f4       	brne	.+32     	; 0xb68 <OSTimeTick+0x4e>
-                if (!(ptcb->OSTCBStat & OS_STAT_SUSPEND)) {    /* Is task suspended?                   */
-     b48:	84 85       	ldd	r24, Z+12	; 0x0c
-     b4a:	83 fd       	sbrc	r24, 3
-     b4c:	0b c0       	rjmp	.+22     	; 0xb64 <OSTimeTick+0x4a>
-                    OSRdyGrp               |= ptcb->OSTCBBitY; /* No,  Make task Rdy to Run (timed out)*/
-     b4e:	81 89       	ldd	r24, Z+17	; 0x11
-                    OSRdyTbl[ptcb->OSTCBY] |= ptcb->OSTCBBitX;
-     b50:	a7 85       	ldd	r26, Z+15	; 0x0f
-     b52:	b0 e0       	ldi	r27, 0x00	; 0
-     b54:	a2 5d       	subi	r26, 0xD2	; 210
-     b56:	ba 4f       	sbci	r27, 0xFA	; 250
-     b58:	5c 91       	ld	r21, X
-     b5a:	90 89       	ldd	r25, Z+16	; 0x10
-     b5c:	95 2b       	or	r25, r21
-     b5e:	9c 93       	st	X, r25
-    while (ptcb->OSTCBPrio != OS_IDLE_PRIO) {              /* Go through all TCBs in TCB list          */
-        OS_ENTER_CRITICAL();
-        if (ptcb->OSTCBDly != 0) {                         /* Delayed or waiting for event with TO     */
-            if (--ptcb->OSTCBDly == 0) {                   /* Decrement nbr of ticks to end of delay   */
-                if (!(ptcb->OSTCBStat & OS_STAT_SUSPEND)) {    /* Is task suspended?                   */
-                    OSRdyGrp               |= ptcb->OSTCBBitY; /* No,  Make task Rdy to Run (timed out)*/
-     b60:	48 2b       	or	r20, r24
-     b62:	02 c0       	rjmp	.+4      	; 0xb68 <OSTimeTick+0x4e>
-                    OSRdyTbl[ptcb->OSTCBY] |= ptcb->OSTCBBitX;
-                } else {                                       /* Yes, Leave 1 tick to prevent ...     */
-                    ptcb->OSTCBDly = 1;                        /* ... loosing the task when the ...    */
-     b64:	33 87       	std	Z+11, r19	; 0x0b
-     b66:	22 87       	std	Z+10, r18	; 0x0a
-                }                                              /* ... suspension is removed.           */
-            }
-        }
-        ptcb = ptcb->OSTCBNext;                            /* Point at next TCB in TCB list            */
-     b68:	02 80       	ldd	r0, Z+2	; 0x02
-     b6a:	f3 81       	ldd	r31, Z+3	; 0x03
-     b6c:	e0 2d       	mov	r30, r0
-        OS_EXIT_CRITICAL();
-     b6e:	78 94       	sei
-    OS_TCB *ptcb;
-
-    OSTimeTickHook();                                      /* Call user definable hook                 */
-	
-    ptcb = OSTCBList;                                      /* Point at first TCB in TCB list           */
-    while (ptcb->OSTCBPrio != OS_IDLE_PRIO) {              /* Go through all TCBs in TCB list          */
-     b70:	85 85       	ldd	r24, Z+13	; 0x0d
-     b72:	8f 33       	cpi	r24, 0x3F	; 63
-     b74:	f9 f6       	brne	.-66     	; 0xb34 <OSTimeTick+0x1a>
-     b76:	40 93 2d 05 	sts	0x052D, r20
-        }
-        ptcb = ptcb->OSTCBNext;                            /* Point at next TCB in TCB list            */
-        OS_EXIT_CRITICAL();
-    }
-	
-    OS_ENTER_CRITICAL();                                   /* Update the 32-bit tick counter           */
-     b7a:	f8 94       	cli
-    OSTime++;
-     b7c:	80 91 3b 05 	lds	r24, 0x053B
-     b80:	90 91 3c 05 	lds	r25, 0x053C
-     b84:	a0 91 3d 05 	lds	r26, 0x053D
-     b88:	b0 91 3e 05 	lds	r27, 0x053E
-     b8c:	01 96       	adiw	r24, 0x01	; 1
-     b8e:	a1 1d       	adc	r26, r1
-     b90:	b1 1d       	adc	r27, r1
-     b92:	80 93 3b 05 	sts	0x053B, r24
-     b96:	90 93 3c 05 	sts	0x053C, r25
-     b9a:	a0 93 3d 05 	sts	0x053D, r26
-     b9e:	b0 93 3e 05 	sts	0x053E, r27
-    OS_EXIT_CRITICAL();
-     ba2:	78 94       	sei
-     ba4:	08 95       	ret
-
-00000ba6 <OSMboxAccept>:
-*              == (void *)0  if the mailbox is empty or if you didn't pass the proper event pointer.
-*********************************************************************************************************
-*/
-
-void *OSMboxAccept (OS_EVENT *pevent)
-{
-     ba6:	fc 01       	movw	r30, r24
-    void  *msg;
-
-
-    OS_ENTER_CRITICAL();
-     ba8:	f8 94       	cli
-    if (pevent->OSEventType != OS_EVENT_TYPE_MBOX) {      /* Validate event block type                 */
-     baa:	84 85       	ldd	r24, Z+12	; 0x0c
-     bac:	81 30       	cpi	r24, 0x01	; 1
-     bae:	21 f0       	breq	.+8      	; 0xbb8 <OSMboxAccept+0x12>
-        OS_EXIT_CRITICAL();
-     bb0:	78 94       	sei
-        return ((void *)0);
-     bb2:	80 e0       	ldi	r24, 0x00	; 0
-     bb4:	90 e0       	ldi	r25, 0x00	; 0
-     bb6:	08 95       	ret
-    }
-    msg = pevent->OSEventPtr; 
-     bb8:	20 81       	ld	r18, Z
-     bba:	31 81       	ldd	r19, Z+1	; 0x01
-    if (msg != (void *)0) {                               /* See if there is already a message         */
-     bbc:	21 15       	cp	r18, r1
-     bbe:	31 05       	cpc	r19, r1
-     bc0:	11 f0       	breq	.+4      	; 0xbc6 <OSMboxAccept+0x20>
-        pevent->OSEventPtr = (void *)0;                   /* Clear the mailbox                         */
-     bc2:	11 82       	std	Z+1, r1	; 0x01
-     bc4:	10 82       	st	Z, r1
-    }
-    OS_EXIT_CRITICAL();
-     bc6:	78 94       	sei
-    return (msg);                                         /* Return the message received (or NULL)     */
-     bc8:	82 2f       	mov	r24, r18
-     bca:	93 2f       	mov	r25, r19
-}
-     bcc:	08 95       	ret
-
-00000bce <OSMboxCreate>:
-*              == (void *)0  if no event control blocks were available
-*********************************************************************************************************
-*/
-
-OS_EVENT *OSMboxCreate (void *msg)
-{
-     bce:	cf 93       	push	r28
-     bd0:	df 93       	push	r29
-    OS_EVENT *pevent;
-
-
-    OS_ENTER_CRITICAL();
-     bd2:	f8 94       	cli
-    pevent = OSEventFreeList;                    /* Get next free event control block                  */
-     bd4:	c0 91 36 05 	lds	r28, 0x0536
-     bd8:	d0 91 37 05 	lds	r29, 0x0537
-    if (OSEventFreeList != (OS_EVENT *)0) {      /* See if pool of free ECB pool was empty             */
-     bdc:	20 97       	sbiw	r28, 0x00	; 0
-     bde:	31 f0       	breq	.+12     	; 0xbec <OSMboxCreate+0x1e>
-        OSEventFreeList = (OS_EVENT *)OSEventFreeList->OSEventPtr;
-     be0:	28 81       	ld	r18, Y
-     be2:	39 81       	ldd	r19, Y+1	; 0x01
-     be4:	30 93 37 05 	sts	0x0537, r19
-     be8:	20 93 36 05 	sts	0x0536, r18
-    }
-    OS_EXIT_CRITICAL();
-     bec:	78 94       	sei
-    if (pevent != (OS_EVENT *)0) {
-     bee:	20 97       	sbiw	r28, 0x00	; 0
-     bf0:	39 f0       	breq	.+14     	; 0xc00 <OSMboxCreate+0x32>
-        pevent->OSEventType = OS_EVENT_TYPE_MBOX;
-     bf2:	21 e0       	ldi	r18, 0x01	; 1
-     bf4:	2c 87       	std	Y+12, r18	; 0x0c
-        pevent->OSEventPtr  = msg;               /* Deposit message in event control block             */
-     bf6:	99 83       	std	Y+1, r25	; 0x01
-     bf8:	88 83       	st	Y, r24
-        OSEventWaitListInit(pevent);
-     bfa:	ce 01       	movw	r24, r28
-     bfc:	0e 94 6e 04 	call	0x8dc	; 0x8dc <OSEventWaitListInit>
-    }
-    return (pevent);                             /* Return pointer to event control block              */
-}
-     c00:	ce 01       	movw	r24, r28
-     c02:	df 91       	pop	r29
-     c04:	cf 91       	pop	r28
-     c06:	08 95       	ret
-
-00000c08 <OSMboxPost>:
-*********************************************************************************************************
-*/
-
-INT8U OSMboxPost (OS_EVENT *pevent, void *msg)
-{
-    OS_ENTER_CRITICAL();
-     c08:	f8 94       	cli
-    if (pevent->OSEventType != OS_EVENT_TYPE_MBOX) {  /* Validate event block type                     */
-     c0a:	fc 01       	movw	r30, r24
-     c0c:	24 85       	ldd	r18, Z+12	; 0x0c
-     c0e:	21 30       	cpi	r18, 0x01	; 1
-     c10:	19 f0       	breq	.+6      	; 0xc18 <OSMboxPost+0x10>
-        OS_EXIT_CRITICAL();
-     c12:	78 94       	sei
-        return (OS_ERR_EVENT_TYPE);
-     c14:	81 e0       	ldi	r24, 0x01	; 1
-     c16:	08 95       	ret
-    }
-    if (pevent->OSEventGrp) {                         /* See if any task pending on mailbox            */
-     c18:	fc 01       	movw	r30, r24
-     c1a:	25 85       	ldd	r18, Z+13	; 0x0d
-     c1c:	22 23       	and	r18, r18
-     c1e:	41 f0       	breq	.+16     	; 0xc30 <OSMboxPost+0x28>
-        OSEventTaskRdy(pevent, msg, OS_STAT_MBOX);    /* Ready highest priority task waiting on event  */
-     c20:	42 e0       	ldi	r20, 0x02	; 2
-     c22:	0e 94 cd 03 	call	0x79a	; 0x79a <OSEventTaskRdy>
-        OS_EXIT_CRITICAL();
-     c26:	78 94       	sei
-        OSSched();                                    /* Find highest priority task ready to run       */
-     c28:	0e 94 bf 04 	call	0x97e	; 0x97e <OSSched>
-        return (OS_NO_ERR);
-     c2c:	80 e0       	ldi	r24, 0x00	; 0
-     c2e:	08 95       	ret
-    } else {
-        if (pevent->OSEventPtr != (void *)0) {        /* Make sure mailbox doesn't already have a msg  */
-     c30:	fc 01       	movw	r30, r24
-     c32:	20 81       	ld	r18, Z
-     c34:	31 81       	ldd	r19, Z+1	; 0x01
-     c36:	23 2b       	or	r18, r19
-     c38:	19 f0       	breq	.+6      	; 0xc40 <OSMboxPost+0x38>
-            OS_EXIT_CRITICAL();
-     c3a:	78 94       	sei
-            return (OS_MBOX_FULL);
-     c3c:	84 e1       	ldi	r24, 0x14	; 20
-     c3e:	08 95       	ret
-        } else {
-            pevent->OSEventPtr = msg;                 /* Place message in mailbox                      */
-     c40:	fc 01       	movw	r30, r24
-     c42:	71 83       	std	Z+1, r23	; 0x01
-     c44:	60 83       	st	Z, r22
-            OS_EXIT_CRITICAL();
-     c46:	78 94       	sei
-            return (OS_NO_ERR);
-     c48:	80 e0       	ldi	r24, 0x00	; 0
-        }
-    }
-}
-     c4a:	08 95       	ret
-
-00000c4c <OSSemCreate>:
-*              == (void *)0  if no event control blocks were available
-*********************************************************************************************************
-*/
-
-OS_EVENT *OSSemCreate (INT16U cnt)
-{
-     c4c:	cf 93       	push	r28
-     c4e:	df 93       	push	r29
-    OS_EVENT *pevent;
-
-
-    OS_ENTER_CRITICAL();
-     c50:	f8 94       	cli
-    pevent = OSEventFreeList;                              /* Get next free event control block        */
-     c52:	c0 91 36 05 	lds	r28, 0x0536
-     c56:	d0 91 37 05 	lds	r29, 0x0537
-    if (OSEventFreeList != (OS_EVENT *)0) {                /* See if pool of free ECB pool was empty   */
-     c5a:	20 97       	sbiw	r28, 0x00	; 0
-     c5c:	31 f0       	breq	.+12     	; 0xc6a <OSSemCreate+0x1e>
-        OSEventFreeList = (OS_EVENT *)OSEventFreeList->OSEventPtr;
-     c5e:	28 81       	ld	r18, Y
-     c60:	39 81       	ldd	r19, Y+1	; 0x01
-     c62:	30 93 37 05 	sts	0x0537, r19
-     c66:	20 93 36 05 	sts	0x0536, r18
-    }
-    OS_EXIT_CRITICAL();
-     c6a:	78 94       	sei
-    if (pevent != (OS_EVENT *)0) {                         /* Get an event control block               */
-     c6c:	20 97       	sbiw	r28, 0x00	; 0
-     c6e:	39 f0       	breq	.+14     	; 0xc7e <OSSemCreate+0x32>
-        pevent->OSEventType = OS_EVENT_TYPE_SEM;
-     c70:	23 e0       	ldi	r18, 0x03	; 3
-     c72:	2c 87       	std	Y+12, r18	; 0x0c
-        pevent->OSEventCnt  = cnt;                         /* Set semaphore value                      */
-     c74:	9b 87       	std	Y+11, r25	; 0x0b
-     c76:	8a 87       	std	Y+10, r24	; 0x0a
-        OSEventWaitListInit(pevent);
-     c78:	ce 01       	movw	r24, r28
-     c7a:	0e 94 6e 04 	call	0x8dc	; 0x8dc <OSEventWaitListInit>
-    }
-    return (pevent);
-}
-     c7e:	ce 01       	movw	r24, r28
-     c80:	df 91       	pop	r29
-     c82:	cf 91       	pop	r28
-     c84:	08 95       	ret
-
-00000c86 <OSSemPend>:
-* Returns    : none
-*********************************************************************************************************
-*/
-
-void OSSemPend (OS_EVENT *pevent, INT16U timeout, INT8U *err)
-{
-     c86:	0f 93       	push	r16
-     c88:	1f 93       	push	r17
-     c8a:	cf 93       	push	r28
-     c8c:	df 93       	push	r29
-     c8e:	ec 01       	movw	r28, r24
-     c90:	8a 01       	movw	r16, r20
-    OS_ENTER_CRITICAL();
-     c92:	f8 94       	cli
-    if (pevent->OSEventType != OS_EVENT_TYPE_SEM) {   /* Validate event block type                     */
-     c94:	8c 85       	ldd	r24, Y+12	; 0x0c
-     c96:	83 30       	cpi	r24, 0x03	; 3
-     c98:	21 f0       	breq	.+8      	; 0xca2 <OSSemPend+0x1c>
-        OS_EXIT_CRITICAL();
-     c9a:	78 94       	sei
-        *err = OS_ERR_EVENT_TYPE;
-     c9c:	81 e0       	ldi	r24, 0x01	; 1
-     c9e:	fa 01       	movw	r30, r20
-     ca0:	80 83       	st	Z, r24
-    }
-    if (pevent->OSEventCnt > 0) {                     /* If sem. is positive, resource available ...   */
-     ca2:	8a 85       	ldd	r24, Y+10	; 0x0a
-     ca4:	9b 85       	ldd	r25, Y+11	; 0x0b
-     ca6:	00 97       	sbiw	r24, 0x00	; 0
-     ca8:	39 f0       	breq	.+14     	; 0xcb8 <OSSemPend+0x32>
-        pevent->OSEventCnt--;                         /* ... decrement semaphore only if positive.     */
-     caa:	01 97       	sbiw	r24, 0x01	; 1
-     cac:	9b 87       	std	Y+11, r25	; 0x0b
-     cae:	8a 87       	std	Y+10, r24	; 0x0a
-        OS_EXIT_CRITICAL();
-     cb0:	78 94       	sei
-        *err = OS_NO_ERR;
-     cb2:	f8 01       	movw	r30, r16
-     cb4:	10 82       	st	Z, r1
-     cb6:	2d c0       	rjmp	.+90     	; 0xd12 <OSSemPend+0x8c>
-    } else if (OSIntNesting > 0) {                    /* See if called from ISR ...                    */
-     cb8:	80 91 38 05 	lds	r24, 0x0538
-     cbc:	88 23       	and	r24, r24
-     cbe:	29 f0       	breq	.+10     	; 0xcca <OSSemPend+0x44>
-        OS_EXIT_CRITICAL();                           /* ... can't PEND from an ISR                    */
-     cc0:	78 94       	sei
-        *err = OS_ERR_PEND_ISR;
-     cc2:	82 e0       	ldi	r24, 0x02	; 2
-     cc4:	f8 01       	movw	r30, r16
-     cc6:	80 83       	st	Z, r24
-     cc8:	24 c0       	rjmp	.+72     	; 0xd12 <OSSemPend+0x8c>
-    } else {                                          /* Otherwise, must wait until event occurs       */
-        OSTCBCur->OSTCBStat    |= OS_STAT_SEM;        /* Resource not available, pend on semaphore     */
-     cca:	e0 91 39 05 	lds	r30, 0x0539
-     cce:	f0 91 3a 05 	lds	r31, 0x053A
-     cd2:	84 85       	ldd	r24, Z+12	; 0x0c
-     cd4:	81 60       	ori	r24, 0x01	; 1
-     cd6:	84 87       	std	Z+12, r24	; 0x0c
-        OSTCBCur->OSTCBDly      = timeout;            /* Store pend timeout in TCB                     */
-     cd8:	73 87       	std	Z+11, r23	; 0x0b
-     cda:	62 87       	std	Z+10, r22	; 0x0a
-        OSEventTaskWait(pevent);                      /* Suspend task until event or timeout occurs    */
-     cdc:	ce 01       	movw	r24, r28
-     cde:	0e 94 20 04 	call	0x840	; 0x840 <OSEventTaskWait>
-        OS_EXIT_CRITICAL();
-     ce2:	78 94       	sei
-        OSSched();                                    /* Find next highest priority task ready         */
-     ce4:	0e 94 bf 04 	call	0x97e	; 0x97e <OSSched>
-        OS_ENTER_CRITICAL();
-     ce8:	f8 94       	cli
-        if (OSTCBCur->OSTCBStat & OS_STAT_SEM) {      /* Must have timed out if still waiting for event*/
-     cea:	e0 91 39 05 	lds	r30, 0x0539
-     cee:	f0 91 3a 05 	lds	r31, 0x053A
-     cf2:	84 85       	ldd	r24, Z+12	; 0x0c
-     cf4:	80 ff       	sbrs	r24, 0
-     cf6:	08 c0       	rjmp	.+16     	; 0xd08 <OSSemPend+0x82>
-            OSEventTO(pevent);
-     cf8:	ce 01       	movw	r24, r28
-     cfa:	0e 94 4f 04 	call	0x89e	; 0x89e <OSEventTO>
-            OS_EXIT_CRITICAL();
-     cfe:	78 94       	sei
-            *err = OS_TIMEOUT;                        /* Indicate that didn't get event within TO      */
-     d00:	8a e0       	ldi	r24, 0x0A	; 10
-     d02:	f8 01       	movw	r30, r16
-     d04:	80 83       	st	Z, r24
-     d06:	05 c0       	rjmp	.+10     	; 0xd12 <OSSemPend+0x8c>
-        } else {
-            OSTCBCur->OSTCBEventPtr = (OS_EVENT *)0;
-     d08:	17 82       	std	Z+7, r1	; 0x07
-     d0a:	16 82       	std	Z+6, r1	; 0x06
-            OS_EXIT_CRITICAL();
-     d0c:	78 94       	sei
-            *err = OS_NO_ERR;
-     d0e:	f8 01       	movw	r30, r16
-     d10:	10 82       	st	Z, r1
-        }
-    }
-}
-     d12:	df 91       	pop	r29
-     d14:	cf 91       	pop	r28
-     d16:	1f 91       	pop	r17
-     d18:	0f 91       	pop	r16
-     d1a:	08 95       	ret
-
-00000d1c <OSTaskCreate>:
-*********************************************************************************************************
-*/
-
-#if OS_TASK_CREATE_EN
-INT8U OSTaskCreate (void (*task)(void *pd), void *pdata, OS_STK *ptos, INT8U prio)
-{
-     d1c:	bf 92       	push	r11
-     d1e:	cf 92       	push	r12
-     d20:	df 92       	push	r13
-     d22:	ef 92       	push	r14
-     d24:	ff 92       	push	r15
-     d26:	0f 93       	push	r16
-     d28:	1f 93       	push	r17
-     d2a:	cf 93       	push	r28
-     d2c:	df 93       	push	r29
-     d2e:	b2 2e       	mov	r11, r18
-
-#if 0
-	DebugPulse();
-#endif	
-	
-    if (prio > OS_LOWEST_PRIO) 
-     d30:	2f e3       	ldi	r18, 0x3F	; 63
-     d32:	2b 15       	cp	r18, r11
-     d34:	08 f4       	brcc	.+2      	; 0xd38 <OSTaskCreate+0x1c>
-     d36:	4f c0       	rjmp	.+158    	; 0xdd6 <OSTaskCreate+0xba>
-	{             /* Make sure priority is within allowable range           */
-        return (OS_PRIO_INVALID);
-    }
-    OS_ENTER_CRITICAL();
-     d38:	f8 94       	cli
-    if (OSTCBPrioTbl[prio] == (OS_TCB *)0) { /* Make sure task doesn't already exist at this priority  */
-     d3a:	cb 2d       	mov	r28, r11
-     d3c:	d0 e0       	ldi	r29, 0x00	; 0
-     d3e:	fe 01       	movw	r30, r28
-     d40:	ee 0f       	add	r30, r30
-     d42:	ff 1f       	adc	r31, r31
-     d44:	e4 53       	subi	r30, 0x34	; 52
-     d46:	fa 4f       	sbci	r31, 0xFA	; 250
-     d48:	01 90       	ld	r0, Z+
-     d4a:	f0 81       	ld	r31, Z
-     d4c:	e0 2d       	mov	r30, r0
-     d4e:	ef 2b       	or	r30, r31
-     d50:	09 f0       	breq	.+2      	; 0xd54 <OSTaskCreate+0x38>
-     d52:	3e c0       	rjmp	.+124    	; 0xdd0 <OSTaskCreate+0xb4>
-        OSTCBPrioTbl[prio] = (OS_TCB *)1;    /* Reserve the priority to prevent others from doing ...  */
-     d54:	fe 01       	movw	r30, r28
-     d56:	ee 0f       	add	r30, r30
-     d58:	ff 1f       	adc	r31, r31
-     d5a:	e4 53       	subi	r30, 0x34	; 52
-     d5c:	fa 4f       	sbci	r31, 0xFA	; 250
-     d5e:	21 e0       	ldi	r18, 0x01	; 1
-     d60:	30 e0       	ldi	r19, 0x00	; 0
-     d62:	31 83       	std	Z+1, r19	; 0x01
-     d64:	20 83       	st	Z, r18
-                                             /* ... the same thing until task is created.              */
-        OS_EXIT_CRITICAL();
-     d66:	78 94       	sei
-		
-        psp = (void *)OSTaskStkInit(task, pdata, ptos, 0); /* Initialize the task's stack              */
-     d68:	20 e0       	ldi	r18, 0x00	; 0
-     d6a:	30 e0       	ldi	r19, 0x00	; 0
-     d6c:	0e 94 7d 03 	call	0x6fa	; 0x6fa <OSTaskStkInit>
-		
-        err = OSTCBInit(prio, psp, (void *)0, 0, 0, (void *)0, 0);         
-     d70:	c1 2c       	mov	r12, r1
-     d72:	d1 2c       	mov	r13, r1
-     d74:	e1 2c       	mov	r14, r1
-     d76:	f1 2c       	mov	r15, r1
-     d78:	00 e0       	ldi	r16, 0x00	; 0
-     d7a:	10 e0       	ldi	r17, 0x00	; 0
-     d7c:	20 e0       	ldi	r18, 0x00	; 0
-     d7e:	30 e0       	ldi	r19, 0x00	; 0
-     d80:	40 e0       	ldi	r20, 0x00	; 0
-     d82:	50 e0       	ldi	r21, 0x00	; 0
-     d84:	bc 01       	movw	r22, r24
-     d86:	8b 2d       	mov	r24, r11
-     d88:	0e 94 2f 05 	call	0xa5e	; 0xa5e <OSTCBInit>
-        if (err == OS_NO_ERR) {
-     d8c:	81 11       	cpse	r24, r1
-     d8e:	17 c0       	rjmp	.+46     	; 0xdbe <OSTaskCreate+0xa2>
-            OS_ENTER_CRITICAL();
-     d90:	f8 94       	cli
-            OSTaskCtr++;                                   /* Increment the #tasks counter             */
-     d92:	80 91 2a 05 	lds	r24, 0x052A
-     d96:	8f 5f       	subi	r24, 0xFF	; 255
-     d98:	80 93 2a 05 	sts	0x052A, r24
-            OSTaskCreateHook(OSTCBPrioTbl[prio]);          /* Call user defined hook                   */
-     d9c:	cc 0f       	add	r28, r28
-     d9e:	dd 1f       	adc	r29, r29
-     da0:	c4 53       	subi	r28, 0x34	; 52
-     da2:	da 4f       	sbci	r29, 0xFA	; 250
-     da4:	88 81       	ld	r24, Y
-     da6:	99 81       	ldd	r25, Y+1	; 0x01
-     da8:	0e 94 c7 03 	call	0x78e	; 0x78e <OSTaskCreateHook>
-            OS_EXIT_CRITICAL();
-     dac:	78 94       	sei
-            if (OSRunning) {                 /* Find highest priority task if multitasking has started */
-     dae:	80 91 16 05 	lds	r24, 0x0516
-     db2:	88 23       	and	r24, r24
-     db4:	91 f0       	breq	.+36     	; 0xdda <OSTaskCreate+0xbe>
-#if 0
-				DebugPulse();
-#endif					
-                OSSched();
-     db6:	0e 94 bf 04 	call	0x97e	; 0x97e <OSSched>
-
-#if 0
-		DebugPulse();
-#endif	
-		
-        return (err);
-     dba:	80 e0       	ldi	r24, 0x00	; 0
-     dbc:	0f c0       	rjmp	.+30     	; 0xddc <OSTaskCreate+0xc0>
-				DebugPulse();
-#endif					
-                OSSched();
-            }
-        } else {
-            OS_ENTER_CRITICAL();
-     dbe:	f8 94       	cli
-            OSTCBPrioTbl[prio] = (OS_TCB *)0;/* Make this priority available to others                 */
-     dc0:	cc 0f       	add	r28, r28
-     dc2:	dd 1f       	adc	r29, r29
-     dc4:	c4 53       	subi	r28, 0x34	; 52
-     dc6:	da 4f       	sbci	r29, 0xFA	; 250
-     dc8:	19 82       	std	Y+1, r1	; 0x01
-     dca:	18 82       	st	Y, r1
-            OS_EXIT_CRITICAL();
-     dcc:	78 94       	sei
-     dce:	06 c0       	rjmp	.+12     	; 0xddc <OSTaskCreate+0xc0>
-		DebugPulse();
-#endif	
-		
-        return (err);
-    } else {
-        OS_EXIT_CRITICAL();
-     dd0:	78 94       	sei
-        return (OS_PRIO_EXIST);
-     dd2:	88 e2       	ldi	r24, 0x28	; 40
-     dd4:	03 c0       	rjmp	.+6      	; 0xddc <OSTaskCreate+0xc0>
-	DebugPulse();
-#endif	
-	
-    if (prio > OS_LOWEST_PRIO) 
-	{             /* Make sure priority is within allowable range           */
-        return (OS_PRIO_INVALID);
-     dd6:	8a e2       	ldi	r24, 0x2A	; 42
-     dd8:	01 c0       	rjmp	.+2      	; 0xddc <OSTaskCreate+0xc0>
-
-#if 0
-		DebugPulse();
-#endif	
-		
-        return (err);
-     dda:	80 e0       	ldi	r24, 0x00	; 0
-    } else {
-        OS_EXIT_CRITICAL();
-        return (OS_PRIO_EXIST);
-    }	
-}
-     ddc:	df 91       	pop	r29
-     dde:	cf 91       	pop	r28
-     de0:	1f 91       	pop	r17
-     de2:	0f 91       	pop	r16
-     de4:	ff 90       	pop	r15
-     de6:	ef 90       	pop	r14
-     de8:	df 90       	pop	r13
-     dea:	cf 90       	pop	r12
-     dec:	bf 90       	pop	r11
-     dee:	08 95       	ret
-
-00000df0 <OSInit>:
-#if 0
-	DebugPulse();
-#endif	
-
-
-    OSTime        = 0L;                                    /* Clear the 32-bit system clock            */
-     df0:	10 92 3b 05 	sts	0x053B, r1
-     df4:	10 92 3c 05 	sts	0x053C, r1
-     df8:	10 92 3d 05 	sts	0x053D, r1
-     dfc:	10 92 3e 05 	sts	0x053E, r1
-    OSIntNesting  = 0;                                     /* Clear the interrupt nesting counter      */
-     e00:	10 92 38 05 	sts	0x0538, r1
-    OSLockNesting = 0;                                     /* Clear the scheduling lock counter        */
-     e04:	10 92 15 05 	sts	0x0515, r1
-#if OS_TASK_CREATE_EN  || OS_TASK_CREATE_EXT_EN || OS_TASK_DEL_EN
-    OSTaskCtr     = 0;                                     /* Clear the number of tasks                */
-     e08:	10 92 2a 05 	sts	0x052A, r1
-#endif
-    OSRunning     = FALSE;                                 /* Indicate that multitasking not started   */
-     e0c:	10 92 16 05 	sts	0x0516, r1
-    OSIdleCtr     = 0L;                                    /* Clear the 32-bit idle counter            */
-     e10:	10 92 17 05 	sts	0x0517, r1
-     e14:	10 92 18 05 	sts	0x0518, r1
-     e18:	10 92 19 05 	sts	0x0519, r1
-     e1c:	10 92 1a 05 	sts	0x051A, r1
-#if OS_TASK_STAT_EN && OS_TASK_CREATE_EXT_EN
-    OSIdleCtrRun  = 0L;
-    OSIdleCtrMax  = 0L;
-    OSStatRdy     = FALSE;                                 /* Statistic task is not ready              */
-#endif
-    OSCtxSwCtr    = 0;                                     /* Clear the context switch counter         */
-     e20:	10 92 1f 05 	sts	0x051F, r1
-     e24:	10 92 20 05 	sts	0x0520, r1
-     e28:	10 92 21 05 	sts	0x0521, r1
-     e2c:	10 92 22 05 	sts	0x0522, r1
-    OSRdyGrp      = 0;                                     /* Clear the ready list                     */
-     e30:	10 92 2d 05 	sts	0x052D, r1
-     e34:	ee e2       	ldi	r30, 0x2E	; 46
-     e36:	f5 e0       	ldi	r31, 0x05	; 5
-     e38:	86 e3       	ldi	r24, 0x36	; 54
-     e3a:	95 e0       	ldi	r25, 0x05	; 5
-    for (i = 0; i < OS_RDY_TBL_SIZE; i++) {
-        OSRdyTbl[i] = 0;
-     e3c:	11 92       	st	Z+, r1
-    OSIdleCtrMax  = 0L;
-    OSStatRdy     = FALSE;                                 /* Statistic task is not ready              */
-#endif
-    OSCtxSwCtr    = 0;                                     /* Clear the context switch counter         */
-    OSRdyGrp      = 0;                                     /* Clear the ready list                     */
-    for (i = 0; i < OS_RDY_TBL_SIZE; i++) {
-     e3e:	e8 17       	cp	r30, r24
-     e40:	f9 07       	cpc	r31, r25
-     e42:	e1 f7       	brne	.-8      	; 0xe3c <OSInit+0x4c>
-        OSRdyTbl[i] = 0;
-    }
-                
-    OSPrioCur     = 0;
-     e44:	10 92 1c 05 	sts	0x051C, r1
-    OSPrioHighRdy = 0;                                           
-     e48:	10 92 1b 05 	sts	0x051B, r1
-    OSTCBHighRdy  = (OS_TCB *)0;                                 /* TCB Initialization                 */
-     e4c:	10 92 2c 05 	sts	0x052C, r1
-     e50:	10 92 2b 05 	sts	0x052B, r1
-    OSTCBCur      = (OS_TCB *)0;
-     e54:	10 92 3a 05 	sts	0x053A, r1
-     e58:	10 92 39 05 	sts	0x0539, r1
-    OSTCBList     = (OS_TCB *)0;
-     e5c:	10 92 1e 05 	sts	0x051E, r1
-     e60:	10 92 1d 05 	sts	0x051D, r1
-     e64:	ec ec       	ldi	r30, 0xCC	; 204
-     e66:	f5 e0       	ldi	r31, 0x05	; 5
-     e68:	8c e4       	ldi	r24, 0x4C	; 76
-     e6a:	96 e0       	ldi	r25, 0x06	; 6
-    for (i = 0; i < (OS_LOWEST_PRIO + 1); i++) {                 /* Clear the priority table           */
-        OSTCBPrioTbl[i] = (OS_TCB *)0;
-     e6c:	11 92       	st	Z+, r1
-     e6e:	11 92       	st	Z+, r1
-    OSPrioCur     = 0;
-    OSPrioHighRdy = 0;                                           
-    OSTCBHighRdy  = (OS_TCB *)0;                                 /* TCB Initialization                 */
-    OSTCBCur      = (OS_TCB *)0;
-    OSTCBList     = (OS_TCB *)0;
-    for (i = 0; i < (OS_LOWEST_PRIO + 1); i++) {                 /* Clear the priority table           */
-     e70:	e8 17       	cp	r30, r24
-     e72:	f9 07       	cpc	r31, r25
-     e74:	d9 f7       	brne	.-10     	; 0xe6c <OSInit+0x7c>
-     e76:	8a e6       	ldi	r24, 0x6A	; 106
-     e78:	92 e0       	ldi	r25, 0x02	; 2
-     e7a:	2c e0       	ldi	r18, 0x0C	; 12
-     e7c:	33 e0       	ldi	r19, 0x03	; 3
-     e7e:	fc 01       	movw	r30, r24
-     e80:	70 97       	sbiw	r30, 0x10	; 16
-        OSTCBPrioTbl[i] = (OS_TCB *)0;
-    }
-    for (i = 0; i < (OS_MAX_TASKS + OS_N_SYS_TASKS - 1); i++) {  /* Init. list of free TCBs            */
-        OSTCBTbl[i].OSTCBNext = &OSTCBTbl[i + 1];
-     e82:	91 83       	std	Z+1, r25	; 0x01
-     e84:	80 83       	st	Z, r24
-     e86:	42 96       	adiw	r24, 0x12	; 18
-    OSTCBCur      = (OS_TCB *)0;
-    OSTCBList     = (OS_TCB *)0;
-    for (i = 0; i < (OS_LOWEST_PRIO + 1); i++) {                 /* Clear the priority table           */
-        OSTCBPrioTbl[i] = (OS_TCB *)0;
-    }
-    for (i = 0; i < (OS_MAX_TASKS + OS_N_SYS_TASKS - 1); i++) {  /* Init. list of free TCBs            */
-     e88:	82 17       	cp	r24, r18
-     e8a:	93 07       	cpc	r25, r19
-     e8c:	c1 f7       	brne	.-16     	; 0xe7e <OSInit+0x8e>
-        OSTCBTbl[i].OSTCBNext = &OSTCBTbl[i + 1];
-    }
-    OSTCBTbl[OS_MAX_TASKS + OS_N_SYS_TASKS - 1].OSTCBNext = (OS_TCB *)0;    /* Last OS_TCB             */
-     e8e:	10 92 fd 02 	sts	0x02FD, r1
-     e92:	10 92 fc 02 	sts	0x02FC, r1
-    OSTCBFreeList                                         = &OSTCBTbl[0];
-     e96:	88 e5       	ldi	r24, 0x58	; 88
-     e98:	92 e0       	ldi	r25, 0x02	; 2
-     e9a:	90 93 28 05 	sts	0x0528, r25
-     e9e:	80 93 27 05 	sts	0x0527, r24
-     ea2:	8d e4       	ldi	r24, 0x4D	; 77
-     ea4:	95 e0       	ldi	r25, 0x05	; 5
-     ea6:	2b ec       	ldi	r18, 0xCB	; 203
-     ea8:	35 e0       	ldi	r19, 0x05	; 5
-     eaa:	fc 01       	movw	r30, r24
-     eac:	3e 97       	sbiw	r30, 0x0e	; 14
-
-#if OS_MAX_EVENTS >= 2
-    for (i = 0; i < (OS_MAX_EVENTS - 1); i++) {            /* Init. list of free EVENT control blocks  */
-        OSEventTbl[i].OSEventPtr = (OS_EVENT *)&OSEventTbl[i + 1];
-     eae:	91 83       	std	Z+1, r25	; 0x01
-     eb0:	80 83       	st	Z, r24
-     eb2:	0e 96       	adiw	r24, 0x0e	; 14
-    }
-    OSTCBTbl[OS_MAX_TASKS + OS_N_SYS_TASKS - 1].OSTCBNext = (OS_TCB *)0;    /* Last OS_TCB             */
-    OSTCBFreeList                                         = &OSTCBTbl[0];
-
-#if OS_MAX_EVENTS >= 2
-    for (i = 0; i < (OS_MAX_EVENTS - 1); i++) {            /* Init. list of free EVENT control blocks  */
-     eb4:	82 17       	cp	r24, r18
-     eb6:	93 07       	cpc	r25, r19
-     eb8:	c1 f7       	brne	.-16     	; 0xeaa <OSInit+0xba>
-        OSEventTbl[i].OSEventPtr = (OS_EVENT *)&OSEventTbl[i + 1];
-    }
-    OSEventTbl[OS_MAX_EVENTS - 1].OSEventPtr = (OS_EVENT *)0;
-     eba:	10 92 be 05 	sts	0x05BE, r1
-     ebe:	10 92 bd 05 	sts	0x05BD, r1
-    OSEventFreeList                          = &OSEventTbl[0];    
-     ec2:	8f e3       	ldi	r24, 0x3F	; 63
-     ec4:	95 e0       	ldi	r25, 0x05	; 5
-     ec6:	90 93 37 05 	sts	0x0537, r25
-     eca:	80 93 36 05 	sts	0x0536, r24
-                    &OSTaskIdleStk[0],                         /* Set Bottom-Of-Stack                  */
-                    OS_TASK_IDLE_STK_SIZE, 
-                    (void *)0,                                 /* No TCB extension                     */
-                    OS_TASK_OPT_STK_CHK | OS_TASK_OPT_STK_CLR);/* Enable stack checking + clear stack  */
-    #else
-    OSTaskCreate(OSTaskIdle, (void *)0, &OSTaskIdleStk[OS_TASK_IDLE_STK_SIZE - 1], OS_IDLE_PRIO);
-     ece:	2f e3       	ldi	r18, 0x3F	; 63
-     ed0:	4b e8       	ldi	r20, 0x8B	; 139
-     ed2:	53 e0       	ldi	r21, 0x03	; 3
-     ed4:	60 e0       	ldi	r22, 0x00	; 0
-     ed6:	70 e0       	ldi	r23, 0x00	; 0
-     ed8:	8a ec       	ldi	r24, 0xCA	; 202
-     eda:	93 e0       	ldi	r25, 0x03	; 3
-     edc:	0e 94 8e 06 	call	0xd1c	; 0xd1c <OSTaskCreate>
-                        (void *)0,                                /* No TCB extension                  */
-                        OS_TASK_OPT_STK_CHK | OS_TASK_OPT_STK_CLR);  /* Enable stack checking + clear  */
-        #endif
-    #else
-        #if OS_STK_GROWTH == 1
-        OSTaskCreate(OSTaskStat, 
-     ee0:	2e e3       	ldi	r18, 0x3E	; 62
-     ee2:	4b e4       	ldi	r20, 0x4B	; 75
-     ee4:	53 e0       	ldi	r21, 0x03	; 3
-     ee6:	60 e0       	ldi	r22, 0x00	; 0
-     ee8:	70 e0       	ldi	r23, 0x00	; 0
-     eea:	81 ec       	ldi	r24, 0xC1	; 193
-     eec:	97 e0       	ldi	r25, 0x07	; 7
-     eee:	0e 94 8e 06 	call	0xd1c	; 0xd1c <OSTaskCreate>
-     ef2:	08 95       	ret
-
-00000ef4 <OSTimeDly>:
-*********************************************************************************************************
-*/
-
-void OSTimeDly (INT16U ticks)
-{
-    if (ticks > 0) {                                                      /* 0 means no delay!         */
-     ef4:	00 97       	sbiw	r24, 0x00	; 0
-     ef6:	e1 f0       	breq	.+56     	; 0xf30 <OSTimeDly+0x3c>
-        OS_ENTER_CRITICAL();
-     ef8:	f8 94       	cli
-        if ((OSRdyTbl[OSTCBCur->OSTCBY] &= ~OSTCBCur->OSTCBBitX) == 0) {  /* Delay current task        */
-     efa:	e0 91 39 05 	lds	r30, 0x0539
-     efe:	f0 91 3a 05 	lds	r31, 0x053A
-     f02:	a7 85       	ldd	r26, Z+15	; 0x0f
-     f04:	b0 e0       	ldi	r27, 0x00	; 0
-     f06:	a2 5d       	subi	r26, 0xD2	; 210
-     f08:	ba 4f       	sbci	r27, 0xFA	; 250
-     f0a:	20 89       	ldd	r18, Z+16	; 0x10
-     f0c:	20 95       	com	r18
-     f0e:	3c 91       	ld	r19, X
-     f10:	23 23       	and	r18, r19
-     f12:	2c 93       	st	X, r18
-     f14:	21 11       	cpse	r18, r1
-     f16:	07 c0       	rjmp	.+14     	; 0xf26 <OSTimeDly+0x32>
-            OSRdyGrp &= ~OSTCBCur->OSTCBBitY;
-     f18:	21 89       	ldd	r18, Z+17	; 0x11
-     f1a:	20 95       	com	r18
-     f1c:	30 91 2d 05 	lds	r19, 0x052D
-     f20:	23 23       	and	r18, r19
-     f22:	20 93 2d 05 	sts	0x052D, r18
-        }
-        OSTCBCur->OSTCBDly = ticks;                                       /* Load ticks in TCB         */
-     f26:	93 87       	std	Z+11, r25	; 0x0b
-     f28:	82 87       	std	Z+10, r24	; 0x0a
-        OS_EXIT_CRITICAL();
-     f2a:	78 94       	sei
-        OSSched();                                                        /* Find next task to run!    */
-     f2c:	0e 94 bf 04 	call	0x97e	; 0x97e <OSSched>
-     f30:	08 95       	ret
-
-00000f32 <OSStatInit>:
-*/
-
-#if OS_TASK_STAT_EN
-void OSStatInit (void)
-{
-    OSTimeDly(2);                                /* Synchronize with clock tick                        */
-     f32:	82 e0       	ldi	r24, 0x02	; 2
-     f34:	90 e0       	ldi	r25, 0x00	; 0
-     f36:	0e 94 7a 07 	call	0xef4	; 0xef4 <OSTimeDly>
-    OS_ENTER_CRITICAL();
-     f3a:	f8 94       	cli
-    OSIdleCtr    = 0L;                           /* Clear idle counter                                 */
-     f3c:	10 92 17 05 	sts	0x0517, r1
-     f40:	10 92 18 05 	sts	0x0518, r1
-     f44:	10 92 19 05 	sts	0x0519, r1
-     f48:	10 92 1a 05 	sts	0x051A, r1
-    OS_EXIT_CRITICAL();
-     f4c:	78 94       	sei
-    OSTimeDly(OS_TICKS_PER_SEC);                 /* Determine MAX. idle counter value for 1 second     */
-     f4e:	88 ec       	ldi	r24, 0xC8	; 200
-     f50:	90 e0       	ldi	r25, 0x00	; 0
-     f52:	0e 94 7a 07 	call	0xef4	; 0xef4 <OSTimeDly>
-    OS_ENTER_CRITICAL();
-     f56:	f8 94       	cli
-    OSIdleCtrMax = OSIdleCtr;                    /* Store maximum idle counter count in 1 second       */
-     f58:	80 91 17 05 	lds	r24, 0x0517
-     f5c:	90 91 18 05 	lds	r25, 0x0518
-     f60:	a0 91 19 05 	lds	r26, 0x0519
-     f64:	b0 91 1a 05 	lds	r27, 0x051A
-     f68:	80 93 23 05 	sts	0x0523, r24
-     f6c:	90 93 24 05 	sts	0x0524, r25
-     f70:	a0 93 25 05 	sts	0x0525, r26
-     f74:	b0 93 26 05 	sts	0x0526, r27
-    OSStatRdy    = TRUE;
-     f78:	81 e0       	ldi	r24, 0x01	; 1
-     f7a:	80 93 cb 05 	sts	0x05CB, r24
-    OS_EXIT_CRITICAL();
-     f7e:	78 94       	sei
-     f80:	08 95       	ret
-
-00000f82 <OSTaskStat>:
-    INT32U run;
-    INT8S  usage;
-    
-    
-    pdata = pdata;                               /* Prevent compiler warning for not using 'pdata'     */
-    while (OSStatRdy == FALSE) {
-     f82:	80 91 cb 05 	lds	r24, 0x05CB
-     f86:	81 11       	cpse	r24, r1
-     f88:	08 c0       	rjmp	.+16     	; 0xf9a <OSTaskStat+0x18>
-        OSTimeDly(2 * OS_TICKS_PER_SEC);             /* Wait until statistic task is ready                 */
-     f8a:	80 e9       	ldi	r24, 0x90	; 144
-     f8c:	91 e0       	ldi	r25, 0x01	; 1
-     f8e:	0e 94 7a 07 	call	0xef4	; 0xef4 <OSTimeDly>
-    INT32U run;
-    INT8S  usage;
-    
-    
-    pdata = pdata;                               /* Prevent compiler warning for not using 'pdata'     */
-    while (OSStatRdy == FALSE) {
-     f92:	80 91 cb 05 	lds	r24, 0x05CB
-     f96:	88 23       	and	r24, r24
-     f98:	c1 f3       	breq	.-16     	; 0xf8a <OSTaskStat+0x8>
-        OSIdleCtrRun = OSIdleCtr;                /* Obtain the of the idle counter for the past second */
-        run          = OSIdleCtr;
-        OSIdleCtr    = 0L;                       /* Reset the idle counter for the next second         */
-        OS_EXIT_CRITICAL();
-        if (OSIdleCtrMax > 0L) {
-            usage = (INT8S)(100L - 100L * run / OSIdleCtrMax);
-     f9a:	c4 e6       	ldi	r28, 0x64	; 100
-    pdata = pdata;                               /* Prevent compiler warning for not using 'pdata'     */
-    while (OSStatRdy == FALSE) {
-        OSTimeDly(2 * OS_TICKS_PER_SEC);             /* Wait until statistic task is ready                 */
-    }
-    for (;;) {
-        OS_ENTER_CRITICAL();
-     f9c:	f8 94       	cli
-        OSIdleCtrRun = OSIdleCtr;                /* Obtain the of the idle counter for the past second */
-     f9e:	20 91 17 05 	lds	r18, 0x0517
-     fa2:	30 91 18 05 	lds	r19, 0x0518
-     fa6:	40 91 19 05 	lds	r20, 0x0519
-     faa:	50 91 1a 05 	lds	r21, 0x051A
-     fae:	20 93 4c 06 	sts	0x064C, r18
-     fb2:	30 93 4d 06 	sts	0x064D, r19
-     fb6:	40 93 4e 06 	sts	0x064E, r20
-     fba:	50 93 4f 06 	sts	0x064F, r21
-        run          = OSIdleCtr;
-        OSIdleCtr    = 0L;                       /* Reset the idle counter for the next second         */
-     fbe:	10 92 17 05 	sts	0x0517, r1
-     fc2:	10 92 18 05 	sts	0x0518, r1
-     fc6:	10 92 19 05 	sts	0x0519, r1
-     fca:	10 92 1a 05 	sts	0x051A, r1
-        OS_EXIT_CRITICAL();
-     fce:	78 94       	sei
-        if (OSIdleCtrMax > 0L) {
-     fd0:	c0 90 23 05 	lds	r12, 0x0523
-     fd4:	d0 90 24 05 	lds	r13, 0x0524
-     fd8:	e0 90 25 05 	lds	r14, 0x0525
-     fdc:	f0 90 26 05 	lds	r15, 0x0526
-     fe0:	c1 14       	cp	r12, r1
-     fe2:	d1 04       	cpc	r13, r1
-     fe4:	e1 04       	cpc	r14, r1
-     fe6:	f1 04       	cpc	r15, r1
-     fe8:	b9 f0       	breq	.+46     	; 0x1018 <OSTaskStat+0x96>
-            usage = (INT8S)(100L - 100L * run / OSIdleCtrMax);
-     fea:	a4 e6       	ldi	r26, 0x64	; 100
-     fec:	b0 e0       	ldi	r27, 0x00	; 0
-     fee:	0e 94 f3 09 	call	0x13e6	; 0x13e6 <__muluhisi3>
-     ff2:	a7 01       	movw	r20, r14
-     ff4:	96 01       	movw	r18, r12
-     ff6:	0e 94 c2 09 	call	0x1384	; 0x1384 <__udivmodsi4>
-     ffa:	8c 2f       	mov	r24, r28
-     ffc:	82 1b       	sub	r24, r18
-            if (usage > 100) {
-     ffe:	85 36       	cpi	r24, 0x65	; 101
-    1000:	1c f0       	brlt	.+6      	; 0x1008 <OSTaskStat+0x86>
-                OSCPUUsage = 100;
-    1002:	c0 93 29 05 	sts	0x0529, r28
-    1006:	0a c0       	rjmp	.+20     	; 0x101c <OSTaskStat+0x9a>
-            } else if (usage < 0) {
-    1008:	88 23       	and	r24, r24
-    100a:	1c f4       	brge	.+6      	; 0x1012 <OSTaskStat+0x90>
-                OSCPUUsage =   0;
-    100c:	10 92 29 05 	sts	0x0529, r1
-    1010:	05 c0       	rjmp	.+10     	; 0x101c <OSTaskStat+0x9a>
-            } else {
-                OSCPUUsage = usage;
-    1012:	80 93 29 05 	sts	0x0529, r24
-    1016:	02 c0       	rjmp	.+4      	; 0x101c <OSTaskStat+0x9a>
-            }
-        } else {
-            OSCPUUsage = 0;
-    1018:	10 92 29 05 	sts	0x0529, r1
-        }
-        OSTaskStatHook();                        /* Invoke user definable hook                         */
-    101c:	0e 94 c8 03 	call	0x790	; 0x790 <OSTaskStatHook>
-        OSTimeDly(OS_TICKS_PER_SEC);             /* Accumulate OSIdleCtr for the next second           */
-    1020:	88 ec       	ldi	r24, 0xC8	; 200
-    1022:	90 e0       	ldi	r25, 0x00	; 0
-    1024:	0e 94 7a 07 	call	0xef4	; 0xef4 <OSTimeDly>
-    }
-    1028:	b9 cf       	rjmp	.-142    	; 0xf9c <OSTaskStat+0x1a>
-
-0000102a <__subsf3>:
-    102a:	50 58       	subi	r21, 0x80	; 128
-
-0000102c <__addsf3>:
-    102c:	bb 27       	eor	r27, r27
-    102e:	aa 27       	eor	r26, r26
-    1030:	0e d0       	rcall	.+28     	; 0x104e <__addsf3x>
-    1032:	0b c1       	rjmp	.+534    	; 0x124a <__fp_round>
-    1034:	fc d0       	rcall	.+504    	; 0x122e <__fp_pscA>
-    1036:	30 f0       	brcs	.+12     	; 0x1044 <__addsf3+0x18>
-    1038:	01 d1       	rcall	.+514    	; 0x123c <__fp_pscB>
-    103a:	20 f0       	brcs	.+8      	; 0x1044 <__addsf3+0x18>
-    103c:	31 f4       	brne	.+12     	; 0x104a <__addsf3+0x1e>
-    103e:	9f 3f       	cpi	r25, 0xFF	; 255
-    1040:	11 f4       	brne	.+4      	; 0x1046 <__addsf3+0x1a>
-    1042:	1e f4       	brtc	.+6      	; 0x104a <__addsf3+0x1e>
-    1044:	f1 c0       	rjmp	.+482    	; 0x1228 <__fp_nan>
-    1046:	0e f4       	brtc	.+2      	; 0x104a <__addsf3+0x1e>
-    1048:	e0 95       	com	r30
-    104a:	e7 fb       	bst	r30, 7
-    104c:	e7 c0       	rjmp	.+462    	; 0x121c <__fp_inf>
-
-0000104e <__addsf3x>:
-    104e:	e9 2f       	mov	r30, r25
-    1050:	0d d1       	rcall	.+538    	; 0x126c <__fp_split3>
-    1052:	80 f3       	brcs	.-32     	; 0x1034 <__addsf3+0x8>
-    1054:	ba 17       	cp	r27, r26
-    1056:	62 07       	cpc	r22, r18
-    1058:	73 07       	cpc	r23, r19
-    105a:	84 07       	cpc	r24, r20
-    105c:	95 07       	cpc	r25, r21
-    105e:	18 f0       	brcs	.+6      	; 0x1066 <__addsf3x+0x18>
-    1060:	71 f4       	brne	.+28     	; 0x107e <__addsf3x+0x30>
-    1062:	9e f5       	brtc	.+102    	; 0x10ca <__addsf3x+0x7c>
-    1064:	25 c1       	rjmp	.+586    	; 0x12b0 <__fp_zero>
-    1066:	0e f4       	brtc	.+2      	; 0x106a <__addsf3x+0x1c>
-    1068:	e0 95       	com	r30
-    106a:	0b 2e       	mov	r0, r27
-    106c:	ba 2f       	mov	r27, r26
-    106e:	a0 2d       	mov	r26, r0
-    1070:	0b 01       	movw	r0, r22
-    1072:	b9 01       	movw	r22, r18
-    1074:	90 01       	movw	r18, r0
-    1076:	0c 01       	movw	r0, r24
-    1078:	ca 01       	movw	r24, r20
-    107a:	a0 01       	movw	r20, r0
-    107c:	11 24       	eor	r1, r1
-    107e:	ff 27       	eor	r31, r31
-    1080:	59 1b       	sub	r21, r25
-    1082:	99 f0       	breq	.+38     	; 0x10aa <__addsf3x+0x5c>
-    1084:	59 3f       	cpi	r21, 0xF9	; 249
-    1086:	50 f4       	brcc	.+20     	; 0x109c <__addsf3x+0x4e>
-    1088:	50 3e       	cpi	r21, 0xE0	; 224
-    108a:	68 f1       	brcs	.+90     	; 0x10e6 <__addsf3x+0x98>
-    108c:	1a 16       	cp	r1, r26
-    108e:	f0 40       	sbci	r31, 0x00	; 0
-    1090:	a2 2f       	mov	r26, r18
-    1092:	23 2f       	mov	r18, r19
-    1094:	34 2f       	mov	r19, r20
-    1096:	44 27       	eor	r20, r20
-    1098:	58 5f       	subi	r21, 0xF8	; 248
-    109a:	f3 cf       	rjmp	.-26     	; 0x1082 <__addsf3x+0x34>
-    109c:	46 95       	lsr	r20
-    109e:	37 95       	ror	r19
-    10a0:	27 95       	ror	r18
-    10a2:	a7 95       	ror	r26
-    10a4:	f0 40       	sbci	r31, 0x00	; 0
-    10a6:	53 95       	inc	r21
-    10a8:	c9 f7       	brne	.-14     	; 0x109c <__addsf3x+0x4e>
-    10aa:	7e f4       	brtc	.+30     	; 0x10ca <__addsf3x+0x7c>
-    10ac:	1f 16       	cp	r1, r31
-    10ae:	ba 0b       	sbc	r27, r26
-    10b0:	62 0b       	sbc	r22, r18
-    10b2:	73 0b       	sbc	r23, r19
-    10b4:	84 0b       	sbc	r24, r20
-    10b6:	ba f0       	brmi	.+46     	; 0x10e6 <__addsf3x+0x98>
-    10b8:	91 50       	subi	r25, 0x01	; 1
-    10ba:	a1 f0       	breq	.+40     	; 0x10e4 <__addsf3x+0x96>
-    10bc:	ff 0f       	add	r31, r31
-    10be:	bb 1f       	adc	r27, r27
-    10c0:	66 1f       	adc	r22, r22
-    10c2:	77 1f       	adc	r23, r23
-    10c4:	88 1f       	adc	r24, r24
-    10c6:	c2 f7       	brpl	.-16     	; 0x10b8 <__addsf3x+0x6a>
-    10c8:	0e c0       	rjmp	.+28     	; 0x10e6 <__addsf3x+0x98>
-    10ca:	ba 0f       	add	r27, r26
-    10cc:	62 1f       	adc	r22, r18
-    10ce:	73 1f       	adc	r23, r19
-    10d0:	84 1f       	adc	r24, r20
-    10d2:	48 f4       	brcc	.+18     	; 0x10e6 <__addsf3x+0x98>
-    10d4:	87 95       	ror	r24
-    10d6:	77 95       	ror	r23
-    10d8:	67 95       	ror	r22
-    10da:	b7 95       	ror	r27
-    10dc:	f7 95       	ror	r31
-    10de:	9e 3f       	cpi	r25, 0xFE	; 254
-    10e0:	08 f0       	brcs	.+2      	; 0x10e4 <__addsf3x+0x96>
-    10e2:	b3 cf       	rjmp	.-154    	; 0x104a <__addsf3+0x1e>
-    10e4:	93 95       	inc	r25
-    10e6:	88 0f       	add	r24, r24
-    10e8:	08 f0       	brcs	.+2      	; 0x10ec <__addsf3x+0x9e>
-    10ea:	99 27       	eor	r25, r25
-    10ec:	ee 0f       	add	r30, r30
-    10ee:	97 95       	ror	r25
-    10f0:	87 95       	ror	r24
-    10f2:	08 95       	ret
-
-000010f4 <__divsf3>:
-    10f4:	0c d0       	rcall	.+24     	; 0x110e <__divsf3x>
-    10f6:	a9 c0       	rjmp	.+338    	; 0x124a <__fp_round>
-    10f8:	a1 d0       	rcall	.+322    	; 0x123c <__fp_pscB>
-    10fa:	40 f0       	brcs	.+16     	; 0x110c <__divsf3+0x18>
-    10fc:	98 d0       	rcall	.+304    	; 0x122e <__fp_pscA>
-    10fe:	30 f0       	brcs	.+12     	; 0x110c <__divsf3+0x18>
-    1100:	21 f4       	brne	.+8      	; 0x110a <__divsf3+0x16>
-    1102:	5f 3f       	cpi	r21, 0xFF	; 255
-    1104:	19 f0       	breq	.+6      	; 0x110c <__divsf3+0x18>
-    1106:	8a c0       	rjmp	.+276    	; 0x121c <__fp_inf>
-    1108:	51 11       	cpse	r21, r1
-    110a:	d3 c0       	rjmp	.+422    	; 0x12b2 <__fp_szero>
-    110c:	8d c0       	rjmp	.+282    	; 0x1228 <__fp_nan>
-
-0000110e <__divsf3x>:
-    110e:	ae d0       	rcall	.+348    	; 0x126c <__fp_split3>
-    1110:	98 f3       	brcs	.-26     	; 0x10f8 <__divsf3+0x4>
-
-00001112 <__divsf3_pse>:
-    1112:	99 23       	and	r25, r25
-    1114:	c9 f3       	breq	.-14     	; 0x1108 <__divsf3+0x14>
-    1116:	55 23       	and	r21, r21
-    1118:	b1 f3       	breq	.-20     	; 0x1106 <__divsf3+0x12>
-    111a:	95 1b       	sub	r25, r21
-    111c:	55 0b       	sbc	r21, r21
-    111e:	bb 27       	eor	r27, r27
-    1120:	aa 27       	eor	r26, r26
-    1122:	62 17       	cp	r22, r18
-    1124:	73 07       	cpc	r23, r19
-    1126:	84 07       	cpc	r24, r20
-    1128:	38 f0       	brcs	.+14     	; 0x1138 <__divsf3_pse+0x26>
-    112a:	9f 5f       	subi	r25, 0xFF	; 255
-    112c:	5f 4f       	sbci	r21, 0xFF	; 255
-    112e:	22 0f       	add	r18, r18
-    1130:	33 1f       	adc	r19, r19
-    1132:	44 1f       	adc	r20, r20
-    1134:	aa 1f       	adc	r26, r26
-    1136:	a9 f3       	breq	.-22     	; 0x1122 <__divsf3_pse+0x10>
-    1138:	33 d0       	rcall	.+102    	; 0x11a0 <__divsf3_pse+0x8e>
-    113a:	0e 2e       	mov	r0, r30
-    113c:	3a f0       	brmi	.+14     	; 0x114c <__divsf3_pse+0x3a>
-    113e:	e0 e8       	ldi	r30, 0x80	; 128
-    1140:	30 d0       	rcall	.+96     	; 0x11a2 <__divsf3_pse+0x90>
-    1142:	91 50       	subi	r25, 0x01	; 1
-    1144:	50 40       	sbci	r21, 0x00	; 0
-    1146:	e6 95       	lsr	r30
-    1148:	00 1c       	adc	r0, r0
-    114a:	ca f7       	brpl	.-14     	; 0x113e <__divsf3_pse+0x2c>
-    114c:	29 d0       	rcall	.+82     	; 0x11a0 <__divsf3_pse+0x8e>
-    114e:	fe 2f       	mov	r31, r30
-    1150:	27 d0       	rcall	.+78     	; 0x11a0 <__divsf3_pse+0x8e>
-    1152:	66 0f       	add	r22, r22
-    1154:	77 1f       	adc	r23, r23
-    1156:	88 1f       	adc	r24, r24
-    1158:	bb 1f       	adc	r27, r27
-    115a:	26 17       	cp	r18, r22
-    115c:	37 07       	cpc	r19, r23
-    115e:	48 07       	cpc	r20, r24
-    1160:	ab 07       	cpc	r26, r27
-    1162:	b0 e8       	ldi	r27, 0x80	; 128
-    1164:	09 f0       	breq	.+2      	; 0x1168 <__divsf3_pse+0x56>
-    1166:	bb 0b       	sbc	r27, r27
-    1168:	80 2d       	mov	r24, r0
-    116a:	bf 01       	movw	r22, r30
-    116c:	ff 27       	eor	r31, r31
-    116e:	93 58       	subi	r25, 0x83	; 131
-    1170:	5f 4f       	sbci	r21, 0xFF	; 255
-    1172:	2a f0       	brmi	.+10     	; 0x117e <__divsf3_pse+0x6c>
-    1174:	9e 3f       	cpi	r25, 0xFE	; 254
-    1176:	51 05       	cpc	r21, r1
-    1178:	68 f0       	brcs	.+26     	; 0x1194 <__divsf3_pse+0x82>
-    117a:	50 c0       	rjmp	.+160    	; 0x121c <__fp_inf>
-    117c:	9a c0       	rjmp	.+308    	; 0x12b2 <__fp_szero>
-    117e:	5f 3f       	cpi	r21, 0xFF	; 255
-    1180:	ec f3       	brlt	.-6      	; 0x117c <__divsf3_pse+0x6a>
-    1182:	98 3e       	cpi	r25, 0xE8	; 232
-    1184:	dc f3       	brlt	.-10     	; 0x117c <__divsf3_pse+0x6a>
-    1186:	86 95       	lsr	r24
-    1188:	77 95       	ror	r23
-    118a:	67 95       	ror	r22
-    118c:	b7 95       	ror	r27
-    118e:	f7 95       	ror	r31
-    1190:	9f 5f       	subi	r25, 0xFF	; 255
-    1192:	c9 f7       	brne	.-14     	; 0x1186 <__divsf3_pse+0x74>
-    1194:	88 0f       	add	r24, r24
-    1196:	91 1d       	adc	r25, r1
-    1198:	96 95       	lsr	r25
-    119a:	87 95       	ror	r24
-    119c:	97 f9       	bld	r25, 7
-    119e:	08 95       	ret
-    11a0:	e1 e0       	ldi	r30, 0x01	; 1
-    11a2:	66 0f       	add	r22, r22
-    11a4:	77 1f       	adc	r23, r23
-    11a6:	88 1f       	adc	r24, r24
-    11a8:	bb 1f       	adc	r27, r27
-    11aa:	62 17       	cp	r22, r18
-    11ac:	73 07       	cpc	r23, r19
-    11ae:	84 07       	cpc	r24, r20
-    11b0:	ba 07       	cpc	r27, r26
-    11b2:	20 f0       	brcs	.+8      	; 0x11bc <__divsf3_pse+0xaa>
-    11b4:	62 1b       	sub	r22, r18
-    11b6:	73 0b       	sbc	r23, r19
-    11b8:	84 0b       	sbc	r24, r20
-    11ba:	ba 0b       	sbc	r27, r26
-    11bc:	ee 1f       	adc	r30, r30
-    11be:	88 f7       	brcc	.-30     	; 0x11a2 <__divsf3_pse+0x90>
-    11c0:	e0 95       	com	r30
-    11c2:	08 95       	ret
-
-000011c4 <__fixunssfsi>:
-    11c4:	5b d0       	rcall	.+182    	; 0x127c <__fp_splitA>
-    11c6:	88 f0       	brcs	.+34     	; 0x11ea <__fixunssfsi+0x26>
-    11c8:	9f 57       	subi	r25, 0x7F	; 127
-    11ca:	90 f0       	brcs	.+36     	; 0x11f0 <__fixunssfsi+0x2c>
-    11cc:	b9 2f       	mov	r27, r25
-    11ce:	99 27       	eor	r25, r25
-    11d0:	b7 51       	subi	r27, 0x17	; 23
-    11d2:	a0 f0       	brcs	.+40     	; 0x11fc <__fixunssfsi+0x38>
-    11d4:	d1 f0       	breq	.+52     	; 0x120a <__fixunssfsi+0x46>
-    11d6:	66 0f       	add	r22, r22
-    11d8:	77 1f       	adc	r23, r23
-    11da:	88 1f       	adc	r24, r24
-    11dc:	99 1f       	adc	r25, r25
-    11de:	1a f0       	brmi	.+6      	; 0x11e6 <__fixunssfsi+0x22>
-    11e0:	ba 95       	dec	r27
-    11e2:	c9 f7       	brne	.-14     	; 0x11d6 <__fixunssfsi+0x12>
-    11e4:	12 c0       	rjmp	.+36     	; 0x120a <__fixunssfsi+0x46>
-    11e6:	b1 30       	cpi	r27, 0x01	; 1
-    11e8:	81 f0       	breq	.+32     	; 0x120a <__fixunssfsi+0x46>
-    11ea:	62 d0       	rcall	.+196    	; 0x12b0 <__fp_zero>
-    11ec:	b1 e0       	ldi	r27, 0x01	; 1
-    11ee:	08 95       	ret
-    11f0:	5f c0       	rjmp	.+190    	; 0x12b0 <__fp_zero>
-    11f2:	67 2f       	mov	r22, r23
-    11f4:	78 2f       	mov	r23, r24
-    11f6:	88 27       	eor	r24, r24
-    11f8:	b8 5f       	subi	r27, 0xF8	; 248
-    11fa:	39 f0       	breq	.+14     	; 0x120a <__fixunssfsi+0x46>
-    11fc:	b9 3f       	cpi	r27, 0xF9	; 249
-    11fe:	cc f3       	brlt	.-14     	; 0x11f2 <__fixunssfsi+0x2e>
-    1200:	86 95       	lsr	r24
-    1202:	77 95       	ror	r23
-    1204:	67 95       	ror	r22
-    1206:	b3 95       	inc	r27
-    1208:	d9 f7       	brne	.-10     	; 0x1200 <__fixunssfsi+0x3c>
-    120a:	3e f4       	brtc	.+14     	; 0x121a <__fixunssfsi+0x56>
-    120c:	90 95       	com	r25
-    120e:	80 95       	com	r24
-    1210:	70 95       	com	r23
-    1212:	61 95       	neg	r22
-    1214:	7f 4f       	sbci	r23, 0xFF	; 255
-    1216:	8f 4f       	sbci	r24, 0xFF	; 255
-    1218:	9f 4f       	sbci	r25, 0xFF	; 255
-    121a:	08 95       	ret
-
-0000121c <__fp_inf>:
-    121c:	97 f9       	bld	r25, 7
-    121e:	9f 67       	ori	r25, 0x7F	; 127
-    1220:	80 e8       	ldi	r24, 0x80	; 128
-    1222:	70 e0       	ldi	r23, 0x00	; 0
-    1224:	60 e0       	ldi	r22, 0x00	; 0
-    1226:	08 95       	ret
-
-00001228 <__fp_nan>:
-    1228:	9f ef       	ldi	r25, 0xFF	; 255
-    122a:	80 ec       	ldi	r24, 0xC0	; 192
-    122c:	08 95       	ret
-
-0000122e <__fp_pscA>:
-    122e:	00 24       	eor	r0, r0
-    1230:	0a 94       	dec	r0
-    1232:	16 16       	cp	r1, r22
-    1234:	17 06       	cpc	r1, r23
-    1236:	18 06       	cpc	r1, r24
-    1238:	09 06       	cpc	r0, r25
-    123a:	08 95       	ret
-
-0000123c <__fp_pscB>:
-    123c:	00 24       	eor	r0, r0
-    123e:	0a 94       	dec	r0
-    1240:	12 16       	cp	r1, r18
-    1242:	13 06       	cpc	r1, r19
-    1244:	14 06       	cpc	r1, r20
-    1246:	05 06       	cpc	r0, r21
-    1248:	08 95       	ret
-
-0000124a <__fp_round>:
-    124a:	09 2e       	mov	r0, r25
-    124c:	03 94       	inc	r0
-    124e:	00 0c       	add	r0, r0
-    1250:	11 f4       	brne	.+4      	; 0x1256 <__fp_round+0xc>
-    1252:	88 23       	and	r24, r24
-    1254:	52 f0       	brmi	.+20     	; 0x126a <__fp_round+0x20>
-    1256:	bb 0f       	add	r27, r27
-    1258:	40 f4       	brcc	.+16     	; 0x126a <__fp_round+0x20>
-    125a:	bf 2b       	or	r27, r31
-    125c:	11 f4       	brne	.+4      	; 0x1262 <__fp_round+0x18>
-    125e:	60 ff       	sbrs	r22, 0
-    1260:	04 c0       	rjmp	.+8      	; 0x126a <__fp_round+0x20>
-    1262:	6f 5f       	subi	r22, 0xFF	; 255
-    1264:	7f 4f       	sbci	r23, 0xFF	; 255
-    1266:	8f 4f       	sbci	r24, 0xFF	; 255
-    1268:	9f 4f       	sbci	r25, 0xFF	; 255
-    126a:	08 95       	ret
-
-0000126c <__fp_split3>:
-    126c:	57 fd       	sbrc	r21, 7
-    126e:	90 58       	subi	r25, 0x80	; 128
-    1270:	44 0f       	add	r20, r20
-    1272:	55 1f       	adc	r21, r21
-    1274:	59 f0       	breq	.+22     	; 0x128c <__fp_splitA+0x10>
-    1276:	5f 3f       	cpi	r21, 0xFF	; 255
-    1278:	71 f0       	breq	.+28     	; 0x1296 <__fp_splitA+0x1a>
-    127a:	47 95       	ror	r20
-
-0000127c <__fp_splitA>:
-    127c:	88 0f       	add	r24, r24
-    127e:	97 fb       	bst	r25, 7
-    1280:	99 1f       	adc	r25, r25
-    1282:	61 f0       	breq	.+24     	; 0x129c <__fp_splitA+0x20>
-    1284:	9f 3f       	cpi	r25, 0xFF	; 255
-    1286:	79 f0       	breq	.+30     	; 0x12a6 <__fp_splitA+0x2a>
-    1288:	87 95       	ror	r24
-    128a:	08 95       	ret
-    128c:	12 16       	cp	r1, r18
-    128e:	13 06       	cpc	r1, r19
-    1290:	14 06       	cpc	r1, r20
-    1292:	55 1f       	adc	r21, r21
-    1294:	f2 cf       	rjmp	.-28     	; 0x127a <__fp_split3+0xe>
-    1296:	46 95       	lsr	r20
-    1298:	f1 df       	rcall	.-30     	; 0x127c <__fp_splitA>
-    129a:	08 c0       	rjmp	.+16     	; 0x12ac <__fp_splitA+0x30>
-    129c:	16 16       	cp	r1, r22
-    129e:	17 06       	cpc	r1, r23
-    12a0:	18 06       	cpc	r1, r24
-    12a2:	99 1f       	adc	r25, r25
-    12a4:	f1 cf       	rjmp	.-30     	; 0x1288 <__fp_splitA+0xc>
-    12a6:	86 95       	lsr	r24
-    12a8:	71 05       	cpc	r23, r1
-    12aa:	61 05       	cpc	r22, r1
-    12ac:	08 94       	sec
-    12ae:	08 95       	ret
-
-000012b0 <__fp_zero>:
-    12b0:	e8 94       	clt
-
-000012b2 <__fp_szero>:
-    12b2:	bb 27       	eor	r27, r27
-    12b4:	66 27       	eor	r22, r22
-    12b6:	77 27       	eor	r23, r23
-    12b8:	cb 01       	movw	r24, r22
-    12ba:	97 f9       	bld	r25, 7
-    12bc:	08 95       	ret
-
-000012be <__mulsf3>:
-    12be:	0b d0       	rcall	.+22     	; 0x12d6 <__mulsf3x>
-    12c0:	c4 cf       	rjmp	.-120    	; 0x124a <__fp_round>
-    12c2:	b5 df       	rcall	.-150    	; 0x122e <__fp_pscA>
-    12c4:	28 f0       	brcs	.+10     	; 0x12d0 <__mulsf3+0x12>
-    12c6:	ba df       	rcall	.-140    	; 0x123c <__fp_pscB>
-    12c8:	18 f0       	brcs	.+6      	; 0x12d0 <__mulsf3+0x12>
-    12ca:	95 23       	and	r25, r21
-    12cc:	09 f0       	breq	.+2      	; 0x12d0 <__mulsf3+0x12>
-    12ce:	a6 cf       	rjmp	.-180    	; 0x121c <__fp_inf>
-    12d0:	ab cf       	rjmp	.-170    	; 0x1228 <__fp_nan>
-    12d2:	11 24       	eor	r1, r1
-    12d4:	ee cf       	rjmp	.-36     	; 0x12b2 <__fp_szero>
-
-000012d6 <__mulsf3x>:
-    12d6:	ca df       	rcall	.-108    	; 0x126c <__fp_split3>
-    12d8:	a0 f3       	brcs	.-24     	; 0x12c2 <__mulsf3+0x4>
-
-000012da <__mulsf3_pse>:
-    12da:	95 9f       	mul	r25, r21
-    12dc:	d1 f3       	breq	.-12     	; 0x12d2 <__mulsf3+0x14>
-    12de:	95 0f       	add	r25, r21
-    12e0:	50 e0       	ldi	r21, 0x00	; 0
-    12e2:	55 1f       	adc	r21, r21
-    12e4:	62 9f       	mul	r22, r18
-    12e6:	f0 01       	movw	r30, r0
-    12e8:	72 9f       	mul	r23, r18
-    12ea:	bb 27       	eor	r27, r27
-    12ec:	f0 0d       	add	r31, r0
-    12ee:	b1 1d       	adc	r27, r1
-    12f0:	63 9f       	mul	r22, r19
-    12f2:	aa 27       	eor	r26, r26
-    12f4:	f0 0d       	add	r31, r0
-    12f6:	b1 1d       	adc	r27, r1
-    12f8:	aa 1f       	adc	r26, r26
-    12fa:	64 9f       	mul	r22, r20
-    12fc:	66 27       	eor	r22, r22
-    12fe:	b0 0d       	add	r27, r0
-    1300:	a1 1d       	adc	r26, r1
-    1302:	66 1f       	adc	r22, r22
-    1304:	82 9f       	mul	r24, r18
-    1306:	22 27       	eor	r18, r18
-    1308:	b0 0d       	add	r27, r0
-    130a:	a1 1d       	adc	r26, r1
-    130c:	62 1f       	adc	r22, r18
-    130e:	73 9f       	mul	r23, r19
-    1310:	b0 0d       	add	r27, r0
-    1312:	a1 1d       	adc	r26, r1
-    1314:	62 1f       	adc	r22, r18
-    1316:	83 9f       	mul	r24, r19
-    1318:	a0 0d       	add	r26, r0
-    131a:	61 1d       	adc	r22, r1
-    131c:	22 1f       	adc	r18, r18
-    131e:	74 9f       	mul	r23, r20
-    1320:	33 27       	eor	r19, r19
-    1322:	a0 0d       	add	r26, r0
-    1324:	61 1d       	adc	r22, r1
-    1326:	23 1f       	adc	r18, r19
-    1328:	84 9f       	mul	r24, r20
-    132a:	60 0d       	add	r22, r0
-    132c:	21 1d       	adc	r18, r1
-    132e:	82 2f       	mov	r24, r18
-    1330:	76 2f       	mov	r23, r22
-    1332:	6a 2f       	mov	r22, r26
-    1334:	11 24       	eor	r1, r1
-    1336:	9f 57       	subi	r25, 0x7F	; 127
-    1338:	50 40       	sbci	r21, 0x00	; 0
-    133a:	8a f0       	brmi	.+34     	; 0x135e <__mulsf3_pse+0x84>
-    133c:	e1 f0       	breq	.+56     	; 0x1376 <__mulsf3_pse+0x9c>
-    133e:	88 23       	and	r24, r24
-    1340:	4a f0       	brmi	.+18     	; 0x1354 <__mulsf3_pse+0x7a>
-    1342:	ee 0f       	add	r30, r30
-    1344:	ff 1f       	adc	r31, r31
-    1346:	bb 1f       	adc	r27, r27
-    1348:	66 1f       	adc	r22, r22
-    134a:	77 1f       	adc	r23, r23
-    134c:	88 1f       	adc	r24, r24
-    134e:	91 50       	subi	r25, 0x01	; 1
-    1350:	50 40       	sbci	r21, 0x00	; 0
-    1352:	a9 f7       	brne	.-22     	; 0x133e <__mulsf3_pse+0x64>
-    1354:	9e 3f       	cpi	r25, 0xFE	; 254
-    1356:	51 05       	cpc	r21, r1
-    1358:	70 f0       	brcs	.+28     	; 0x1376 <__mulsf3_pse+0x9c>
-    135a:	60 cf       	rjmp	.-320    	; 0x121c <__fp_inf>
-    135c:	aa cf       	rjmp	.-172    	; 0x12b2 <__fp_szero>
-    135e:	5f 3f       	cpi	r21, 0xFF	; 255
-    1360:	ec f3       	brlt	.-6      	; 0x135c <__mulsf3_pse+0x82>
-    1362:	98 3e       	cpi	r25, 0xE8	; 232
-    1364:	dc f3       	brlt	.-10     	; 0x135c <__mulsf3_pse+0x82>
-    1366:	86 95       	lsr	r24
-    1368:	77 95       	ror	r23
-    136a:	67 95       	ror	r22
-    136c:	b7 95       	ror	r27
-    136e:	f7 95       	ror	r31
-    1370:	e7 95       	ror	r30
-    1372:	9f 5f       	subi	r25, 0xFF	; 255
-    1374:	c1 f7       	brne	.-16     	; 0x1366 <__mulsf3_pse+0x8c>
-    1376:	fe 2b       	or	r31, r30
-    1378:	88 0f       	add	r24, r24
-    137a:	91 1d       	adc	r25, r1
-    137c:	96 95       	lsr	r25
-    137e:	87 95       	ror	r24
-    1380:	97 f9       	bld	r25, 7
-    1382:	08 95       	ret
-
-00001384 <__udivmodsi4>:
-    1384:	a1 e2       	ldi	r26, 0x21	; 33
-    1386:	1a 2e       	mov	r1, r26
-    1388:	aa 1b       	sub	r26, r26
-    138a:	bb 1b       	sub	r27, r27
-    138c:	fd 01       	movw	r30, r26
-    138e:	0d c0       	rjmp	.+26     	; 0x13aa <__udivmodsi4_ep>
-
-00001390 <__udivmodsi4_loop>:
-    1390:	aa 1f       	adc	r26, r26
-    1392:	bb 1f       	adc	r27, r27
-    1394:	ee 1f       	adc	r30, r30
-    1396:	ff 1f       	adc	r31, r31
-    1398:	a2 17       	cp	r26, r18
-    139a:	b3 07       	cpc	r27, r19
-    139c:	e4 07       	cpc	r30, r20
-    139e:	f5 07       	cpc	r31, r21
-    13a0:	20 f0       	brcs	.+8      	; 0x13aa <__udivmodsi4_ep>
-    13a2:	a2 1b       	sub	r26, r18
-    13a4:	b3 0b       	sbc	r27, r19
-    13a6:	e4 0b       	sbc	r30, r20
-    13a8:	f5 0b       	sbc	r31, r21
-
-000013aa <__udivmodsi4_ep>:
-    13aa:	66 1f       	adc	r22, r22
-    13ac:	77 1f       	adc	r23, r23
-    13ae:	88 1f       	adc	r24, r24
-    13b0:	99 1f       	adc	r25, r25
-    13b2:	1a 94       	dec	r1
-    13b4:	69 f7       	brne	.-38     	; 0x1390 <__udivmodsi4_loop>
-    13b6:	60 95       	com	r22
-    13b8:	70 95       	com	r23
-    13ba:	80 95       	com	r24
-    13bc:	90 95       	com	r25
-    13be:	9b 01       	movw	r18, r22
-    13c0:	ac 01       	movw	r20, r24
-    13c2:	bd 01       	movw	r22, r26
-    13c4:	cf 01       	movw	r24, r30
-    13c6:	08 95       	ret
-
-000013c8 <__umulhisi3>:
-    13c8:	a2 9f       	mul	r26, r18
-    13ca:	b0 01       	movw	r22, r0
-    13cc:	b3 9f       	mul	r27, r19
-    13ce:	c0 01       	movw	r24, r0
-    13d0:	a3 9f       	mul	r26, r19
-    13d2:	70 0d       	add	r23, r0
-    13d4:	81 1d       	adc	r24, r1
-    13d6:	11 24       	eor	r1, r1
-    13d8:	91 1d       	adc	r25, r1
-    13da:	b2 9f       	mul	r27, r18
-    13dc:	70 0d       	add	r23, r0
-    13de:	81 1d       	adc	r24, r1
-    13e0:	11 24       	eor	r1, r1
-    13e2:	91 1d       	adc	r25, r1
-    13e4:	08 95       	ret
-
-000013e6 <__muluhisi3>:
-    13e6:	0e 94 e4 09 	call	0x13c8	; 0x13c8 <__umulhisi3>
-    13ea:	a5 9f       	mul	r26, r21
-    13ec:	90 0d       	add	r25, r0
-    13ee:	b4 9f       	mul	r27, r20
-    13f0:	90 0d       	add	r25, r0
-    13f2:	a4 9f       	mul	r26, r20
-    13f4:	80 0d       	add	r24, r0
-    13f6:	91 1d       	adc	r25, r1
-    13f8:	11 24       	eor	r1, r1
-    13fa:	08 95       	ret
-
-000013fc <strcpy>:
-    13fc:	fb 01       	movw	r30, r22
-    13fe:	dc 01       	movw	r26, r24
-    1400:	01 90       	ld	r0, Z+
-    1402:	0d 92       	st	X+, r0
-    1404:	00 20       	and	r0, r0
-    1406:	e1 f7       	brne	.-8      	; 0x1400 <strcpy+0x4>
-    1408:	08 95       	ret
-
-0000140a <_exit>:
-    140a:	f8 94       	cli
-
-0000140c <__stop_program>:
-    140c:	ff cf       	rjmp	.-2      	; 0x140c <__stop_program>
+ 4ac:	08 95       	ret
+
+000004ae <OSTaskIdle>:
+ 4ae:	f8 94       	cli
+ 4b0:	78 94       	sei
+ 4b2:	fd cf       	rjmp	.-6      	; 0x4ae <OSTaskIdle>
+
+000004b4 <OSEventTaskRdy>:
+ 4b4:	0f 93       	push	r16
+ 4b6:	1f 93       	push	r17
+ 4b8:	cf 93       	push	r28
+ 4ba:	df 93       	push	r29
+ 4bc:	fc 01       	movw	r30, r24
+ 4be:	05 85       	ldd	r16, Z+13	; 0x0d
+ 4c0:	e0 2f       	mov	r30, r16
+ 4c2:	f0 e0       	ldi	r31, 0x00	; 0
+ 4c4:	e1 5b       	subi	r30, 0xB1	; 177
+ 4c6:	fe 4f       	sbci	r31, 0xFE	; 254
+ 4c8:	10 81       	ld	r17, Z
+ 4ca:	21 2f       	mov	r18, r17
+ 4cc:	30 e0       	ldi	r19, 0x00	; 0
+ 4ce:	d9 01       	movw	r26, r18
+ 4d0:	a1 5b       	subi	r26, 0xB1	; 177
+ 4d2:	bd 4f       	sbci	r27, 0xFD	; 253
+ 4d4:	dc 91       	ld	r29, X
+ 4d6:	fc 01       	movw	r30, r24
+ 4d8:	e2 0f       	add	r30, r18
+ 4da:	f3 1f       	adc	r31, r19
+ 4dc:	52 81       	ldd	r21, Z+2	; 0x02
+ 4de:	a5 2f       	mov	r26, r21
+ 4e0:	b0 e0       	ldi	r27, 0x00	; 0
+ 4e2:	a1 5b       	subi	r26, 0xB1	; 177
+ 4e4:	be 4f       	sbci	r27, 0xFE	; 254
+ 4e6:	cc 91       	ld	r28, X
+ 4e8:	ac 2f       	mov	r26, r28
+ 4ea:	b0 e0       	ldi	r27, 0x00	; 0
+ 4ec:	a1 5b       	subi	r26, 0xB1	; 177
+ 4ee:	bd 4f       	sbci	r27, 0xFD	; 253
+ 4f0:	ac 91       	ld	r26, X
+ 4f2:	11 0f       	add	r17, r17
+ 4f4:	11 0f       	add	r17, r17
+ 4f6:	11 0f       	add	r17, r17
+ 4f8:	c1 0f       	add	r28, r17
+ 4fa:	ba 2f       	mov	r27, r26
+ 4fc:	b0 95       	com	r27
+ 4fe:	5b 23       	and	r21, r27
+ 500:	52 83       	std	Z+2, r21	; 0x02
+ 502:	51 11       	cpse	r21, r1
+ 504:	05 c0       	rjmp	.+10     	; 0x510 <OSEventTaskRdy+0x5c>
+ 506:	5d 2f       	mov	r21, r29
+ 508:	50 95       	com	r21
+ 50a:	05 23       	and	r16, r21
+ 50c:	fc 01       	movw	r30, r24
+ 50e:	05 87       	std	Z+13, r16	; 0x0d
+ 510:	ec 2f       	mov	r30, r28
+ 512:	f0 e0       	ldi	r31, 0x00	; 0
+ 514:	ee 0f       	add	r30, r30
+ 516:	ff 1f       	adc	r31, r31
+ 518:	e4 5b       	subi	r30, 0xB4	; 180
+ 51a:	f9 4f       	sbci	r31, 0xF9	; 249
+ 51c:	01 90       	ld	r0, Z+
+ 51e:	f0 81       	ld	r31, Z
+ 520:	e0 2d       	mov	r30, r0
+ 522:	13 86       	std	Z+11, r1	; 0x0b
+ 524:	12 86       	std	Z+10, r1	; 0x0a
+ 526:	17 82       	std	Z+7, r1	; 0x07
+ 528:	16 82       	std	Z+6, r1	; 0x06
+ 52a:	71 87       	std	Z+9, r23	; 0x09
+ 52c:	60 87       	std	Z+8, r22	; 0x08
+ 52e:	40 95       	com	r20
+ 530:	84 85       	ldd	r24, Z+12	; 0x0c
+ 532:	48 23       	and	r20, r24
+ 534:	44 87       	std	Z+12, r20	; 0x0c
+ 536:	41 11       	cpse	r20, r1
+ 538:	0b c0       	rjmp	.+22     	; 0x550 <OSEventTaskRdy+0x9c>
+ 53a:	80 91 ad 05 	lds	r24, 0x05AD
+ 53e:	d8 2b       	or	r29, r24
+ 540:	d0 93 ad 05 	sts	0x05AD, r29
+ 544:	f9 01       	movw	r30, r18
+ 546:	e2 55       	subi	r30, 0x52	; 82
+ 548:	fa 4f       	sbci	r31, 0xFA	; 250
+ 54a:	80 81       	ld	r24, Z
+ 54c:	a8 2b       	or	r26, r24
+ 54e:	a0 83       	st	Z, r26
+ 550:	df 91       	pop	r29
+ 552:	cf 91       	pop	r28
+ 554:	1f 91       	pop	r17
+ 556:	0f 91       	pop	r16
+ 558:	08 95       	ret
+
+0000055a <OSEventWaitListInit>:
+ 55a:	fc 01       	movw	r30, r24
+ 55c:	15 86       	std	Z+13, r1	; 0x0d
+ 55e:	32 96       	adiw	r30, 0x02	; 2
+ 560:	80 e0       	ldi	r24, 0x00	; 0
+ 562:	11 92       	st	Z+, r1
+ 564:	8f 5f       	subi	r24, 0xFF	; 255
+ 566:	88 30       	cpi	r24, 0x08	; 8
+ 568:	e1 f7       	brne	.-8      	; 0x562 <OSEventWaitListInit+0x8>
+ 56a:	08 95       	ret
+
+0000056c <OSIntExit>:
+ 56c:	f8 94       	cli
+ 56e:	80 91 b8 05 	lds	r24, 0x05B8
+ 572:	81 50       	subi	r24, 0x01	; 1
+ 574:	80 93 b8 05 	sts	0x05B8, r24
+ 578:	90 91 95 05 	lds	r25, 0x0595
+ 57c:	89 2b       	or	r24, r25
+ 57e:	e1 f5       	brne	.+120    	; 0x5f8 <OSIntExit+0x8c>
+ 580:	e0 91 ad 05 	lds	r30, 0x05AD
+ 584:	f0 e0       	ldi	r31, 0x00	; 0
+ 586:	e1 5b       	subi	r30, 0xB1	; 177
+ 588:	fe 4f       	sbci	r31, 0xFE	; 254
+ 58a:	80 81       	ld	r24, Z
+ 58c:	80 93 8c 03 	sts	0x038C, r24
+ 590:	e8 2f       	mov	r30, r24
+ 592:	f0 e0       	ldi	r31, 0x00	; 0
+ 594:	e2 55       	subi	r30, 0x52	; 82
+ 596:	fa 4f       	sbci	r31, 0xFA	; 250
+ 598:	e0 81       	ld	r30, Z
+ 59a:	f0 e0       	ldi	r31, 0x00	; 0
+ 59c:	e1 5b       	subi	r30, 0xB1	; 177
+ 59e:	fe 4f       	sbci	r31, 0xFE	; 254
+ 5a0:	88 0f       	add	r24, r24
+ 5a2:	88 0f       	add	r24, r24
+ 5a4:	88 0f       	add	r24, r24
+ 5a6:	90 81       	ld	r25, Z
+ 5a8:	89 0f       	add	r24, r25
+ 5aa:	80 93 9b 05 	sts	0x059B, r24
+ 5ae:	90 91 9c 05 	lds	r25, 0x059C
+ 5b2:	89 17       	cp	r24, r25
+ 5b4:	09 f1       	breq	.+66     	; 0x5f8 <OSIntExit+0x8c>
+ 5b6:	e8 2f       	mov	r30, r24
+ 5b8:	f0 e0       	ldi	r31, 0x00	; 0
+ 5ba:	ee 0f       	add	r30, r30
+ 5bc:	ff 1f       	adc	r31, r31
+ 5be:	e4 5b       	subi	r30, 0xB4	; 180
+ 5c0:	f9 4f       	sbci	r31, 0xF9	; 249
+ 5c2:	80 81       	ld	r24, Z
+ 5c4:	91 81       	ldd	r25, Z+1	; 0x01
+ 5c6:	90 93 ac 05 	sts	0x05AC, r25
+ 5ca:	80 93 ab 05 	sts	0x05AB, r24
+ 5ce:	80 91 9f 05 	lds	r24, 0x059F
+ 5d2:	90 91 a0 05 	lds	r25, 0x05A0
+ 5d6:	a0 91 a1 05 	lds	r26, 0x05A1
+ 5da:	b0 91 a2 05 	lds	r27, 0x05A2
+ 5de:	01 96       	adiw	r24, 0x01	; 1
+ 5e0:	a1 1d       	adc	r26, r1
+ 5e2:	b1 1d       	adc	r27, r1
+ 5e4:	80 93 9f 05 	sts	0x059F, r24
+ 5e8:	90 93 a0 05 	sts	0x05A0, r25
+ 5ec:	a0 93 a1 05 	sts	0x05A1, r26
+ 5f0:	b0 93 a2 05 	sts	0x05A2, r27
+ 5f4:	0e 94 e0 00 	call	0x1c0	; 0x1c0 <OSIntCtxSw>
+ 5f8:	78 94       	sei
+ 5fa:	08 95       	ret
+
+000005fc <OSSched>:
+ 5fc:	f8 94       	cli
+ 5fe:	90 91 b8 05 	lds	r25, 0x05B8
+ 602:	80 91 95 05 	lds	r24, 0x0595
+ 606:	89 2b       	or	r24, r25
+ 608:	d1 f5       	brne	.+116    	; 0x67e <OSSched+0x82>
+ 60a:	e0 91 ad 05 	lds	r30, 0x05AD
+ 60e:	f0 e0       	ldi	r31, 0x00	; 0
+ 610:	e1 5b       	subi	r30, 0xB1	; 177
+ 612:	fe 4f       	sbci	r31, 0xFE	; 254
+ 614:	80 81       	ld	r24, Z
+ 616:	e8 2f       	mov	r30, r24
+ 618:	f0 e0       	ldi	r31, 0x00	; 0
+ 61a:	e2 55       	subi	r30, 0x52	; 82
+ 61c:	fa 4f       	sbci	r31, 0xFA	; 250
+ 61e:	e0 81       	ld	r30, Z
+ 620:	f0 e0       	ldi	r31, 0x00	; 0
+ 622:	e1 5b       	subi	r30, 0xB1	; 177
+ 624:	fe 4f       	sbci	r31, 0xFE	; 254
+ 626:	88 0f       	add	r24, r24
+ 628:	88 0f       	add	r24, r24
+ 62a:	88 0f       	add	r24, r24
+ 62c:	90 81       	ld	r25, Z
+ 62e:	e8 2f       	mov	r30, r24
+ 630:	e9 0f       	add	r30, r25
+ 632:	e0 93 9b 05 	sts	0x059B, r30
+ 636:	80 91 9c 05 	lds	r24, 0x059C
+ 63a:	e8 17       	cp	r30, r24
+ 63c:	01 f1       	breq	.+64     	; 0x67e <OSSched+0x82>
+ 63e:	f0 e0       	ldi	r31, 0x00	; 0
+ 640:	ee 0f       	add	r30, r30
+ 642:	ff 1f       	adc	r31, r31
+ 644:	e4 5b       	subi	r30, 0xB4	; 180
+ 646:	f9 4f       	sbci	r31, 0xF9	; 249
+ 648:	80 81       	ld	r24, Z
+ 64a:	91 81       	ldd	r25, Z+1	; 0x01
+ 64c:	90 93 ac 05 	sts	0x05AC, r25
+ 650:	80 93 ab 05 	sts	0x05AB, r24
+ 654:	80 91 9f 05 	lds	r24, 0x059F
+ 658:	90 91 a0 05 	lds	r25, 0x05A0
+ 65c:	a0 91 a1 05 	lds	r26, 0x05A1
+ 660:	b0 91 a2 05 	lds	r27, 0x05A2
+ 664:	01 96       	adiw	r24, 0x01	; 1
+ 666:	a1 1d       	adc	r26, r1
+ 668:	b1 1d       	adc	r27, r1
+ 66a:	80 93 9f 05 	sts	0x059F, r24
+ 66e:	90 93 a0 05 	sts	0x05A0, r25
+ 672:	a0 93 a1 05 	sts	0x05A1, r26
+ 676:	b0 93 a2 05 	sts	0x05A2, r27
+ 67a:	0e 94 83 00 	call	0x106	; 0x106 <OSCtxSw>
+ 67e:	78 94       	sei
+ 680:	08 95       	ret
+
+00000682 <OSStart>:
+ 682:	80 91 96 05 	lds	r24, 0x0596
+ 686:	81 11       	cpse	r24, r1
+ 688:	26 c0       	rjmp	.+76     	; 0x6d6 <OSStart+0x54>
+ 68a:	e0 91 ad 05 	lds	r30, 0x05AD
+ 68e:	f0 e0       	ldi	r31, 0x00	; 0
+ 690:	e1 5b       	subi	r30, 0xB1	; 177
+ 692:	fe 4f       	sbci	r31, 0xFE	; 254
+ 694:	e0 81       	ld	r30, Z
+ 696:	ae 2f       	mov	r26, r30
+ 698:	b0 e0       	ldi	r27, 0x00	; 0
+ 69a:	a2 55       	subi	r26, 0x52	; 82
+ 69c:	ba 4f       	sbci	r27, 0xFA	; 250
+ 69e:	ac 91       	ld	r26, X
+ 6a0:	b0 e0       	ldi	r27, 0x00	; 0
+ 6a2:	a1 5b       	subi	r26, 0xB1	; 177
+ 6a4:	be 4f       	sbci	r27, 0xFE	; 254
+ 6a6:	ee 0f       	add	r30, r30
+ 6a8:	ee 0f       	add	r30, r30
+ 6aa:	ee 0f       	add	r30, r30
+ 6ac:	8c 91       	ld	r24, X
+ 6ae:	e8 0f       	add	r30, r24
+ 6b0:	e0 93 9b 05 	sts	0x059B, r30
+ 6b4:	e0 93 9c 05 	sts	0x059C, r30
+ 6b8:	f0 e0       	ldi	r31, 0x00	; 0
+ 6ba:	ee 0f       	add	r30, r30
+ 6bc:	ff 1f       	adc	r31, r31
+ 6be:	e4 5b       	subi	r30, 0xB4	; 180
+ 6c0:	f9 4f       	sbci	r31, 0xF9	; 249
+ 6c2:	80 81       	ld	r24, Z
+ 6c4:	91 81       	ldd	r25, Z+1	; 0x01
+ 6c6:	90 93 ac 05 	sts	0x05AC, r25
+ 6ca:	80 93 ab 05 	sts	0x05AB, r24
+ 6ce:	90 93 ba 05 	sts	0x05BA, r25
+ 6d2:	80 93 b9 05 	sts	0x05B9, r24
+ 6d6:	0e 94 53 00 	call	0xa6	; 0xa6 <OSStartHighRdy>
+ 6da:	08 95       	ret
+
+000006dc <OSTCBInit>:
+ 6dc:	cf 93       	push	r28
+ 6de:	df 93       	push	r29
+ 6e0:	f8 94       	cli
+ 6e2:	e0 91 a7 05 	lds	r30, 0x05A7
+ 6e6:	f0 91 a8 05 	lds	r31, 0x05A8
+ 6ea:	30 97       	sbiw	r30, 0x00	; 0
+ 6ec:	09 f4       	brne	.+2      	; 0x6f0 <OSTCBInit+0x14>
+ 6ee:	4f c0       	rjmp	.+158    	; 0x78e <OSTCBInit+0xb2>
+ 6f0:	22 81       	ldd	r18, Z+2	; 0x02
+ 6f2:	33 81       	ldd	r19, Z+3	; 0x03
+ 6f4:	30 93 a8 05 	sts	0x05A8, r19
+ 6f8:	20 93 a7 05 	sts	0x05A7, r18
+ 6fc:	78 94       	sei
+ 6fe:	71 83       	std	Z+1, r23	; 0x01
+ 700:	60 83       	st	Z, r22
+ 702:	85 87       	std	Z+13, r24	; 0x0d
+ 704:	14 86       	std	Z+12, r1	; 0x0c
+ 706:	13 86       	std	Z+11, r1	; 0x0b
+ 708:	12 86       	std	Z+10, r1	; 0x0a
+ 70a:	c8 2f       	mov	r28, r24
+ 70c:	c6 95       	lsr	r28
+ 70e:	c6 95       	lsr	r28
+ 710:	c6 95       	lsr	r28
+ 712:	c7 87       	std	Z+15, r28	; 0x0f
+ 714:	d0 e0       	ldi	r29, 0x00	; 0
+ 716:	c1 5b       	subi	r28, 0xB1	; 177
+ 718:	dd 4f       	sbci	r29, 0xFD	; 253
+ 71a:	98 81       	ld	r25, Y
+ 71c:	91 8b       	std	Z+17, r25	; 0x11
+ 71e:	c8 2f       	mov	r28, r24
+ 720:	c7 70       	andi	r28, 0x07	; 7
+ 722:	c6 87       	std	Z+14, r28	; 0x0e
+ 724:	d0 e0       	ldi	r29, 0x00	; 0
+ 726:	c1 5b       	subi	r28, 0xB1	; 177
+ 728:	dd 4f       	sbci	r29, 0xFD	; 253
+ 72a:	98 81       	ld	r25, Y
+ 72c:	90 8b       	std	Z+16, r25	; 0x10
+ 72e:	17 82       	std	Z+7, r1	; 0x07
+ 730:	16 82       	std	Z+6, r1	; 0x06
+ 732:	11 86       	std	Z+9, r1	; 0x09
+ 734:	10 86       	std	Z+8, r1	; 0x08
+ 736:	f8 94       	cli
+ 738:	a8 2f       	mov	r26, r24
+ 73a:	b0 e0       	ldi	r27, 0x00	; 0
+ 73c:	aa 0f       	add	r26, r26
+ 73e:	bb 1f       	adc	r27, r27
+ 740:	a4 5b       	subi	r26, 0xB4	; 180
+ 742:	b9 4f       	sbci	r27, 0xF9	; 249
+ 744:	ed 93       	st	X+, r30
+ 746:	fc 93       	st	X, r31
+ 748:	a0 91 9d 05 	lds	r26, 0x059D
+ 74c:	b0 91 9e 05 	lds	r27, 0x059E
+ 750:	b3 83       	std	Z+3, r27	; 0x03
+ 752:	a2 83       	std	Z+2, r26	; 0x02
+ 754:	15 82       	std	Z+5, r1	; 0x05
+ 756:	14 82       	std	Z+4, r1	; 0x04
+ 758:	10 97       	sbiw	r26, 0x00	; 0
+ 75a:	21 f0       	breq	.+8      	; 0x764 <OSTCBInit+0x88>
+ 75c:	15 96       	adiw	r26, 0x05	; 5
+ 75e:	fc 93       	st	X, r31
+ 760:	ee 93       	st	-X, r30
+ 762:	14 97       	sbiw	r26, 0x04	; 4
+ 764:	f0 93 9e 05 	sts	0x059E, r31
+ 768:	e0 93 9d 05 	sts	0x059D, r30
+ 76c:	90 91 ad 05 	lds	r25, 0x05AD
+ 770:	81 89       	ldd	r24, Z+17	; 0x11
+ 772:	89 2b       	or	r24, r25
+ 774:	80 93 ad 05 	sts	0x05AD, r24
+ 778:	a7 85       	ldd	r26, Z+15	; 0x0f
+ 77a:	b0 e0       	ldi	r27, 0x00	; 0
+ 77c:	a2 55       	subi	r26, 0x52	; 82
+ 77e:	ba 4f       	sbci	r27, 0xFA	; 250
+ 780:	9c 91       	ld	r25, X
+ 782:	80 89       	ldd	r24, Z+16	; 0x10
+ 784:	89 2b       	or	r24, r25
+ 786:	8c 93       	st	X, r24
+ 788:	78 94       	sei
+ 78a:	80 e0       	ldi	r24, 0x00	; 0
+ 78c:	02 c0       	rjmp	.+4      	; 0x792 <OSTCBInit+0xb6>
+ 78e:	78 94       	sei
+ 790:	86 e4       	ldi	r24, 0x46	; 70
+ 792:	df 91       	pop	r29
+ 794:	cf 91       	pop	r28
+ 796:	08 95       	ret
+
+00000798 <OSTimeTick>:
+ 798:	0e 94 56 02 	call	0x4ac	; 0x4ac <OSTimeTickHook>
+ 79c:	e0 91 9d 05 	lds	r30, 0x059D
+ 7a0:	f0 91 9e 05 	lds	r31, 0x059E
+ 7a4:	85 85       	ldd	r24, Z+13	; 0x0d
+ 7a6:	8f 33       	cpi	r24, 0x3F	; 63
+ 7a8:	39 f1       	breq	.+78     	; 0x7f8 <OSTimeTick+0x60>
+ 7aa:	40 91 ad 05 	lds	r20, 0x05AD
+ 7ae:	21 e0       	ldi	r18, 0x01	; 1
+ 7b0:	30 e0       	ldi	r19, 0x00	; 0
+ 7b2:	f8 94       	cli
+ 7b4:	82 85       	ldd	r24, Z+10	; 0x0a
+ 7b6:	93 85       	ldd	r25, Z+11	; 0x0b
+ 7b8:	00 97       	sbiw	r24, 0x00	; 0
+ 7ba:	a9 f0       	breq	.+42     	; 0x7e6 <OSTimeTick+0x4e>
+ 7bc:	01 97       	sbiw	r24, 0x01	; 1
+ 7be:	93 87       	std	Z+11, r25	; 0x0b
+ 7c0:	82 87       	std	Z+10, r24	; 0x0a
+ 7c2:	89 2b       	or	r24, r25
+ 7c4:	81 f4       	brne	.+32     	; 0x7e6 <OSTimeTick+0x4e>
+ 7c6:	84 85       	ldd	r24, Z+12	; 0x0c
+ 7c8:	83 fd       	sbrc	r24, 3
+ 7ca:	0b c0       	rjmp	.+22     	; 0x7e2 <OSTimeTick+0x4a>
+ 7cc:	81 89       	ldd	r24, Z+17	; 0x11
+ 7ce:	a7 85       	ldd	r26, Z+15	; 0x0f
+ 7d0:	b0 e0       	ldi	r27, 0x00	; 0
+ 7d2:	a2 55       	subi	r26, 0x52	; 82
+ 7d4:	ba 4f       	sbci	r27, 0xFA	; 250
+ 7d6:	5c 91       	ld	r21, X
+ 7d8:	90 89       	ldd	r25, Z+16	; 0x10
+ 7da:	95 2b       	or	r25, r21
+ 7dc:	9c 93       	st	X, r25
+ 7de:	48 2b       	or	r20, r24
+ 7e0:	02 c0       	rjmp	.+4      	; 0x7e6 <OSTimeTick+0x4e>
+ 7e2:	33 87       	std	Z+11, r19	; 0x0b
+ 7e4:	22 87       	std	Z+10, r18	; 0x0a
+ 7e6:	02 80       	ldd	r0, Z+2	; 0x02
+ 7e8:	f3 81       	ldd	r31, Z+3	; 0x03
+ 7ea:	e0 2d       	mov	r30, r0
+ 7ec:	78 94       	sei
+ 7ee:	85 85       	ldd	r24, Z+13	; 0x0d
+ 7f0:	8f 33       	cpi	r24, 0x3F	; 63
+ 7f2:	f9 f6       	brne	.-66     	; 0x7b2 <OSTimeTick+0x1a>
+ 7f4:	40 93 ad 05 	sts	0x05AD, r20
+ 7f8:	f8 94       	cli
+ 7fa:	80 91 bb 05 	lds	r24, 0x05BB
+ 7fe:	90 91 bc 05 	lds	r25, 0x05BC
+ 802:	a0 91 bd 05 	lds	r26, 0x05BD
+ 806:	b0 91 be 05 	lds	r27, 0x05BE
+ 80a:	01 96       	adiw	r24, 0x01	; 1
+ 80c:	a1 1d       	adc	r26, r1
+ 80e:	b1 1d       	adc	r27, r1
+ 810:	80 93 bb 05 	sts	0x05BB, r24
+ 814:	90 93 bc 05 	sts	0x05BC, r25
+ 818:	a0 93 bd 05 	sts	0x05BD, r26
+ 81c:	b0 93 be 05 	sts	0x05BE, r27
+ 820:	78 94       	sei
+ 822:	08 95       	ret
+
+00000824 <OSMboxCreate>:
+ 824:	cf 93       	push	r28
+ 826:	df 93       	push	r29
+ 828:	f8 94       	cli
+ 82a:	c0 91 b6 05 	lds	r28, 0x05B6
+ 82e:	d0 91 b7 05 	lds	r29, 0x05B7
+ 832:	20 97       	sbiw	r28, 0x00	; 0
+ 834:	31 f0       	breq	.+12     	; 0x842 <OSMboxCreate+0x1e>
+ 836:	28 81       	ld	r18, Y
+ 838:	39 81       	ldd	r19, Y+1	; 0x01
+ 83a:	30 93 b7 05 	sts	0x05B7, r19
+ 83e:	20 93 b6 05 	sts	0x05B6, r18
+ 842:	78 94       	sei
+ 844:	20 97       	sbiw	r28, 0x00	; 0
+ 846:	39 f0       	breq	.+14     	; 0x856 <OSMboxCreate+0x32>
+ 848:	21 e0       	ldi	r18, 0x01	; 1
+ 84a:	2c 87       	std	Y+12, r18	; 0x0c
+ 84c:	99 83       	std	Y+1, r25	; 0x01
+ 84e:	88 83       	st	Y, r24
+ 850:	ce 01       	movw	r24, r28
+ 852:	0e 94 ad 02 	call	0x55a	; 0x55a <OSEventWaitListInit>
+ 856:	ce 01       	movw	r24, r28
+ 858:	df 91       	pop	r29
+ 85a:	cf 91       	pop	r28
+ 85c:	08 95       	ret
+
+0000085e <OSMboxPost>:
+ 85e:	f8 94       	cli
+ 860:	fc 01       	movw	r30, r24
+ 862:	24 85       	ldd	r18, Z+12	; 0x0c
+ 864:	21 30       	cpi	r18, 0x01	; 1
+ 866:	19 f0       	breq	.+6      	; 0x86e <OSMboxPost+0x10>
+ 868:	78 94       	sei
+ 86a:	81 e0       	ldi	r24, 0x01	; 1
+ 86c:	08 95       	ret
+ 86e:	fc 01       	movw	r30, r24
+ 870:	25 85       	ldd	r18, Z+13	; 0x0d
+ 872:	22 23       	and	r18, r18
+ 874:	41 f0       	breq	.+16     	; 0x886 <OSMboxPost+0x28>
+ 876:	42 e0       	ldi	r20, 0x02	; 2
+ 878:	0e 94 5a 02 	call	0x4b4	; 0x4b4 <OSEventTaskRdy>
+ 87c:	78 94       	sei
+ 87e:	0e 94 fe 02 	call	0x5fc	; 0x5fc <OSSched>
+ 882:	80 e0       	ldi	r24, 0x00	; 0
+ 884:	08 95       	ret
+ 886:	fc 01       	movw	r30, r24
+ 888:	20 81       	ld	r18, Z
+ 88a:	31 81       	ldd	r19, Z+1	; 0x01
+ 88c:	23 2b       	or	r18, r19
+ 88e:	19 f0       	breq	.+6      	; 0x896 <OSMboxPost+0x38>
+ 890:	78 94       	sei
+ 892:	84 e1       	ldi	r24, 0x14	; 20
+ 894:	08 95       	ret
+ 896:	fc 01       	movw	r30, r24
+ 898:	71 83       	std	Z+1, r23	; 0x01
+ 89a:	60 83       	st	Z, r22
+ 89c:	78 94       	sei
+ 89e:	80 e0       	ldi	r24, 0x00	; 0
+ 8a0:	08 95       	ret
+
+000008a2 <OSSemCreate>:
+ 8a2:	cf 93       	push	r28
+ 8a4:	df 93       	push	r29
+ 8a6:	f8 94       	cli
+ 8a8:	c0 91 b6 05 	lds	r28, 0x05B6
+ 8ac:	d0 91 b7 05 	lds	r29, 0x05B7
+ 8b0:	20 97       	sbiw	r28, 0x00	; 0
+ 8b2:	31 f0       	breq	.+12     	; 0x8c0 <OSSemCreate+0x1e>
+ 8b4:	28 81       	ld	r18, Y
+ 8b6:	39 81       	ldd	r19, Y+1	; 0x01
+ 8b8:	30 93 b7 05 	sts	0x05B7, r19
+ 8bc:	20 93 b6 05 	sts	0x05B6, r18
+ 8c0:	78 94       	sei
+ 8c2:	20 97       	sbiw	r28, 0x00	; 0
+ 8c4:	39 f0       	breq	.+14     	; 0x8d4 <OSSemCreate+0x32>
+ 8c6:	23 e0       	ldi	r18, 0x03	; 3
+ 8c8:	2c 87       	std	Y+12, r18	; 0x0c
+ 8ca:	9b 87       	std	Y+11, r25	; 0x0b
+ 8cc:	8a 87       	std	Y+10, r24	; 0x0a
+ 8ce:	ce 01       	movw	r24, r28
+ 8d0:	0e 94 ad 02 	call	0x55a	; 0x55a <OSEventWaitListInit>
+ 8d4:	ce 01       	movw	r24, r28
+ 8d6:	df 91       	pop	r29
+ 8d8:	cf 91       	pop	r28
+ 8da:	08 95       	ret
+
+000008dc <OSTaskCreate>:
+ 8dc:	bf 92       	push	r11
+ 8de:	cf 92       	push	r12
+ 8e0:	df 92       	push	r13
+ 8e2:	ef 92       	push	r14
+ 8e4:	ff 92       	push	r15
+ 8e6:	0f 93       	push	r16
+ 8e8:	1f 93       	push	r17
+ 8ea:	cf 93       	push	r28
+ 8ec:	df 93       	push	r29
+ 8ee:	b2 2e       	mov	r11, r18
+ 8f0:	2f e3       	ldi	r18, 0x3F	; 63
+ 8f2:	2b 15       	cp	r18, r11
+ 8f4:	08 f4       	brcc	.+2      	; 0x8f8 <OSTaskCreate+0x1c>
+ 8f6:	4f c0       	rjmp	.+158    	; 0x996 <__stack+0x97>
+ 8f8:	f8 94       	cli
+ 8fa:	cb 2d       	mov	r28, r11
+ 8fc:	d0 e0       	ldi	r29, 0x00	; 0
+ 8fe:	fe 01       	movw	r30, r28
+ 900:	ee 0f       	add	r30, r30
+ 902:	ff 1f       	adc	r31, r31
+ 904:	e4 5b       	subi	r30, 0xB4	; 180
+ 906:	f9 4f       	sbci	r31, 0xF9	; 249
+ 908:	01 90       	ld	r0, Z+
+ 90a:	f0 81       	ld	r31, Z
+ 90c:	e0 2d       	mov	r30, r0
+ 90e:	ef 2b       	or	r30, r31
+ 910:	09 f0       	breq	.+2      	; 0x914 <__stack+0x15>
+ 912:	3e c0       	rjmp	.+124    	; 0x990 <__stack+0x91>
+ 914:	fe 01       	movw	r30, r28
+ 916:	ee 0f       	add	r30, r30
+ 918:	ff 1f       	adc	r31, r31
+ 91a:	e4 5b       	subi	r30, 0xB4	; 180
+ 91c:	f9 4f       	sbci	r31, 0xF9	; 249
+ 91e:	21 e0       	ldi	r18, 0x01	; 1
+ 920:	30 e0       	ldi	r19, 0x00	; 0
+ 922:	31 83       	std	Z+1, r19	; 0x01
+ 924:	20 83       	st	Z, r18
+ 926:	78 94       	sei
+ 928:	20 e0       	ldi	r18, 0x00	; 0
+ 92a:	30 e0       	ldi	r19, 0x00	; 0
+ 92c:	0e 94 0a 02 	call	0x414	; 0x414 <OSTaskStkInit>
+ 930:	c1 2c       	mov	r12, r1
+ 932:	d1 2c       	mov	r13, r1
+ 934:	e1 2c       	mov	r14, r1
+ 936:	f1 2c       	mov	r15, r1
+ 938:	00 e0       	ldi	r16, 0x00	; 0
+ 93a:	10 e0       	ldi	r17, 0x00	; 0
+ 93c:	20 e0       	ldi	r18, 0x00	; 0
+ 93e:	30 e0       	ldi	r19, 0x00	; 0
+ 940:	40 e0       	ldi	r20, 0x00	; 0
+ 942:	50 e0       	ldi	r21, 0x00	; 0
+ 944:	bc 01       	movw	r22, r24
+ 946:	8b 2d       	mov	r24, r11
+ 948:	0e 94 6e 03 	call	0x6dc	; 0x6dc <OSTCBInit>
+ 94c:	81 11       	cpse	r24, r1
+ 94e:	17 c0       	rjmp	.+46     	; 0x97e <__stack+0x7f>
+ 950:	f8 94       	cli
+ 952:	80 91 aa 05 	lds	r24, 0x05AA
+ 956:	8f 5f       	subi	r24, 0xFF	; 255
+ 958:	80 93 aa 05 	sts	0x05AA, r24
+ 95c:	cc 0f       	add	r28, r28
+ 95e:	dd 1f       	adc	r29, r29
+ 960:	c4 5b       	subi	r28, 0xB4	; 180
+ 962:	d9 4f       	sbci	r29, 0xF9	; 249
+ 964:	88 81       	ld	r24, Y
+ 966:	99 81       	ldd	r25, Y+1	; 0x01
+ 968:	0e 94 54 02 	call	0x4a8	; 0x4a8 <OSTaskCreateHook>
+ 96c:	78 94       	sei
+ 96e:	80 91 96 05 	lds	r24, 0x0596
+ 972:	88 23       	and	r24, r24
+ 974:	91 f0       	breq	.+36     	; 0x99a <__stack+0x9b>
+ 976:	0e 94 fe 02 	call	0x5fc	; 0x5fc <OSSched>
+ 97a:	80 e0       	ldi	r24, 0x00	; 0
+ 97c:	0f c0       	rjmp	.+30     	; 0x99c <__stack+0x9d>
+ 97e:	f8 94       	cli
+ 980:	cc 0f       	add	r28, r28
+ 982:	dd 1f       	adc	r29, r29
+ 984:	c4 5b       	subi	r28, 0xB4	; 180
+ 986:	d9 4f       	sbci	r29, 0xF9	; 249
+ 988:	19 82       	std	Y+1, r1	; 0x01
+ 98a:	18 82       	st	Y, r1
+ 98c:	78 94       	sei
+ 98e:	06 c0       	rjmp	.+12     	; 0x99c <__stack+0x9d>
+ 990:	78 94       	sei
+ 992:	88 e2       	ldi	r24, 0x28	; 40
+ 994:	03 c0       	rjmp	.+6      	; 0x99c <__stack+0x9d>
+ 996:	8a e2       	ldi	r24, 0x2A	; 42
+ 998:	01 c0       	rjmp	.+2      	; 0x99c <__stack+0x9d>
+ 99a:	80 e0       	ldi	r24, 0x00	; 0
+ 99c:	df 91       	pop	r29
+ 99e:	cf 91       	pop	r28
+ 9a0:	1f 91       	pop	r17
+ 9a2:	0f 91       	pop	r16
+ 9a4:	ff 90       	pop	r15
+ 9a6:	ef 90       	pop	r14
+ 9a8:	df 90       	pop	r13
+ 9aa:	cf 90       	pop	r12
+ 9ac:	bf 90       	pop	r11
+ 9ae:	08 95       	ret
+
+000009b0 <OSInit>:
+ 9b0:	10 92 bb 05 	sts	0x05BB, r1
+ 9b4:	10 92 bc 05 	sts	0x05BC, r1
+ 9b8:	10 92 bd 05 	sts	0x05BD, r1
+ 9bc:	10 92 be 05 	sts	0x05BE, r1
+ 9c0:	10 92 b8 05 	sts	0x05B8, r1
+ 9c4:	10 92 95 05 	sts	0x0595, r1
+ 9c8:	10 92 aa 05 	sts	0x05AA, r1
+ 9cc:	10 92 96 05 	sts	0x0596, r1
+ 9d0:	10 92 97 05 	sts	0x0597, r1
+ 9d4:	10 92 98 05 	sts	0x0598, r1
+ 9d8:	10 92 99 05 	sts	0x0599, r1
+ 9dc:	10 92 9a 05 	sts	0x059A, r1
+ 9e0:	10 92 9f 05 	sts	0x059F, r1
+ 9e4:	10 92 a0 05 	sts	0x05A0, r1
+ 9e8:	10 92 a1 05 	sts	0x05A1, r1
+ 9ec:	10 92 a2 05 	sts	0x05A2, r1
+ 9f0:	10 92 ad 05 	sts	0x05AD, r1
+ 9f4:	ee ea       	ldi	r30, 0xAE	; 174
+ 9f6:	f5 e0       	ldi	r31, 0x05	; 5
+ 9f8:	86 eb       	ldi	r24, 0xB6	; 182
+ 9fa:	95 e0       	ldi	r25, 0x05	; 5
+ 9fc:	11 92       	st	Z+, r1
+ 9fe:	e8 17       	cp	r30, r24
+ a00:	f9 07       	cpc	r31, r25
+ a02:	e1 f7       	brne	.-8      	; 0x9fc <OSInit+0x4c>
+ a04:	10 92 9c 05 	sts	0x059C, r1
+ a08:	10 92 9b 05 	sts	0x059B, r1
+ a0c:	10 92 ac 05 	sts	0x05AC, r1
+ a10:	10 92 ab 05 	sts	0x05AB, r1
+ a14:	10 92 ba 05 	sts	0x05BA, r1
+ a18:	10 92 b9 05 	sts	0x05B9, r1
+ a1c:	10 92 9e 05 	sts	0x059E, r1
+ a20:	10 92 9d 05 	sts	0x059D, r1
+ a24:	ec e4       	ldi	r30, 0x4C	; 76
+ a26:	f6 e0       	ldi	r31, 0x06	; 6
+ a28:	8c ec       	ldi	r24, 0xCC	; 204
+ a2a:	96 e0       	ldi	r25, 0x06	; 6
+ a2c:	11 92       	st	Z+, r1
+ a2e:	11 92       	st	Z+, r1
+ a30:	e8 17       	cp	r30, r24
+ a32:	f9 07       	cpc	r31, r25
+ a34:	d9 f7       	brne	.-10     	; 0xa2c <OSInit+0x7c>
+ a36:	8a e6       	ldi	r24, 0x6A	; 106
+ a38:	92 e0       	ldi	r25, 0x02	; 2
+ a3a:	2c e0       	ldi	r18, 0x0C	; 12
+ a3c:	33 e0       	ldi	r19, 0x03	; 3
+ a3e:	fc 01       	movw	r30, r24
+ a40:	70 97       	sbiw	r30, 0x10	; 16
+ a42:	91 83       	std	Z+1, r25	; 0x01
+ a44:	80 83       	st	Z, r24
+ a46:	42 96       	adiw	r24, 0x12	; 18
+ a48:	82 17       	cp	r24, r18
+ a4a:	93 07       	cpc	r25, r19
+ a4c:	c1 f7       	brne	.-16     	; 0xa3e <OSInit+0x8e>
+ a4e:	10 92 fd 02 	sts	0x02FD, r1
+ a52:	10 92 fc 02 	sts	0x02FC, r1
+ a56:	88 e5       	ldi	r24, 0x58	; 88
+ a58:	92 e0       	ldi	r25, 0x02	; 2
+ a5a:	90 93 a8 05 	sts	0x05A8, r25
+ a5e:	80 93 a7 05 	sts	0x05A7, r24
+ a62:	8d ec       	ldi	r24, 0xCD	; 205
+ a64:	95 e0       	ldi	r25, 0x05	; 5
+ a66:	2b e4       	ldi	r18, 0x4B	; 75
+ a68:	36 e0       	ldi	r19, 0x06	; 6
+ a6a:	fc 01       	movw	r30, r24
+ a6c:	3e 97       	sbiw	r30, 0x0e	; 14
+ a6e:	91 83       	std	Z+1, r25	; 0x01
+ a70:	80 83       	st	Z, r24
+ a72:	0e 96       	adiw	r24, 0x0e	; 14
+ a74:	82 17       	cp	r24, r18
+ a76:	93 07       	cpc	r25, r19
+ a78:	c1 f7       	brne	.-16     	; 0xa6a <OSInit+0xba>
+ a7a:	10 92 3e 06 	sts	0x063E, r1
+ a7e:	10 92 3d 06 	sts	0x063D, r1
+ a82:	8f eb       	ldi	r24, 0xBF	; 191
+ a84:	95 e0       	ldi	r25, 0x05	; 5
+ a86:	90 93 b7 05 	sts	0x05B7, r25
+ a8a:	80 93 b6 05 	sts	0x05B6, r24
+ a8e:	2f e3       	ldi	r18, 0x3F	; 63
+ a90:	4b e8       	ldi	r20, 0x8B	; 139
+ a92:	53 e0       	ldi	r21, 0x03	; 3
+ a94:	60 e0       	ldi	r22, 0x00	; 0
+ a96:	70 e0       	ldi	r23, 0x00	; 0
+ a98:	87 e5       	ldi	r24, 0x57	; 87
+ a9a:	92 e0       	ldi	r25, 0x02	; 2
+ a9c:	0e 94 6e 04 	call	0x8dc	; 0x8dc <OSTaskCreate>
+ aa0:	2e e3       	ldi	r18, 0x3E	; 62
+ aa2:	4b e4       	ldi	r20, 0x4B	; 75
+ aa4:	53 e0       	ldi	r21, 0x03	; 3
+ aa6:	60 e0       	ldi	r22, 0x00	; 0
+ aa8:	70 e0       	ldi	r23, 0x00	; 0
+ aaa:	81 ea       	ldi	r24, 0xA1	; 161
+ aac:	95 e0       	ldi	r25, 0x05	; 5
+ aae:	0e 94 6e 04 	call	0x8dc	; 0x8dc <OSTaskCreate>
+ ab2:	08 95       	ret
+
+00000ab4 <OSTimeDly>:
+ ab4:	00 97       	sbiw	r24, 0x00	; 0
+ ab6:	e1 f0       	breq	.+56     	; 0xaf0 <OSTimeDly+0x3c>
+ ab8:	f8 94       	cli
+ aba:	e0 91 b9 05 	lds	r30, 0x05B9
+ abe:	f0 91 ba 05 	lds	r31, 0x05BA
+ ac2:	a7 85       	ldd	r26, Z+15	; 0x0f
+ ac4:	b0 e0       	ldi	r27, 0x00	; 0
+ ac6:	a2 55       	subi	r26, 0x52	; 82
+ ac8:	ba 4f       	sbci	r27, 0xFA	; 250
+ aca:	20 89       	ldd	r18, Z+16	; 0x10
+ acc:	20 95       	com	r18
+ ace:	3c 91       	ld	r19, X
+ ad0:	23 23       	and	r18, r19
+ ad2:	2c 93       	st	X, r18
+ ad4:	21 11       	cpse	r18, r1
+ ad6:	07 c0       	rjmp	.+14     	; 0xae6 <OSTimeDly+0x32>
+ ad8:	21 89       	ldd	r18, Z+17	; 0x11
+ ada:	20 95       	com	r18
+ adc:	30 91 ad 05 	lds	r19, 0x05AD
+ ae0:	23 23       	and	r18, r19
+ ae2:	20 93 ad 05 	sts	0x05AD, r18
+ ae6:	93 87       	std	Z+11, r25	; 0x0b
+ ae8:	82 87       	std	Z+10, r24	; 0x0a
+ aea:	78 94       	sei
+ aec:	0e 94 fe 02 	call	0x5fc	; 0x5fc <OSSched>
+ af0:	08 95       	ret
+
+00000af2 <OSStatInit>:
+ af2:	82 e0       	ldi	r24, 0x02	; 2
+ af4:	90 e0       	ldi	r25, 0x00	; 0
+ af6:	0e 94 5a 05 	call	0xab4	; 0xab4 <OSTimeDly>
+ afa:	f8 94       	cli
+ afc:	10 92 97 05 	sts	0x0597, r1
+ b00:	10 92 98 05 	sts	0x0598, r1
+ b04:	10 92 99 05 	sts	0x0599, r1
+ b08:	10 92 9a 05 	sts	0x059A, r1
+ b0c:	78 94       	sei
+ b0e:	88 ec       	ldi	r24, 0xC8	; 200
+ b10:	90 e0       	ldi	r25, 0x00	; 0
+ b12:	0e 94 5a 05 	call	0xab4	; 0xab4 <OSTimeDly>
+ b16:	f8 94       	cli
+ b18:	80 91 97 05 	lds	r24, 0x0597
+ b1c:	90 91 98 05 	lds	r25, 0x0598
+ b20:	a0 91 99 05 	lds	r26, 0x0599
+ b24:	b0 91 9a 05 	lds	r27, 0x059A
+ b28:	80 93 a3 05 	sts	0x05A3, r24
+ b2c:	90 93 a4 05 	sts	0x05A4, r25
+ b30:	a0 93 a5 05 	sts	0x05A5, r26
+ b34:	b0 93 a6 05 	sts	0x05A6, r27
+ b38:	81 e0       	ldi	r24, 0x01	; 1
+ b3a:	80 93 4b 06 	sts	0x064B, r24
+ b3e:	78 94       	sei
+ b40:	08 95       	ret
+
+00000b42 <OSTaskStat>:
+ b42:	80 91 4b 06 	lds	r24, 0x064B
+ b46:	81 11       	cpse	r24, r1
+ b48:	08 c0       	rjmp	.+16     	; 0xb5a <OSTaskStat+0x18>
+ b4a:	80 e9       	ldi	r24, 0x90	; 144
+ b4c:	91 e0       	ldi	r25, 0x01	; 1
+ b4e:	0e 94 5a 05 	call	0xab4	; 0xab4 <OSTimeDly>
+ b52:	80 91 4b 06 	lds	r24, 0x064B
+ b56:	88 23       	and	r24, r24
+ b58:	c1 f3       	breq	.-16     	; 0xb4a <OSTaskStat+0x8>
+ b5a:	c4 e6       	ldi	r28, 0x64	; 100
+ b5c:	f8 94       	cli
+ b5e:	20 91 97 05 	lds	r18, 0x0597
+ b62:	30 91 98 05 	lds	r19, 0x0598
+ b66:	40 91 99 05 	lds	r20, 0x0599
+ b6a:	50 91 9a 05 	lds	r21, 0x059A
+ b6e:	20 93 cc 06 	sts	0x06CC, r18
+ b72:	30 93 cd 06 	sts	0x06CD, r19
+ b76:	40 93 ce 06 	sts	0x06CE, r20
+ b7a:	50 93 cf 06 	sts	0x06CF, r21
+ b7e:	10 92 97 05 	sts	0x0597, r1
+ b82:	10 92 98 05 	sts	0x0598, r1
+ b86:	10 92 99 05 	sts	0x0599, r1
+ b8a:	10 92 9a 05 	sts	0x059A, r1
+ b8e:	78 94       	sei
+ b90:	c0 90 a3 05 	lds	r12, 0x05A3
+ b94:	d0 90 a4 05 	lds	r13, 0x05A4
+ b98:	e0 90 a5 05 	lds	r14, 0x05A5
+ b9c:	f0 90 a6 05 	lds	r15, 0x05A6
+ ba0:	c1 14       	cp	r12, r1
+ ba2:	d1 04       	cpc	r13, r1
+ ba4:	e1 04       	cpc	r14, r1
+ ba6:	f1 04       	cpc	r15, r1
+ ba8:	b9 f0       	breq	.+46     	; 0xbd8 <OSTaskStat+0x96>
+ baa:	a4 e6       	ldi	r26, 0x64	; 100
+ bac:	b0 e0       	ldi	r27, 0x00	; 0
+ bae:	0e 94 26 06 	call	0xc4c	; 0xc4c <__muluhisi3>
+ bb2:	a7 01       	movw	r20, r14
+ bb4:	96 01       	movw	r18, r12
+ bb6:	0e 94 f5 05 	call	0xbea	; 0xbea <__udivmodsi4>
+ bba:	8c 2f       	mov	r24, r28
+ bbc:	82 1b       	sub	r24, r18
+ bbe:	85 36       	cpi	r24, 0x65	; 101
+ bc0:	1c f0       	brlt	.+6      	; 0xbc8 <OSTaskStat+0x86>
+ bc2:	c0 93 a9 05 	sts	0x05A9, r28
+ bc6:	0a c0       	rjmp	.+20     	; 0xbdc <OSTaskStat+0x9a>
+ bc8:	88 23       	and	r24, r24
+ bca:	1c f4       	brge	.+6      	; 0xbd2 <OSTaskStat+0x90>
+ bcc:	10 92 a9 05 	sts	0x05A9, r1
+ bd0:	05 c0       	rjmp	.+10     	; 0xbdc <OSTaskStat+0x9a>
+ bd2:	80 93 a9 05 	sts	0x05A9, r24
+ bd6:	02 c0       	rjmp	.+4      	; 0xbdc <OSTaskStat+0x9a>
+ bd8:	10 92 a9 05 	sts	0x05A9, r1
+ bdc:	0e 94 55 02 	call	0x4aa	; 0x4aa <OSTaskStatHook>
+ be0:	88 ec       	ldi	r24, 0xC8	; 200
+ be2:	90 e0       	ldi	r25, 0x00	; 0
+ be4:	0e 94 5a 05 	call	0xab4	; 0xab4 <OSTimeDly>
+ be8:	b9 cf       	rjmp	.-142    	; 0xb5c <OSTaskStat+0x1a>
+
+00000bea <__udivmodsi4>:
+ bea:	a1 e2       	ldi	r26, 0x21	; 33
+ bec:	1a 2e       	mov	r1, r26
+ bee:	aa 1b       	sub	r26, r26
+ bf0:	bb 1b       	sub	r27, r27
+ bf2:	fd 01       	movw	r30, r26
+ bf4:	0d c0       	rjmp	.+26     	; 0xc10 <__udivmodsi4_ep>
+
+00000bf6 <__udivmodsi4_loop>:
+ bf6:	aa 1f       	adc	r26, r26
+ bf8:	bb 1f       	adc	r27, r27
+ bfa:	ee 1f       	adc	r30, r30
+ bfc:	ff 1f       	adc	r31, r31
+ bfe:	a2 17       	cp	r26, r18
+ c00:	b3 07       	cpc	r27, r19
+ c02:	e4 07       	cpc	r30, r20
+ c04:	f5 07       	cpc	r31, r21
+ c06:	20 f0       	brcs	.+8      	; 0xc10 <__udivmodsi4_ep>
+ c08:	a2 1b       	sub	r26, r18
+ c0a:	b3 0b       	sbc	r27, r19
+ c0c:	e4 0b       	sbc	r30, r20
+ c0e:	f5 0b       	sbc	r31, r21
+
+00000c10 <__udivmodsi4_ep>:
+ c10:	66 1f       	adc	r22, r22
+ c12:	77 1f       	adc	r23, r23
+ c14:	88 1f       	adc	r24, r24
+ c16:	99 1f       	adc	r25, r25
+ c18:	1a 94       	dec	r1
+ c1a:	69 f7       	brne	.-38     	; 0xbf6 <__udivmodsi4_loop>
+ c1c:	60 95       	com	r22
+ c1e:	70 95       	com	r23
+ c20:	80 95       	com	r24
+ c22:	90 95       	com	r25
+ c24:	9b 01       	movw	r18, r22
+ c26:	ac 01       	movw	r20, r24
+ c28:	bd 01       	movw	r22, r26
+ c2a:	cf 01       	movw	r24, r30
+ c2c:	08 95       	ret
+
+00000c2e <__umulhisi3>:
+ c2e:	a2 9f       	mul	r26, r18
+ c30:	b0 01       	movw	r22, r0
+ c32:	b3 9f       	mul	r27, r19
+ c34:	c0 01       	movw	r24, r0
+ c36:	a3 9f       	mul	r26, r19
+ c38:	70 0d       	add	r23, r0
+ c3a:	81 1d       	adc	r24, r1
+ c3c:	11 24       	eor	r1, r1
+ c3e:	91 1d       	adc	r25, r1
+ c40:	b2 9f       	mul	r27, r18
+ c42:	70 0d       	add	r23, r0
+ c44:	81 1d       	adc	r24, r1
+ c46:	11 24       	eor	r1, r1
+ c48:	91 1d       	adc	r25, r1
+ c4a:	08 95       	ret
+
+00000c4c <__muluhisi3>:
+ c4c:	0e 94 17 06 	call	0xc2e	; 0xc2e <__umulhisi3>
+ c50:	a5 9f       	mul	r26, r21
+ c52:	90 0d       	add	r25, r0
+ c54:	b4 9f       	mul	r27, r20
+ c56:	90 0d       	add	r25, r0
+ c58:	a4 9f       	mul	r26, r20
+ c5a:	80 0d       	add	r24, r0
+ c5c:	91 1d       	adc	r25, r1
+ c5e:	11 24       	eor	r1, r1
+ c60:	08 95       	ret
+
+00000c62 <_exit>:
+ c62:	f8 94       	cli
+
+00000c64 <__stop_program>:
+ c64:	ff cf       	rjmp	.-2      	; 0xc64 <__stop_program>

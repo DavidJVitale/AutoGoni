@@ -26,6 +26,7 @@ OS_STK        TaskStartStk[TASK_STK_SIZE];
 OS_STK        TaskLedStk[TASK_STK_SIZE];
 OS_STK        TaskTimerStk[TRANSMIT_TASK_STK_SIZE];
 OS_STK        SerialTransmitTaskStk[TRANSMIT_TASK_STK_SIZE];
+OS_STK		  ButtonStk[TRANSMIT_TASK_STK_SIZE];
 
 OS_EVENT     *LedSem;
 OS_EVENT     *LedMBox;
@@ -48,6 +49,7 @@ void  USART_TX_Poll(unsigned char pdata);	   /* Function prototypes of LedTask *
 void  SerialTransmitTask(void *data);          /* Function prototypes of tasks */
 void PostTxCompleteSem (void);                 /* Function prototypes of tasks */
 void USART_Transmit(unsigned char data);
+void Button(void *pdata);
 
 /*
  *********************************************************************************************************
@@ -95,11 +97,13 @@ void  TaskStart (void *pdata)
 	
 	OSStatInit();                                          /* Initialize uC/OS-II's statistics         */
 	
-	OSTaskCreate(TimerTask, (void *)0, &TaskTimerStk[TRANSMIT_TASK_STK_SIZE - 1], 11);
+	//OSTaskCreate(TimerTask, (void *)0, &TaskTimerStk[TRANSMIT_TASK_STK_SIZE - 1], 11);
 
-	OSTaskCreate(LedTask, (void *) 0, &TaskLedStk[TASK_STK_SIZE - 1], 10);
+	//OSTaskCreate(LedTask, (void *) 0, &TaskLedStk[TASK_STK_SIZE - 1], 10);
 	
-	OSTaskCreate(SerialTransmitTask, (void *) 0, &SerialTransmitTaskStk[TRANSMIT_TASK_STK_SIZE-1], 20);
+	//OSTaskCreate(SerialTransmitTask, (void *) 0, &SerialTransmitTaskStk[TRANSMIT_TASK_STK_SIZE-1], 20);
+	
+	OSTaskCreate(Button, (void *) 0, &ButtonStk[TASK_STK_SIZE - 1], 5);
 	
 	OSMboxPost(SerialTxMBox, (void *)threeDollarSign); //enter command mode
 	OSTimeDly(2*OS_TICKS_PER_SEC);
@@ -261,4 +265,31 @@ void PostTxCompleteSem (void)
 	
 	OSIntExit();
 	PopRS();
+}
+
+void Button (void *pdata)
+{
+	int i;
+	//send high priority error with button 1
+	//send low priority error with button 2
+	
+	//if pin8 is high
+	//turn on LED
+	
+	for (;;)
+	{
+		DDRB = 0b11111100;
+		
+		if (PINB & _BV(PORTB2))
+		{
+			PORTB &= ~_BV(PORTB1); // turn on debug pin
+		}
+	}
+	
+
+
+
+	//PORTB |= _BV(PORTB5); // turn off led
+	
+	
 }

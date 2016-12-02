@@ -69,8 +69,12 @@ void InitPeripherals(void)
 	
 	// TEAM ROTA-REE!!!!!!!!
 	
-	DDRC &= 0b11110000;	// Set Port 0-3 of PORTC to input (set lower four bits to 0 for input)
-	DDRD &= 0b00001111; // Set Port 4-7 of PORTD to input (set upper four bits to 0 for input)
+	DDRC &= 0b11110000;	// Set Port 0-3 of PORTC to input (by setting lower four bits to 0 for input)
+	DDRD &= 0b00001111; // Set Port 4-7 of PORTD to input (by setting upper four bits to 0 for input)
+	
+	// pg 76 328p Datasheet. When DDRx is set to 
+//	PORTC |= 0b00001111;	// set PORT 0-3 of PORTC to 1 for pull-up
+	//PORTD |= 0b11110000;	// ste PORT 4-7 of PORTD to 1 for pull-up
 	
 	// END TEAM ROTARY
 	

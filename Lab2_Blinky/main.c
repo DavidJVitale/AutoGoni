@@ -7,13 +7,17 @@
 #include <avr/io.h>
 #include <util/delay.h>
 #include <string.h>
-#include "includes.h" 
+#include "includes.h"
+
+// must add this to use program space -PD
+#include <avr/pgmspace.h>
 
 #define NO_SYSTEM_ERROR					0
 #define MEDIUM_PRIORITY_ERROR			1
 #define HIGH_PRIORITY_ERROR				2
 
-#define TASK_STK_SIZE					64		/* Size of each task's stacks (# of WORDs)            */
+#define TASK_STK_SIZE					128		/* Size of each task's stacks (# of WORDs)            */
+				// with TASK_STK_SIZE at 128, two arrays of 64 can be used
 #define TRANSMIT_TASK_STK_SIZE			128		/* Size of the Transmit Task's stack                  */
 #define TRANSMIT_BUFFER_SIZE			24	    /* Size of buffers used to store character strings    */	
 
@@ -35,6 +39,109 @@ OS_EVENT     *LedSem;
 OS_EVENT     *LedMBox;
 OS_EVENT	 *SerialTxSem;
 OS_EVENT     *SerialTxMBox;
+
+//INT8U RotaryUnMapTbl[] = {
+//unsigned const static int RotaryUnMapTbl[] PROGMEM = {
+const INT8U RotaryUnMapTbl[] PROGMEM = {
+	
+    255	,	56	,	40	,	55	,	24	,	255	,	39	,	52	,	8	,	57	,
+    255	,	255	,	23	,	255	,	36	,	13	,	120	,	255	,	41	,	54	,
+    255	,	255	,	255	,	53	,	7	,	255	,	255	,	255	,	20	,	19	,
+    125	,	18	,	104	,	105	,	255	,	255	,	25	,	106	,	38	,	255	,
+    255	,	58	,	255	,	255	,	255	,	255	,	37	,	14	,	119	,	118	,
+	
+    255	,	255	,	255	,	107	,	255	,	255	,	4	,	255	,	3	,	255	,
+    109	,	108	,	2	,	1	,	88	,	255	,	89	,	255	,	255	,	255	,
+    255	,	51	,	9	,	10	,	90	,	255	,	22	,	11	,	255	,	12	,
+    255	,	255	,	42	,	43	,	255	,	255	,	255	,	255	,	255	,	255	,
+    255	,	255	,	21	,	255	,	126	,	127	,	103	,	255	,	102	,	255	,
+	
+    255	,	255	,	255	,	255	,	255	,	255	,	91	,	255	,	255	,	255	,
+    255	,	255	,	116	,	117	,	255	,	255	,	115	,	255	,	255	,	255	,
+    93	,	94	,	92	,	255	,	114	,	95	,	113	,	0	,	72	,	71	,
+    255	,	68	,	73	,	255	,	255	,	29	,	255	,	70	,	255	,	69	,
+    255	,	255	,	35	,	34	,	121	,	255	,	122	,	255	,	74	,	255	,
+	
+    255	,	30	,	6	,	255	,	123	,	255	,	255	,	255	,	124	,	17	,
+    255	,	255	,	255	,	67	,	26	,	255	,	27	,	28	,	255	,	59	,
+    255	,	255	,	255	,	255	,	255	,	15	,	255	,	255	,	255	,	255	,
+    255	,	255	,	255	,	255	,	5	,	255	,	255	,	255	,	110	,	255	,
+    111	,	16	,	87	,	84	,	255	,	45	,	86	,	85	,	255	,	50	,
+	
+    255	,	255	,	255	,	46	,	255	,	255	,	255	,	33	,	255	,	83	,
+    255	,	44	,	75	,	255	,	255	,	31	,	255	,	255	,	255	,	255	,
+    255	,	255	,	255	,	32	,	100	,	61	,	101	,	66	,	255	,	62	,
+    255	,	49	,	99	,	60	,	255	,	47	,	255	,	255	,	255	,	48	,
+    77	,	82	,	78	,	65	,	76	,	63	,	255	,	64	,	98	,	81	,
+	
+    79	,	80	,	97	,	96	,	112	,	255					
+};
+
+/* Testing fragmented 64-sized=array structure
+
+INT8U RotaryUnMapTbl_0_63[] = {
+    255	,	56	,	40	,	55	,	24	,	255	,	39	,	52	,	8	,	57	,
+    255	,	255	,	23	,	255	,	36	,	13	,	120	,	255	,	41	,	54	,
+    255	,	255	,	255	,	53	,	7	,	255	,	255	,	255	,	20	,	19	,
+    125	,	18	,	104	,	105	,	255	,	255	,	25	,	106	,	38	,	255	,
+    255	,	58	,	255	,	255	,	255	,	255	,	37	,	14	,	119	,	118	,
+	
+    255	,	255	,	255	,	107	,	255	,	255	,	4	,	255	,	3	,	255	,
+    109	,	108	,	2	,	1
+};
+
+INT8U RotaryUnMapTbl_64_127[] = {
+									88	,	255	,	89	,	255	,	255	,	255	,
+    255	,	51	,	9	,	10	,	90	,	255	,	22	,	11	,	255	,	12	,
+    255	,	255	,	42	,	43	,	255	,	255	,	255	,	255	,	255	,	255	,
+    255	,	255	,	21	,	255	,	126	,	127	,	103	,	255	,	102	,	255	,
+	
+    255	,	255	,	255	,	255	,	255	,	255	,	91	,	255	,	255	,	255	,
+    255	,	255	,	116	,	117	,	255	,	255	,	115	,	255	,	255	,	255	,
+    93	,	94	,	92	,	255	,	114	,	95	,	113	,	0	
+};
+
+INT8U RotaryUnMapTbl_128_191[] = {
+																	72	,	71	,
+    255	,	68	,	73	,	255	,	255	,	29	,	255	,	70	,	255	,	69	,
+    255	,	255	,	35	,	34	,	121	,	255	,	122	,	255	,	74	,	255	,
+	
+    255	,	30	,	6	,	255	,	123	,	255	,	255	,	255	,	124	,	17	,
+    255	,	255	,	255	,	67	,	26	,	255	,	27	,	28	,	255	,	59	,
+    255	,	255	,	255	,	255	,	255	,	15	,	255	,	255	,	255	,	255	,
+    255	,	255	,	255	,	255	,	5	,	255	,	255	,	255	,	110	,	255	,
+    111	,	16			
+};
+
+INT8U RotaryUnMapTbl_192_255[] = {
+					87	,	84	,	255	,	45	,	86	,	85	,	255	,	50	,
+    255	,	255	,	255	,	46	,	255	,	255	,	255	,	33	,	255	,	83	,
+    255	,	44	,	75	,	255	,	255	,	31	,	255	,	255	,	255	,	255	,
+    255	,	255	,	255	,	32	,	100	,	61	,	101	,	66	,	255	,	62	,
+    255	,	49	,	99	,	60	,	255	,	47	,	255	,	255	,	255	,	48	,
+    77	,	82	,	78	,	65	,	76	,	63	,	255	,	64	,	98	,	81	,
+    79	,	80	,	97	,	96	,	112	,	255					
+};
+
+*/
+
+//INT8U globsArray[] = {
+	//0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 
+	//0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 
+	//0, 1, 2, 3, 4, 5, 6, 7, 8, 9,
+	//0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 
+	//0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 
+	//0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 
+	//0, 1, 2, 3, 4
+//};
+
+	//{
+	//0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 
+	//0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 
+	//0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 
+	//0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 
+	//0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 
+	//};
 
 /*
  *********************************************************************************************************
@@ -138,8 +245,10 @@ void  AngleOutputTask (void *pdata)
 	int tempCounter;
 	
 	INT8U rotaryInput;
+	INT8U positionOutput;
 	
     for (;;) {
+		
 		//strcpy(TextMessage, "TIMER TASK...\r\n");
 		//OSMboxPost(SerialTxMBox, (void *)&TextMessage);
 		
@@ -154,40 +263,79 @@ void  AngleOutputTask (void *pdata)
 			//OSMboxPost(SerialTxMBox, (void *)&TextMessage);
 		//}
 		
+		// LSB PC0 (pin A0) -> PC3 (pin A3)
+		//	   PD4 (pin 4)  -> PD7 (pin 7)
 		rotaryInput = (INT8U)((PINC & 0b00001111) | (PIND & 0b11110000));
-		
-		tempInt = rotaryInput;
-		digitCounter = 0;
-		
-		while(tempInt != 0)
-		{
-			digitCounter++;
-			tempInt = tempInt / 10;
-		}
+		//rotaryInput = RotaryUnMapTbl[rotaryInput];
+		rotaryInput = pgm_read_byte(&RotaryUnMapTbl[rotaryInput]); 
 
-		tempInt = rotaryInput;	// reset input
+/* testing fragmented 64-sized-array structure
 
-		// Decimal 48 -> ASCII '0'
-		// Decimal 57 -> ASCII '9'
-		
-		CommRxBuff[digitCounter] = '\r';
-		CommRxBuff[digitCounter + 1] = '\n';
-		
-		while (digitCounter >= 0)
+		if(rotaryInput < 64)
 		{
-			CommRxBuff[digitCounter - 1] = (tempInt % 10) + ASCII_CHAR_OFFSET;	// and add inputs, starting from the most significant digit
-			digitCounter--;
-			tempInt = tempInt / 10;
+			rotaryInput = RotaryUnMapTbl_0_63[rotaryInput];
 		}
-		// END Turn number value into serial ^
 		
-		if(CommRxBuff)
+		if((rotaryInput >= 64) && (rotaryInput < 128))
 		{
+			rotaryInput = RotaryUnMapTbl_64_127[rotaryInput - 64];
+		}
+		//
+		//if((rotaryInput >= 128) && (rotaryInput < 192))
+		//{
+			//rotaryInput = RotaryUnMapTbl_128_191[rotaryInput - 128];
+		//}
+		
+		//if((rotaryInput >= 192) && (rotaryInput < 256))
+		//{
+			//rotaryInput = RotaryUnMapTbl_192_255[rotaryInput - 192];
+		//}
+		//else
+		//{
+			//rotaryInput = 0;
+		//}
+		*/
+		
+		if (rotaryInput == 0)
+		{
+			CommRxBuff[0] = '0';
+			CommRxBuff[1] = '\r';
+			CommRxBuff[2] = '\n';
 			OSMboxPost(SerialTxMBox, (void *)&CommRxBuff[0]);
 		}
-		
-//		rotaryInput = (PINC & 0b00001111) | (PIND & 0b11110000);
+		else
+		{
+			tempInt = rotaryInput;
+			
+			digitCounter = 0;
+			
+			while(tempInt != 0)
+			{
+				digitCounter++;
+				tempInt = tempInt / 10;
+			}
 
+			tempInt = rotaryInput;	// reset input
+
+			// Decimal 48 -> ASCII '0'
+			// Decimal 57 -> ASCII '9'
+			
+			CommRxBuff[digitCounter] = '\r';
+			CommRxBuff[digitCounter + 1] = '\n';
+			
+			while (digitCounter >= 0)
+			{
+				CommRxBuff[digitCounter - 1] = (tempInt % 10) + ASCII_CHAR_OFFSET;	// and add inputs, starting from the most significant digit
+				digitCounter--;
+				tempInt = tempInt / 10;
+			}
+			// END Turn number value into serial ^
+			
+			if(CommRxBuff)
+			{
+				OSMboxPost(SerialTxMBox, (void *)&CommRxBuff[0]);
+			}
+		}
 					
 		OSTimeDly(OS_TICKS_PER_SEC);	// relinquish CPU
     }	

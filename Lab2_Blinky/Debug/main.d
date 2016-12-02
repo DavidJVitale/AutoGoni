@@ -17,7 +17,8 @@ main.d main.o: .././main.c \
  c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.1061\avr8-gnu-toolchain\lib\gcc\avr\4.8.1\include\stddef.h \
  .././includes.h \
  c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.1061\avr8-gnu-toolchain\avr\include\avr\interrupt.h \
- .././os_cpu.h .././os_cfg.h .././ucos_ii.h .././avr_isr.h
+ .././os_cpu.h .././os_cfg.h .././ucos_ii.h .././avr_isr.h \
+ c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.1061\avr8-gnu-toolchain\avr\include\avr\pgmspace.h
 
 c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.1061\avr8-gnu-toolchain\avr\include\avr\io.h:
 
@@ -62,3 +63,5 @@ c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.1061\avr8-g
 .././ucos_ii.h:
 
 .././avr_isr.h:
+
+c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.1061\avr8-gnu-toolchain\avr\include\avr\pgmspace.h:

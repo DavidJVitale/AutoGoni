@@ -201,24 +201,22 @@ int main (void)
  */
 void  TaskStart (void *pdata)
 {
-	char *threeDollarSign = "$$$";
-	char *baudString = "U,38400,N";
-	char *sys_on_str = "\r\nuCOS ON\r\n---\r\n";			//helps see when the system turns on
+	char *sys_on_str = "\r\rAutoGoni ON     \r\n(c) 2016        ";			//helps see when the system turns on
+	char *clear_screen = "\r\r                \r\n                ";
 	pdata = pdata;                                         /* Prevent compiler warning                 */
 	
 	OSStatInit();                                          /* Initialize uC/OS-II's statistics         */
-	
-	OSTaskCreate(TimerTask, (void *)0, &TaskTimerStk[TRANSMIT_TASK_STK_SIZE - 1], 11);
+
 	OSTaskCreate(LedTask, (void *) 0, &TaskLedStk[TASK_STK_SIZE - 1], 10);
-	OSTaskCreate(AngleOutputTask, (void *) 0, &AngleOutputTaskStk[TASK_STK_SIZE - 1], 15);
 	
 	OSTaskCreate(SerialTransmitTask, (void *) 0, &SerialTransmitTaskStk[TRANSMIT_TASK_STK_SIZE-1], 20);
-	
-	OSMboxPost(SerialTxMBox, (void *)threeDollarSign); //enter command mode
-	OSTimeDly(2*OS_TICKS_PER_SEC);
-	OSMboxPost(SerialTxMBox, (void *)baudString); //set baud to 38400
 	OSTimeDly(2*OS_TICKS_PER_SEC);
 	OSMboxPost(SerialTxMBox, (void *)sys_on_str);	//tell the user debugging that we're on!
+	OSTimeDly(2*OS_TICKS_PER_SEC);
+	OSMboxPost(SerialTxMBox, (void*)clear_screen);
+
+	OSTaskCreate(AngleOutputTask, (void *) 0, &AngleOutputTaskStk[TASK_STK_SIZE - 1], 15);
+	OSTaskCreate(TimerTask, (void *)0, &TaskTimerStk[TRANSMIT_TASK_STK_SIZE - 1], 11);
 
     for (;;) {	
         OSCtxSwCtr = 0;                         /* Clear context switch counter             */
@@ -359,21 +357,21 @@ void  TimerTask (void *pdata)
 		tmp = HIGH_PRIORITY_ERROR;
 		OSMboxPost(LedMBox, (void *)&tmp);
 		//strcpy(TextMessage, "HIGH ERR STATE\n\r");
-		strcpy(TextMessage, "[Hi]\n\r");
+		strcpy(TextMessage, "\r\r[Hi]            ");
 		OSMboxPost(SerialTxMBox, (void *)TextMessage);
 
 		OSTimeDly (10*OS_TICKS_PER_SEC);
 		tmp = MEDIUM_PRIORITY_ERROR;
 		OSMboxPost(LedMBox, (void *)&tmp);	
 		//strcpy(TextMessage, "MED ERR STATE\n\r");
-		strcpy(TextMessage, "[Med]\n\r");
+		strcpy(TextMessage, "\r\r[Med]           ");
 		OSMboxPost(SerialTxMBox, (void *)TextMessage);
 	
 		OSTimeDly (10*OS_TICKS_PER_SEC);
 		tmp = NO_SYSTEM_ERROR;
 		OSMboxPost(LedMBox, (void *)&tmp);
 		//strcpy(TextMessage, "NO ERR STATE\n\r");
-		strcpy(TextMessage, "[No]\n\r");
+		strcpy(TextMessage, "\r\r[No]            ");
 		OSMboxPost(SerialTxMBox, (void *)TextMessage);
 
     }	
@@ -446,6 +444,14 @@ void  SerialTransmitTask (void *pdata)
 
 			UCSR0B |= TXCIE0;	//ENABLE TX COMPLETE INTERRUPT
 			for(str_index=0;TextMessage[str_index]!='\0';str_index++){ //print the string
+					if(TextMessage[str_index] == '\r' && TextMessage[str_index + 1] == '\r'){
+						TextMessage[str_index] = (char)254;
+						TextMessage[str_index+1] = (char)128;
+					}
+					if(TextMessage[str_index] == '\r' && TextMessage[str_index + 1] == '\n'){
+						TextMessage[str_index] = (char)254;
+						TextMessage[str_index+1] = (char)192;
+					}
 	//				USART_Transmit(TextMessage[str_index]);
 					
 					/* Wait for empty transmit buffer */

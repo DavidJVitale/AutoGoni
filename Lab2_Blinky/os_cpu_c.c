@@ -39,7 +39,7 @@
 //#endif
 
 
-#define  BAUD			38400
+#define  BAUD			9600
 #define  FOSC			16000000
 #define  UBRR			((FOSC/16/BAUD)-1)
 
@@ -90,7 +90,7 @@ void InitPeripherals(void)
 
 /* setup USART here  */	
 
-	
+	UCSR0B &= ~TXCIE0;	//DISABLE TX COMPLETE INTERRUPT
 	
 	
 /* END setup USART   */	

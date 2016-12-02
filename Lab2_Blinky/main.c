@@ -236,11 +236,6 @@ void  AngleOutputTask (void *pdata)
 	INT16U Message;
 	INT8U tmp;
 	char  TextMessage[TRANSMIT_BUFFER_SIZE];
-	char  CommRxBuff[TRANSMIT_BUFFER_SIZE];
-	
-	int digitCounter;
-	int tempInt;
-	int tempCounter;
 	
 	INT8U rotaryInput;
 	INT8U positionOutput;
@@ -293,47 +288,38 @@ void  AngleOutputTask (void *pdata)
 			//rotaryInput = 0;
 		//}
 		*/
+		TextMessage[0] = '\r';
+		TextMessage[1] = '\n';
+		char* p = &TextMessage[2];
+		int shifter = rotaryInput;
+		char const digit[] = "0123456789";
+		do{ //Move to where representation ends
+			++p;
+			shifter = shifter/10;
+		}while(shifter);
+
+		p[0] = ' ';
+		p[1] = ' ';
+		p[2] = ' ';
+		p[3] = ' ';
+		p[4] = ' ';
+		p[5] = ' ';
+		p[6] = ' ';
+		p[7] = ' ';
+		p[8] = ' ';
+		p[9] = ' ';
+		p[10] = ' ';
+		p[11] = ' ';
+		p[12] = ' ';
+		p[13] = '\0';
 		
-		if (rotaryInput == 0)
-		{
-			CommRxBuff[0] = '0';
-			CommRxBuff[1] = '\r';
-			CommRxBuff[2] = '\n';
-			OSMboxPost(SerialTxMBox, (void *)&CommRxBuff[0]);
-		}
-		else
-		{
-			tempInt = rotaryInput;
-			
-			digitCounter = 0;
-			
-			while(tempInt != 0)
-			{
-				digitCounter++;
-				tempInt = tempInt / 10;
-			}
 
-			tempInt = rotaryInput;	// reset input
-
-			// Decimal 48 -> ASCII '0'
-			// Decimal 57 -> ASCII '9'
-			
-			CommRxBuff[digitCounter] = '\r';
-			CommRxBuff[digitCounter + 1] = '\n';
-			
-			while (digitCounter >= 0)
-			{
-				CommRxBuff[digitCounter - 1] = (tempInt % 10) + ASCII_CHAR_OFFSET;	// and add inputs, starting from the most significant digit
-				digitCounter--;
-				tempInt = tempInt / 10;
-			}
-			// END Turn number value into serial ^
-			
-			if(CommRxBuff)
-			{
-				OSMboxPost(SerialTxMBox, (void *)&CommRxBuff[0]);
-			}
-		}
+		do{ //Move back, inserting digits as you go
+			*--p = digit[rotaryInput%10];
+			rotaryInput = rotaryInput/10;
+		}while(rotaryInput);
+		
+		OSMboxPost(SerialTxMBox, (void *)&TextMessage);
 					
 		OSTimeDly(OS_TICKS_PER_SEC);	// relinquish CPU
     }	

@@ -78,6 +78,14 @@ void InitPeripherals(void)
 	
 	// END TEAM ROTARY
 	
+	//BUTTON
+	
+	DDRB |= _BV(DDB0); //B0 as input
+	DDRB |= _BV(DDB1); //B1 as input
+	DDRB |= _BV(DDB2); //B2 as input
+	
+	// END BUTTON
+	
 
 	// setup Timer0 for UC/OS-II timer tick
 	//

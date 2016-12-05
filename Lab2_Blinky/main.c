@@ -239,6 +239,9 @@ void  AngleOutputTask (void *pdata)
 	
 	INT8U rotaryInput;
 	INT8U positionOutput;
+	INT8U notFound = 255;
+	INT16U unitsPer100Degrees = 281;
+	INT16U outputAngle = 0;
 	
     for (;;) {
 		
@@ -260,38 +263,98 @@ void  AngleOutputTask (void *pdata)
 		//	   PD4 (pin 4)  -> PD7 (pin 7)
 		rotaryInput = (INT8U)((PINC & 0b00001111) | (PIND & 0b11110000));
 		//rotaryInput = RotaryUnMapTbl[rotaryInput];
-		rotaryInput = pgm_read_byte(&RotaryUnMapTbl[rotaryInput]); 
-
-/* testing fragmented 64-sized-array structure
-
-		if(rotaryInput < 64)
-		{
-			rotaryInput = RotaryUnMapTbl_0_63[rotaryInput];
-		}
+		rotaryInput = pgm_read_byte(&RotaryUnMapTbl[rotaryInput]);
 		
-		if((rotaryInput >= 64) && (rotaryInput < 128))
-		{
-			rotaryInput = RotaryUnMapTbl_64_127[rotaryInput - 64];
-		}
-		//
-		//if((rotaryInput >= 128) && (rotaryInput < 192))
-		//{
-			//rotaryInput = RotaryUnMapTbl_128_191[rotaryInput - 128];
-		//}
+		if (rotaryInput != notFound){
+			outputAngle = (rotaryInput * unitsPer100Degrees);
+			outputAngle = outputAngle / 100;
+
+	/* testing fragmented 64-sized-array structure
+
+			if(rotaryInput < 64)
+			{
+				rotaryInput = RotaryUnMapTbl_0_63[rotaryInput];
+			}
 		
-		//if((rotaryInput >= 192) && (rotaryInput < 256))
-		//{
-			//rotaryInput = RotaryUnMapTbl_192_255[rotaryInput - 192];
-		//}
-		//else
-		//{
-			//rotaryInput = 0;
-		//}
-		*/
+			if((rotaryInput >= 64) && (rotaryInput < 128))
+			{
+				rotaryInput = RotaryUnMapTbl_64_127[rotaryInput - 64];
+			}
+			//
+			//if((rotaryInput >= 128) && (rotaryInput < 192))
+			//{
+				//rotaryInput = RotaryUnMapTbl_128_191[rotaryInput - 128];
+			//}
+		
+			//if((rotaryInput >= 192) && (rotaryInput < 256))
+			//{
+				//rotaryInput = RotaryUnMapTbl_192_255[rotaryInput - 192];
+			//}
+			//else
+			//{
+				//rotaryInput = 0;
+			//}
+			*/
+			TextMessage[0] = '\r';
+			TextMessage[1] = '\n';
+			char* p = &TextMessage[2];
+			int shifter = outputAngle;
+			char const digit[] = "0123456789";
+			do{ //Move to where representation ends
+				++p;
+				shifter = shifter/10;
+			}while(shifter);
+
+			p[0] = ' ';
+			p[1] = ' ';
+			p[2] = ' ';
+			p[3] = ' ';
+			p[4] = ' ';
+			p[5] = ' ';
+			p[6] = ' ';
+			p[7] = ' ';
+			p[8] = ' ';
+			p[9] = ' ';
+			p[10] = ' ';
+			p[11] = ' ';
+			p[12] = ' ';
+			p[13] = '\0';
+		
+
+			do{ //Move back, inserting digits as you go
+				*--p = digit[outputAngle%10];
+				outputAngle = outputAngle/10;
+			}while(outputAngle);
+		
+			OSMboxPost(SerialTxMBox, (void *)&TextMessage);
+		}
+					
+		OSTimeDly(0.5*OS_TICKS_PER_SEC);	// relinquish CPU
+    }	
+}
+
+/*
+ *********************************************************************************************************
+ *                                                  TimerTASK
+ *********************************************************************************************************
+ */
+
+void  TimerTask (void *pdata)
+{
+    INT8U  err;
+	INT16U Message;
+	INT8U ButtonsInput;
+	char  TextMessage[TRANSMIT_BUFFER_SIZE];
+
+	OSTimeDly (0.1*OS_TICKS_PER_SEC);
+    for (;;) {
+		OSTimeDly (0.2*OS_TICKS_PER_SEC);
+		ButtonsInput = 0 | (PINB & (_BV(PINB0) | _BV(PINB1) | _BV(PINB2)) );
+		
 		TextMessage[0] = '\r';
-		TextMessage[1] = '\n';
+		TextMessage[1] = '\r';
 		char* p = &TextMessage[2];
-		int shifter = rotaryInput;
+		int shifter = ButtonsInput;
 		char const digit[] = "0123456789";
 		do{ //Move to where representation ends
 			++p;
@@ -306,59 +369,14 @@ void  AngleOutputTask (void *pdata)
 		p[5] = ' ';
 		p[6] = ' ';
 		p[7] = ' ';
-		p[8] = ' ';
-		p[9] = ' ';
-		p[10] = ' ';
-		p[11] = ' ';
-		p[12] = ' ';
-		p[13] = '\0';
+		p[8] = '\0';
 		
 
 		do{ //Move back, inserting digits as you go
-			*--p = digit[rotaryInput%10];
-			rotaryInput = rotaryInput/10;
-		}while(rotaryInput);
-		
-		OSMboxPost(SerialTxMBox, (void *)&TextMessage);
-					
-		OSTimeDly(OS_TICKS_PER_SEC);	// relinquish CPU
-    }	
-}
-
-/*
- *********************************************************************************************************
- *                                                  TimerTASK
- *********************************************************************************************************
- */
-
-void  TimerTask (void *pdata)
-{
-    INT8U  err;
-	INT16U Message;
-	INT8U tmp;
-	char  TextMessage[TRANSMIT_BUFFER_SIZE];
-	
-    for (;;) {
-		OSTimeDly (10*OS_TICKS_PER_SEC);
-		tmp = HIGH_PRIORITY_ERROR;
-		OSMboxPost(LedMBox, (void *)&tmp);
-		//strcpy(TextMessage, "HIGH ERR STATE\n\r");
-		strcpy(TextMessage, "\r\r[Hi]            ");
-		OSMboxPost(SerialTxMBox, (void *)TextMessage);
-
-		OSTimeDly (10*OS_TICKS_PER_SEC);
-		tmp = MEDIUM_PRIORITY_ERROR;
-		OSMboxPost(LedMBox, (void *)&tmp);	
-		//strcpy(TextMessage, "MED ERR STATE\n\r");
-		strcpy(TextMessage, "\r\r[Med]           ");
-		OSMboxPost(SerialTxMBox, (void *)TextMessage);
-	
-		OSTimeDly (10*OS_TICKS_PER_SEC);
-		tmp = NO_SYSTEM_ERROR;
-		OSMboxPost(LedMBox, (void *)&tmp);
-		//strcpy(TextMessage, "NO ERR STATE\n\r");
-		strcpy(TextMessage, "\r\r[No]            ");
-		OSMboxPost(SerialTxMBox, (void *)TextMessage);
+			*--p = digit[ButtonsInput%10];
+			ButtonsInput = ButtonsInput/10;
+		}while(ButtonsInput);
+		OSMboxPost(SerialTxMBox, (void*)&TextMessage);
 
     }	
 }
@@ -422,7 +440,7 @@ void  SerialTransmitTask (void *pdata)
 	char TextMessage[TRANSMIT_BUFFER_SIZE];
 	
 	for (;;) {
-		OSTimeDly (1*OS_TICKS_PER_SEC);
+		OSTimeDly (5);
 		msg = OSMboxAccept(SerialTxMBox);
 		
 		if(msg != NULL){

@@ -34,9 +34,11 @@
 
 INT8U measIndex = 0;
 INT16U measArray[NUM_MEAS];
+INT16U passiveArray[NUM_MEAS];
 INT16U OnscreenAngle = 0;
 
-
+char *start = "SSSSSSS";
+char *end = "EEEEEEEE";
 
 /*
  *********************************************************************************************************
@@ -91,72 +93,6 @@ const INT8U RotaryUnMapTbl[] PROGMEM = {
 	
     79	,	80	,	97	,	96	,	112	,	255					
 };
-
-/* Testing fragmented 64-sized=array structure
-
-INT8U RotaryUnMapTbl_0_63[] = {
-    255	,	56	,	40	,	55	,	24	,	255	,	39	,	52	,	8	,	57	,
-    255	,	255	,	23	,	255	,	36	,	13	,	120	,	255	,	41	,	54	,
-    255	,	255	,	255	,	53	,	7	,	255	,	255	,	255	,	20	,	19	,
-    125	,	18	,	104	,	105	,	255	,	255	,	25	,	106	,	38	,	255	,
-    255	,	58	,	255	,	255	,	255	,	255	,	37	,	14	,	119	,	118	,
-	
-    255	,	255	,	255	,	107	,	255	,	255	,	4	,	255	,	3	,	255	,
-    109	,	108	,	2	,	1
-};
-
-INT8U RotaryUnMapTbl_64_127[] = {
-									88	,	255	,	89	,	255	,	255	,	255	,
-    255	,	51	,	9	,	10	,	90	,	255	,	22	,	11	,	255	,	12	,
-    255	,	255	,	42	,	43	,	255	,	255	,	255	,	255	,	255	,	255	,
-    255	,	255	,	21	,	255	,	126	,	127	,	103	,	255	,	102	,	255	,
-	
-    255	,	255	,	255	,	255	,	255	,	255	,	91	,	255	,	255	,	255	,
-    255	,	255	,	116	,	117	,	255	,	255	,	115	,	255	,	255	,	255	,
-    93	,	94	,	92	,	255	,	114	,	95	,	113	,	0	
-};
-
-INT8U RotaryUnMapTbl_128_191[] = {
-																	72	,	71	,
-    255	,	68	,	73	,	255	,	255	,	29	,	255	,	70	,	255	,	69	,
-    255	,	255	,	35	,	34	,	121	,	255	,	122	,	255	,	74	,	255	,
-	
-    255	,	30	,	6	,	255	,	123	,	255	,	255	,	255	,	124	,	17	,
-    255	,	255	,	255	,	67	,	26	,	255	,	27	,	28	,	255	,	59	,
-    255	,	255	,	255	,	255	,	255	,	15	,	255	,	255	,	255	,	255	,
-    255	,	255	,	255	,	255	,	5	,	255	,	255	,	255	,	110	,	255	,
-    111	,	16			
-};
-
-INT8U RotaryUnMapTbl_192_255[] = {
-					87	,	84	,	255	,	45	,	86	,	85	,	255	,	50	,
-    255	,	255	,	255	,	46	,	255	,	255	,	255	,	33	,	255	,	83	,
-    255	,	44	,	75	,	255	,	255	,	31	,	255	,	255	,	255	,	255	,
-    255	,	255	,	255	,	32	,	100	,	61	,	101	,	66	,	255	,	62	,
-    255	,	49	,	99	,	60	,	255	,	47	,	255	,	255	,	255	,	48	,
-    77	,	82	,	78	,	65	,	76	,	63	,	255	,	64	,	98	,	81	,
-    79	,	80	,	97	,	96	,	112	,	255					
-};
-
-*/
-
-//INT8U globsArray[] = {
-	//0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 
-	//0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 
-	//0, 1, 2, 3, 4, 5, 6, 7, 8, 9,
-	//0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 
-	//0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 
-	//0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 
-	//0, 1, 2, 3, 4
-//};
-
-	//{
-	//0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 
-	//0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 
-	//0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 
-	//0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 
-	//0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 
-	//};
 
 /*
  *********************************************************************************************************
@@ -225,6 +161,7 @@ void  TaskStart (void *pdata)
 
 	for(i=0;i<NUM_MEAS;i++){
 		measArray[i] = 0;
+		passiveArray[i] = 0;
 	}
 	OSTaskCreate(LedTask, (void *) 0, &TaskLedStk[TASK_STK_SIZE - 1], 10);
 	
@@ -262,22 +199,28 @@ void  AngleOutputTask (void *pdata)
 	INT16U unitsPer100Degrees = 281;
 	INT16U outputAngle = 0;
 
+	TextMessage[0]  = '\r';
+	TextMessage[1]  = '\r';
+	TextMessage[2]  = 'M';
+	TextMessage[3]  = 'E';
+	TextMessage[4]  = 'A';
+	TextMessage[5]  = 'S';
+	TextMessage[6]  = '#';
+	TextMessage[9] = ':';
+	TextMessage[10] = ' ';
+	TextMessage[11] = ' ';
+	TextMessage[12] = ' ';
+	TextMessage[13] = ' ';
+
     for (;;) {
-		
-		//strcpy(TextMessage, "TIMER TASK...\r\n");
-		//OSMboxPost(SerialTxMBox, (void *)&TextMessage);
-		
-		//if(PINC & 0b00000001)
-		//{
-			//strcpy(TextMessage, "pin 14 is high\r\n");
-			//OSMboxPost(SerialTxMBox, (void *)&TextMessage);
-		//}
-		//else
-		//{
-			//strcpy(TextMessage, "pin 14 is low\r\n");
-			//OSMboxPost(SerialTxMBox, (void *)&TextMessage);
-		//}
-		
+	TextMessage[7] = ' ';
+	TextMessage[8] = ' ';
+
+	TextMessage[14] = ' ';
+	TextMessage[15] = ' ';
+	TextMessage[16] = ' ';
+	TextMessage[17] = (char)223;
+	TextMessage[18] = '\0';
 		// LSB PC0 (pin A0) -> PC3 (pin A3)
 		//	   PD4 (pin 4)  -> PD7 (pin 7)
 		rotaryInput = (INT8U)((PINC & 0b00001111) | (PIND & 0b11110000));
@@ -288,36 +231,10 @@ void  AngleOutputTask (void *pdata)
 			outputAngle = (rotaryInput * unitsPer100Degrees);
 			outputAngle = outputAngle / 100;
 			OnscreenAngle = outputAngle;
+		}
 
-	/* testing fragmented 64-sized-array structure
-
-			if(rotaryInput < 64)
-			{
-				rotaryInput = RotaryUnMapTbl_0_63[rotaryInput];
-			}
-		
-			if((rotaryInput >= 64) && (rotaryInput < 128))
-			{
-				rotaryInput = RotaryUnMapTbl_64_127[rotaryInput - 64];
-			}
-			//
-			//if((rotaryInput >= 128) && (rotaryInput < 192))
-			//{
-				//rotaryInput = RotaryUnMapTbl_128_191[rotaryInput - 128];
-			//}
-		
-			//if((rotaryInput >= 192) && (rotaryInput < 256))
-			//{
-				//rotaryInput = RotaryUnMapTbl_192_255[rotaryInput - 192];
-			//}
-			//else
-			//{
-				//rotaryInput = 0;
-			//}
-			*/
-			TextMessage[0] = '\r';
-			TextMessage[1] = '\n';
-			char* p = &TextMessage[2];
+/*PRINT ANGLE*/
+			char* p = &TextMessage[14];
 			int shifter = outputAngle;
 			char const digit[] = "0123456789";
 			do{ //Move to where representation ends
@@ -325,29 +242,27 @@ void  AngleOutputTask (void *pdata)
 				shifter = shifter/10;
 			}while(shifter);
 
-			p[0] = ' ';
-			p[1] = ' ';
-			p[2] = ' ';
-			p[3] = ' ';
-			p[4] = ' ';
-			p[5] = ' ';
-			p[6] = ' ';
-			p[7] = ' ';
-			p[8] = ' ';
-			p[9] = ' ';
-			p[10] = ' ';
-			p[11] = ' ';
-			p[12] = ' ';
-			p[13] = '\0';
-		
+		do{ //Move back, inserting digits as you go
+			*--p = digit[outputAngle%10];
+			outputAngle = outputAngle/10;
+		}while(outputAngle);
 
-			do{ //Move back, inserting digits as you go
-				*--p = digit[outputAngle%10];
-				outputAngle = outputAngle/10;
-			}while(outputAngle);
+/*PRINT MEAS #*/
+			p = &TextMessage[7];
+			tmp = measIndex + 1;
+			shifter = tmp;
+			do{ //Move to where representation ends
+				++p;
+				shifter = shifter/10;
+			}while(shifter);
+
+		do{ //Move back, inserting digits as you go
+			*--p = digit[tmp%10];
+			tmp = tmp/10;
+		}while(tmp);
 		
-			OSMboxPost(SerialTxMBox, (void *)&TextMessage);
-		}
+		OSMboxPost(SerialTxMBox, (void *)&TextMessage);
+
 					
 		OSTimeDly(0.5*OS_TICKS_PER_SEC);	// relinquish CPU
     }	
@@ -367,19 +282,38 @@ void  TimerTask (void *pdata)
 	INT16U tmp16;
 	INT8U tmp8;
 	INT8U i;
+	
+				char* p;
+				int shifter;
+				char const digit[] = "0123456789";
+	
 	char  TextMessage[TRANSMIT_BUFFER_SIZE];
+	char  OUTPUTBUFFER[TRANSMIT_BUFFER_SIZE];
 
 		TextMessage[0]  = '\r';
-		TextMessage[1]  = '\r';
-		TextMessage[2]  = 'M';
-		TextMessage[3]  = 'E';
-		TextMessage[4]  = 'A';
-		TextMessage[5]  = 'S';
-		TextMessage[6]  = '#';
+		TextMessage[1]  = '\n';
+		TextMessage[2]  = 'A';
+		TextMessage[3]  = 'C';
+		TextMessage[4]  = 'T';
+		TextMessage[5]  = ':';
 
+		TextMessage[9]  = ' ';
+		TextMessage[10]  = 'P';
+		TextMessage[11]  = 'A';
+		TextMessage[12]  = 'S';
+		TextMessage[13]  = ':';
+		TextMessage[17]  = ' ';
+		TextMessage[18] = '\0';
 	OSTimeDly (0.1*OS_TICKS_PER_SEC);
     for (;;) {
 		OSTimeDly (0.2*OS_TICKS_PER_SEC);
+		TextMessage[6]  = ' ';
+		TextMessage[7]  = ' ';
+		TextMessage[8]  = ' ';
+		TextMessage[14]  = ' ';
+		TextMessage[15]  = ' ';
+		TextMessage[16]  = ' ';
+		
 		ButtonsInput = 0 | (PINB & (_BV(PINB0) | _BV(PINB1) | _BV(PINB2)) );
 		if(ButtonsInput == TOP_BUTTON_ONLY){
 			if (measIndex < NUM_MEAS-1){
@@ -395,9 +329,20 @@ void  TimerTask (void *pdata)
 		}
 		if(ButtonsInput == MIDDLE_BUTTON_ONLY){
 			measArray[measIndex] = OnscreenAngle;
+			passiveArray[measIndex] = OnscreenAngle;
+			OSTimeDly(0.2 * OS_TICKS_PER_SEC);
+		}
+		if(ButtonsInput == TOP_TWO_BUTTONS){
+			measArray[measIndex] = OnscreenAngle;
+			OSTimeDly(0.2 * OS_TICKS_PER_SEC);
+		}
+		if(ButtonsInput == BUTTOM_TWO_BUTTONS){
+			passiveArray[measIndex] = OnscreenAngle;
 			OSTimeDly(0.2 * OS_TICKS_PER_SEC);
 		}
 		if(ButtonsInput == ALL_3_BUTTONS){
+			OSMboxPost(SerialTxMBox, &start);
+			OSTimeDly(1*OS_TICKS_PER_SEC);
 			for(i=0;i<NUM_MEAS;i++){
 				
 				/*Print Meas Number*/
@@ -445,39 +390,15 @@ void  TimerTask (void *pdata)
 				OSMboxPost(SerialTxMBox, (void*)&TextMessage);
 				OSTimeDly(5);
 			}
-			OSTimeDly(2*OS_TICKS_PER_SEC);
+			
+			OSMboxPost(SerialTxMBox, &end);
+			OSTimeDly(1*OS_TICKS_PER_SEC);
 		}
-		
-		
-
-/*Print Meas Number*/
-		TextMessage[7]  = ' ';
-		TextMessage[8]  = ' ';
-		TextMessage[9]  = ' ';
-		TextMessage[10] = '\0';
-		char* p = &TextMessage[7];
-		INT16U shifter = measIndex+1;
-		tmp8 = measIndex+1;
-		char const digit[] = "0123456789";
-		do{ //Move to where representation ends
-			++p;
-			shifter = shifter/10;
-		}while(shifter);
-
-		do{ //Move back, inserting digits as you go
-			*--p = digit[tmp8%10];
-			tmp8 = tmp8/10;
-		}while(tmp8);
 
 
-/*Print that Meas Number's angle*/
-		TextMessage[10] = '=';
-		TextMessage[11] = ' ';
-		TextMessage[12] = ' ';
-		TextMessage[13] = ' ';
-		TextMessage[14] = ' ';
+/*Print ACTIVE*/
 
-		p = &TextMessage[12];
+		p = &TextMessage[6];
 		shifter = measArray[measIndex];
 		tmp16 = shifter;
 		do{ //Move to where representation ends
@@ -491,7 +412,20 @@ void  TimerTask (void *pdata)
 			tmp16 = tmp16/10;
 		}while(tmp16);
 
-		TextMessage[15] = '\0';
+/* PRINT PASSIVE*/
+		p = &TextMessage[14];
+		shifter = passiveArray[measIndex];
+		tmp16 = shifter;
+		do{ //Move to where representation ends
+			++p;
+			shifter = shifter/10;
+		}while(shifter);
+		
+
+		do{ //Move back, inserting digits as you go
+			*--p = digit[tmp16%10];
+			tmp16 = tmp16/10;
+		}while(tmp16);
 		
 		
 		OSMboxPost(SerialTxMBox, (void*)&TextMessage);

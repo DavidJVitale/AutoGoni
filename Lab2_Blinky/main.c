@@ -22,6 +22,21 @@
 #define TRANSMIT_BUFFER_SIZE			24	    /* Size of buffers used to store character strings    */	
 
 #define ASCII_CHAR_OFFSET				48
+#define NUM_MEAS						32
+
+#define TOP_BUTTON_ONLY					2
+#define MIDDLE_BUTTON_ONLY				4
+#define BOTTOM_BUTTON_ONLY				1
+#define TOP_TWO_BUTTONS					6
+#define BUTTOM_TWO_BUTTONS				5
+#define TOP_AND_BOTTOM_BUTTONS			3
+#define ALL_3_BUTTONS					7
+
+INT8U measIndex = 0;
+INT16U measArray[NUM_MEAS];
+INT16U OnscreenAngle = 0;
+
+
 
 /*
  *********************************************************************************************************
@@ -204,9 +219,13 @@ void  TaskStart (void *pdata)
 	char *sys_on_str = "\r\rAutoGoni ON     \r\n(c) 2016        ";			//helps see when the system turns on
 	char *clear_screen = "\r\r                \r\n                ";
 	pdata = pdata;                                         /* Prevent compiler warning                 */
+	int i;
 	
 	OSStatInit();                                          /* Initialize uC/OS-II's statistics         */
 
+	for(i=0;i<NUM_MEAS;i++){
+		measArray[i] = 0;
+	}
 	OSTaskCreate(LedTask, (void *) 0, &TaskLedStk[TASK_STK_SIZE - 1], 10);
 	
 	OSTaskCreate(SerialTransmitTask, (void *) 0, &SerialTransmitTaskStk[TRANSMIT_TASK_STK_SIZE-1], 20);
@@ -242,7 +261,7 @@ void  AngleOutputTask (void *pdata)
 	INT8U notFound = 255;
 	INT16U unitsPer100Degrees = 281;
 	INT16U outputAngle = 0;
-	
+
     for (;;) {
 		
 		//strcpy(TextMessage, "TIMER TASK...\r\n");
@@ -268,6 +287,7 @@ void  AngleOutputTask (void *pdata)
 		if (rotaryInput != notFound){
 			outputAngle = (rotaryInput * unitsPer100Degrees);
 			outputAngle = outputAngle / 100;
+			OnscreenAngle = outputAngle;
 
 	/* testing fragmented 64-sized-array structure
 
@@ -344,38 +364,136 @@ void  TimerTask (void *pdata)
     INT8U  err;
 	INT16U Message;
 	INT8U ButtonsInput;
+	INT16U tmp16;
+	INT8U tmp8;
+	INT8U i;
 	char  TextMessage[TRANSMIT_BUFFER_SIZE];
+
+		TextMessage[0]  = '\r';
+		TextMessage[1]  = '\r';
+		TextMessage[2]  = 'M';
+		TextMessage[3]  = 'E';
+		TextMessage[4]  = 'A';
+		TextMessage[5]  = 'S';
+		TextMessage[6]  = '#';
 
 	OSTimeDly (0.1*OS_TICKS_PER_SEC);
     for (;;) {
 		OSTimeDly (0.2*OS_TICKS_PER_SEC);
 		ButtonsInput = 0 | (PINB & (_BV(PINB0) | _BV(PINB1) | _BV(PINB2)) );
+		if(ButtonsInput == TOP_BUTTON_ONLY){
+			if (measIndex < NUM_MEAS-1){
+				measIndex++;
+				OSTimeDly(0.2 * OS_TICKS_PER_SEC);
+			}
+		}
+		if(ButtonsInput == BOTTOM_BUTTON_ONLY){
+			if(measIndex > 0){
+				measIndex--;
+				OSTimeDly(0.2 * OS_TICKS_PER_SEC);
+			}
+		}
+		if(ButtonsInput == MIDDLE_BUTTON_ONLY){
+			measArray[measIndex] = OnscreenAngle;
+			OSTimeDly(0.2 * OS_TICKS_PER_SEC);
+		}
+		if(ButtonsInput == ALL_3_BUTTONS){
+			for(i=0;i<NUM_MEAS;i++){
+				
+				/*Print Meas Number*/
+				TextMessage[7]  = ' ';
+				TextMessage[8]  = ' ';
+				TextMessage[9]  = ' ';
+				TextMessage[10] = '\0';
+				char* p = &TextMessage[7];
+				INT16U shifter = i+1;
+				tmp8 = i+1;
+				char const digit[] = "0123456789";
+				do{ //Move to where representation ends
+					++p;
+					shifter = shifter/10;
+				}while(shifter);
+
+				do{ //Move back, inserting digits as you go
+					*--p = digit[tmp8%10];
+					tmp8 = tmp8/10;
+				}while(tmp8);
+
+
+		/*Print that Meas Number's angle*/
+				TextMessage[10] = '=';
+				TextMessage[11] = ' ';
+				TextMessage[12] = ' ';
+				TextMessage[13] = ' ';
+				TextMessage[14] = ' ';
+
+				p = &TextMessage[12];
+				shifter = measArray[i];
+				tmp16 = shifter;
+				do{ //Move to where representation ends
+					++p;
+					shifter = shifter/10;
+				}while(shifter);
 		
-		TextMessage[0] = '\r';
-		TextMessage[1] = '\r';
-		char* p = &TextMessage[2];
-		int shifter = ButtonsInput;
+
+				do{ //Move back, inserting digits as you go
+					*--p = digit[tmp16%10];
+					tmp16 = tmp16/10;
+				}while(tmp16);
+
+				TextMessage[15] = '\0';
+				OSMboxPost(SerialTxMBox, (void*)&TextMessage);
+				OSTimeDly(5);
+			}
+			OSTimeDly(2*OS_TICKS_PER_SEC);
+		}
+		
+		
+
+/*Print Meas Number*/
+		TextMessage[7]  = ' ';
+		TextMessage[8]  = ' ';
+		TextMessage[9]  = ' ';
+		TextMessage[10] = '\0';
+		char* p = &TextMessage[7];
+		INT16U shifter = measIndex+1;
+		tmp8 = measIndex+1;
 		char const digit[] = "0123456789";
 		do{ //Move to where representation ends
 			++p;
 			shifter = shifter/10;
 		}while(shifter);
 
-		p[0] = ' ';
-		p[1] = ' ';
-		p[2] = ' ';
-		p[3] = ' ';
-		p[4] = ' ';
-		p[5] = ' ';
-		p[6] = ' ';
-		p[7] = ' ';
-		p[8] = '\0';
+		do{ //Move back, inserting digits as you go
+			*--p = digit[tmp8%10];
+			tmp8 = tmp8/10;
+		}while(tmp8);
+
+
+/*Print that Meas Number's angle*/
+		TextMessage[10] = '=';
+		TextMessage[11] = ' ';
+		TextMessage[12] = ' ';
+		TextMessage[13] = ' ';
+		TextMessage[14] = ' ';
+
+		p = &TextMessage[12];
+		shifter = measArray[measIndex];
+		tmp16 = shifter;
+		do{ //Move to where representation ends
+			++p;
+			shifter = shifter/10;
+		}while(shifter);
 		
 
 		do{ //Move back, inserting digits as you go
-			*--p = digit[ButtonsInput%10];
-			ButtonsInput = ButtonsInput/10;
-		}while(ButtonsInput);
+			*--p = digit[tmp16%10];
+			tmp16 = tmp16/10;
+		}while(tmp16);
+
+		TextMessage[15] = '\0';
+		
+		
 		OSMboxPost(SerialTxMBox, (void*)&TextMessage);
 
     }	
@@ -396,8 +514,8 @@ void  LedTask (void *pdata)
 	INT16U OnPeriodTimeout = OS_TICKS_PER_SEC/10;
 	INT16U OffPeriodTimeout = OS_TICKS_PER_SEC-OnPeriodTimeout;
 	INT8U LocalMessage = NO_SYSTEM_ERROR;
-	float blink_freq = 1.0;	//in Hz
-	float duty_cycle = 0.1; //as percentage
+	float blink_freq = 2.4;	//in Hz
+	float duty_cycle = 0.5; //as percentage
 
     for (;;) {
 		/*HANDLE LED BLINKING*/

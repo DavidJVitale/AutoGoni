@@ -37,8 +37,7 @@ INT16U measArray[NUM_MEAS];
 INT16U passiveArray[NUM_MEAS];
 INT16U OnscreenAngle = 0;
 
-char *start = "SSSSSSS";
-char *end = "EEEEEEEE";
+INT8U TransmitTopLine = 1;
 
 /*
  *********************************************************************************************************
@@ -213,58 +212,63 @@ void  AngleOutputTask (void *pdata)
 	TextMessage[13] = ' ';
 
     for (;;) {
-	TextMessage[7] = ' ';
-	TextMessage[8] = ' ';
+	if(!TransmitTopLine){
+	OSTimeDly(0.5*OS_TICKS_PER_SEC);
+	}
+	else{
+		TextMessage[7] = ' ';
+		TextMessage[8] = ' ';
 
-	TextMessage[14] = ' ';
-	TextMessage[15] = ' ';
-	TextMessage[16] = ' ';
-	TextMessage[17] = (char)223;
-	TextMessage[18] = '\0';
-		// LSB PC0 (pin A0) -> PC3 (pin A3)
-		//	   PD4 (pin 4)  -> PD7 (pin 7)
-		rotaryInput = (INT8U)((PINC & 0b00001111) | (PIND & 0b11110000));
-		//rotaryInput = RotaryUnMapTbl[rotaryInput];
-		rotaryInput = pgm_read_byte(&RotaryUnMapTbl[rotaryInput]);
+		TextMessage[14] = ' ';
+		TextMessage[15] = ' ';
+		TextMessage[16] = ' ';
+		TextMessage[17] = (char)223;
+		TextMessage[18] = '\0';
+			// LSB PC0 (pin A0) -> PC3 (pin A3)
+			//	   PD4 (pin 4)  -> PD7 (pin 7)
+			rotaryInput = (INT8U)((PINC & 0b00001111) | (PIND & 0b11110000));
+			//rotaryInput = RotaryUnMapTbl[rotaryInput];
+			rotaryInput = pgm_read_byte(&RotaryUnMapTbl[rotaryInput]);
 		
-		if (rotaryInput != notFound){
-			outputAngle = (rotaryInput * unitsPer100Degrees);
-			outputAngle = outputAngle / 100;
-			OnscreenAngle = outputAngle;
-		}
+			if (rotaryInput != notFound){
+				outputAngle = (rotaryInput * unitsPer100Degrees);
+				outputAngle = outputAngle / 100;
+				OnscreenAngle = outputAngle;
+			}
 
-/*PRINT ANGLE*/
-			char* p = &TextMessage[14];
-			int shifter = outputAngle;
-			char const digit[] = "0123456789";
-			do{ //Move to where representation ends
-				++p;
-				shifter = shifter/10;
-			}while(shifter);
+	/*PRINT ANGLE*/
+				char* p = &TextMessage[14];
+				int shifter = outputAngle;
+				char const digit[] = "0123456789";
+				do{ //Move to where representation ends
+					++p;
+					shifter = shifter/10;
+				}while(shifter);
 
-		do{ //Move back, inserting digits as you go
-			*--p = digit[outputAngle%10];
-			outputAngle = outputAngle/10;
-		}while(outputAngle);
+			do{ //Move back, inserting digits as you go
+				*--p = digit[outputAngle%10];
+				outputAngle = outputAngle/10;
+			}while(outputAngle);
 
-/*PRINT MEAS #*/
-			p = &TextMessage[7];
-			tmp = measIndex + 1;
-			shifter = tmp;
-			do{ //Move to where representation ends
-				++p;
-				shifter = shifter/10;
-			}while(shifter);
+	/*PRINT MEAS #*/
+				p = &TextMessage[7];
+				tmp = measIndex + 1;
+				shifter = tmp;
+				do{ //Move to where representation ends
+					++p;
+					shifter = shifter/10;
+				}while(shifter);
 
-		do{ //Move back, inserting digits as you go
-			*--p = digit[tmp%10];
-			tmp = tmp/10;
-		}while(tmp);
+			do{ //Move back, inserting digits as you go
+				*--p = digit[tmp%10];
+				tmp = tmp/10;
+			}while(tmp);
 		
-		OSMboxPost(SerialTxMBox, (void *)&TextMessage);
+			OSMboxPost(SerialTxMBox, (void *)&TextMessage);
 
 					
-		OSTimeDly(0.5*OS_TICKS_PER_SEC);	// relinquish CPU
+			OSTimeDly(0.5*OS_TICKS_PER_SEC);	// relinquish CPU
+		}
     }	
 }
 
@@ -340,59 +344,104 @@ void  TimerTask (void *pdata)
 			passiveArray[measIndex] = OnscreenAngle;
 			OSTimeDly(0.2 * OS_TICKS_PER_SEC);
 		}
+		if(ButtonsInput == TOP_AND_BOTTOM_BUTTONS){
+				for(i=0;i<NUM_MEAS;i++){
+				measArray[i] = 0;
+				passiveArray[i] = 0;
+			}
+		}
+		
 		if(ButtonsInput == ALL_3_BUTTONS){
-			OSMboxPost(SerialTxMBox, &start);
+			TransmitTopLine = 0;	//stop the top line from transmitting!
+
+/*Send STart String SSS*/
 			OSTimeDly(1*OS_TICKS_PER_SEC);
+			OUTPUTBUFFER[0] ='S';
+			OUTPUTBUFFER[1]= 'S';
+			OUTPUTBUFFER[2]='S';
+			OUTPUTBUFFER[3]='\n';
+			OUTPUTBUFFER[4]='\0';
+			OSMboxPost(SerialTxMBox, (void*)OUTPUTBUFFER);
+			OSTimeDly(1*OS_TICKS_PER_SEC);
+
+/*Send Measurements*/
 			for(i=0;i<NUM_MEAS;i++){
-				
-				/*Print Meas Number*/
-				TextMessage[7]  = ' ';
-				TextMessage[8]  = ' ';
-				TextMessage[9]  = ' ';
-				TextMessage[10] = '\0';
-				char* p = &TextMessage[7];
-				INT16U shifter = i+1;
-				tmp8 = i+1;
-				char const digit[] = "0123456789";
-				do{ //Move to where representation ends
-					++p;
-					shifter = shifter/10;
-				}while(shifter);
+				OUTPUTBUFFER[0]=' ';
+				OUTPUTBUFFER[1]=' ';
+				OUTPUTBUFFER[2]='_';
+				OUTPUTBUFFER[3]=' ';
+				OUTPUTBUFFER[4]=' ';
+				OUTPUTBUFFER[5]=' ';
+				OUTPUTBUFFER[6]='_';
+				OUTPUTBUFFER[7]=' ';
+				OUTPUTBUFFER[8]=' ';
+				OUTPUTBUFFER[9]=' ';
+				OUTPUTBUFFER[10]='\n';
+				OUTPUTBUFFER[11]='\0';
 
-				do{ //Move back, inserting digits as you go
-					*--p = digit[tmp8%10];
-					tmp8 = tmp8/10;
-				}while(tmp8);
-
-
-		/*Print that Meas Number's angle*/
-				TextMessage[10] = '=';
-				TextMessage[11] = ' ';
-				TextMessage[12] = ' ';
-				TextMessage[13] = ' ';
-				TextMessage[14] = ' ';
-
-				p = &TextMessage[12];
-				shifter = measArray[i];
-				tmp16 = shifter;
-				do{ //Move to where representation ends
-					++p;
-					shifter = shifter/10;
-				}while(shifter);
+				/*PRINT ID*/
+			p = &OUTPUTBUFFER[0];
+			shifter = i;
+			tmp16 = shifter;
+			do{ //Move to where representation ends
+				++p;
+				shifter = shifter/10;
+			}while(shifter);
 		
 
-				do{ //Move back, inserting digits as you go
-					*--p = digit[tmp16%10];
-					tmp16 = tmp16/10;
-				}while(tmp16);
+			do{ //Move back, inserting digits as you go
+				*--p = digit[tmp16%10];
+				tmp16 = tmp16/10;
+			}while(tmp16);
 
-				TextMessage[15] = '\0';
-				OSMboxPost(SerialTxMBox, (void*)&TextMessage);
-				OSTimeDly(5);
+
+
+				/* PRINT ACT*/
+			p = &OUTPUTBUFFER[3];
+			shifter = measArray[i];
+			tmp16 = shifter;
+			do{ //Move to where representation ends
+				++p;
+				shifter = shifter/10;
+			}while(shifter);
+		
+
+			do{ //Move back, inserting digits as you go
+				*--p = digit[tmp16%10];
+				tmp16 = tmp16/10;
+			}while(tmp16);
+
+				/* PRINT PAS*/
+			p = &OUTPUTBUFFER[7];
+			shifter = passiveArray[i];
+			tmp16 = shifter;
+			do{ //Move to where representation ends
+				++p;
+				shifter = shifter/10;
+			}while(shifter);
+		
+
+			do{ //Move back, inserting digits as you go
+				*--p = digit[tmp16%10];
+				tmp16 = tmp16/10;
+			}while(tmp16);
+
+
+				/*OUTPUT THE STRING!!!*/
+				OSMboxPost(SerialTxMBox, (void*)&OUTPUTBUFFER);
+				OSTimeDly(0.05*OS_TICKS_PER_SEC);
 			}
 			
-			OSMboxPost(SerialTxMBox, &end);
+		/*Send End String SSS*/
 			OSTimeDly(1*OS_TICKS_PER_SEC);
+			OUTPUTBUFFER[0] ='E';
+			OUTPUTBUFFER[1]= 'E';
+			OUTPUTBUFFER[2]='E';
+			OUTPUTBUFFER[3]='\n';
+			OUTPUTBUFFER[4]='\0';
+			OSMboxPost(SerialTxMBox, (void*)OUTPUTBUFFER);
+			OSTimeDly(1*OS_TICKS_PER_SEC);
+			TransmitTopLine = 1;	//allow the top line to transmit again
 		}
 
 

@@ -1,4 +1,4 @@
-![AutoGoni Logo](https://c1.staticflickr.com/5/4170/34052339760_4a80fe05f5_z.jpg)
+![AutoGoni Logo](https://raw.githubusercontent.com/DavidJVitale/AutoGoni/master/pics/1.jpg)
 
 # AutoGoni
 
@@ -6,7 +6,7 @@ The AutoGoni is a digital goniometer designed to make the gathering of joint ang
 
 ## See the AutoGoni in Action
 
-[![AutoGoni Video Demonstration](https://c1.staticflickr.com/3/2866/33594629674_bba5082603_z.jpg)](https://www.youtube.com/watch?v=PIq4bduV_98 "AutoGoni Video Demonstration")
+[![AutoGoni Video Demonstration](https://raw.githubusercontent.com/DavidJVitale/AutoGoni/master/pics/2.jpg)](https://www.youtube.com/watch?v=PIq4bduV_98 "AutoGoni Video Demonstration")
 
 ## Background
 
